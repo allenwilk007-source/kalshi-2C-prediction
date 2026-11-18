@@ -1,5 +1,5 @@
 {
- "snapshot": "20261118T044236Z",
+ "snapshot": "20261118T045829Z",
  "rows": [
   {
    "series": "KXCO2LEVEL",
@@ -72,9 +72,9 @@
    "ticker": "KXGTEMP-27-P0",
    "event": "KXGTEMP-27",
    "label": "Hottest",
-   "bid": 0.87,
+   "bid": 0.88,
    "ask": 0.9,
-   "mid": 0.885,
+   "mid": 0.89,
    "last": 0.87,
    "volume": 34846.67,
    "close": "2027-01-01T04:59:00Z",
@@ -83,11 +83,11 @@
    "p_alt": null,
    "method": "2026 nowcast, GISS annual",
    "band": [
-    0.862,
+    0.8726,
     0.9063
    ],
    "position": "below",
-   "gap": -0.04600000000000004
+   "gap": -0.051000000000000045
   },
   {
    "series": "KXCO2LEVEL",
@@ -119,8 +119,8 @@
    "bid": 0.881,
    "ask": 0.884,
    "mid": 0.8825000000000001,
-   "last": 0.884,
-   "volume": 618144.44,
+   "last": 0.881,
+   "volume": 618152.57,
    "close": "2027-01-01T04:59:00Z",
    "rule": "If the unsmoothed Land-Ocean Temperature Index value for 2026 reported by NASA\u2019s Goddard Institute for Space Studies (GISS) is above the 2025 value and 1.28 degrees Celsius, then the market resolves to Yes.",
    "p_model": 0.839,
@@ -185,8 +185,8 @@
    "bid": 0.9,
    "ask": 0.92,
    "mid": 0.91,
-   "last": 0.91,
-   "volume": 56721.43,
+   "last": 0.9,
+   "volume": 56848.63,
    "close": "2026-12-16T04:59:00Z",
    "rule": "If Nov 2026 is the hottest November ever, then the market resolves to Yes.",
    "p_model": 0.9343,

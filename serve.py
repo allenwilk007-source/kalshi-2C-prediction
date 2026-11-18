@@ -44,8 +44,9 @@ STEPS = [
     ("phase7.py", "Phase 7: price every live Kalshi climate market"),
     ("phase9.py", "Phase 9: market history and news test"),
     ("phase10.py", "Phase 10: temperature distributions across model versions"),
+    ("phase11.py", "Phase 11: hypothetical trade idea (class project)"),
 ]
-RESULT_FILES = ("phase2", "phase3", "phase4", "phase5", "phase6", "phase7", "phase9", "phase10")
+RESULT_FILES = ("phase2", "phase3", "phase4", "phase5", "phase6", "phase7", "phase9", "phase10", "phase11")
 
 
 class Pipeline:

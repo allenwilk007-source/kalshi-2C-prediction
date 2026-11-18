@@ -1,11 +1,11 @@
 {
- "snapshot": "20261118T044236Z",
+ "snapshot": "20261118T045829Z",
  "kxgtemp_26": {
   "ticker": "KXGTEMP-26-P0",
   "bid": 0.881,
   "ask": 0.884,
-  "last": 0.884,
-  "volume": 618144.44,
+  "last": 0.881,
+  "volume": 618152.57,
   "open_interest": 174995.23,
   "rule": "If the unsmoothed Land-Ocean Temperature Index value for 2026 reported by NASA\u00e2\u20ac\u2122s Goddard Institute for Space Studies (GISS) is above the 2025 value and 1.28 degrees Celsius, then the market resolves to Yes."
  },

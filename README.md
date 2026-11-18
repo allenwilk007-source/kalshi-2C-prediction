@@ -459,3 +459,39 @@ Kalshi on 18 Nov 2026: 0.68/0.72, mid **70 %**, range after fees 66–74 %.
 equal Kalshi's mid; negative means the version runs hotter than the market. Every version's middle sits
 at about 2.0–2.2 °C. They differ mainly in width: the narrow class-model versions put almost all of
 their mass above 2.0, while the IPCC versions spread into slower-warming futures.
+
+## Phase 11: hypothetical trade idea (class project)
+
+`phase11.py`, `test_phase11.py` (5 tests). On the dashboard: **Trade idea**. **Hypothetical, for a class
+presentation. Not investment advice; nothing places orders.**
+
+**Our estimate:** an ensemble of the class model with its important settings changed.
+- Climate sensitivity (Parameter 2): 1.00 / 1.15 / 1.30
+- Adjustment speed (Parameter 1): 0.020 / 0.0256 / 0.032
+- Emissions: HW5 economy / falling / flat / rising
+- Missing land-use emissions: off / on
+
+That's 72 versions × 4,000 futures, each from the 2026 nowcast with Kalshi's rule. The estimate is
+the mean of the ensemble PDF: **80.8 %** that some year reaches 2 °C before 2050, against Kalshi's
+70 % (18 Nov 2026). The PDF's mean peak reading is 2.14 °C. Sensitivity matters most (58 % → 98 %),
+then adjustment speed, then emissions.
+
+**Strategy A, value bet:** buy Yes at 0.72 (0.734 with the fee).
+- Edge: +7.4 ¢ per contract.
+- Hypothetical $1,000 (1,362 contracts): **+$362** if 2 °C is reached, **−$1,000** if not;
+  expected **+$100** (about 0.55 %/yr over ~18 years, plus Kalshi's 3.5 % interest on the position).
+- Kelly sizing: 28 % of a bankroll (half-Kelly 14 %).
+- Reality checks: only ~500 contracts sit near the ask, and with the IPCC-calibrated estimate (67 %)
+  the same trade has negative edge.
+
+**Strategy B, hedge:** 70 % Yes on 2 °C + 30 % No on "CO₂ ≥ 445 ppm before 2030". The model gives
+CO₂ ≥ 445 about 1.3 % vs the market's 20 %. High CO₂ goes with fast warming, so the No leg mostly
+pays in the slow-warming worlds where the 2 °C bet loses.
+- If 2 °C is not reached: **−$638** instead of −$1,000.
+- Expected: +$127.
+
+**Strategy C, arbitrage check:** `KXGTEMP-26` and `KXGTEMP-27` both ask whether 2026 is GISS's
+record year. Buying Yes on one and No on the other pays exactly $1, so it's arbitrage whenever the
+two cost less than $1 after fees. On 18 Nov 2026 they cost about $1.02–1.03, so there's no arbitrage;
+the prices would need to drift 2–3 ¢ further apart (the dashboard shows the live figure). Risk: if Kalshi treats "-27" as a 2027 market, they
+stop being the same bet.

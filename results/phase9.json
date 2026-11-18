@@ -1682,13 +1682,13 @@
  ],
  "kxwarming": {
   "first_day": "2025-06-05",
-  "last_day": "2026-11-16",
-  "days": 423,
+  "last_day": "2026-11-17",
+  "days": 424,
   "price_first": 0.73,
-  "price_last": 0.6950000000000001,
+  "price_last": 0.7,
   "mean_before_sweep": 0.7817166212534059,
-  "mean_after_sweep": 0.674,
-  "total_volume": 21754.51,
+  "mean_after_sweep": 0.6744642857142856,
+  "total_volume": 21754.510000000002,
   "open_interest_last": 4141.8
  },
  "kxwarming_daily": [
@@ -3806,6 +3806,11 @@
    "date": "2026-11-16",
    "price": 0.6950000000000001,
    "volume": 0.0
+  },
+  {
+   "date": "2026-11-17",
+   "price": 0.7,
+   "volume": 0.0
   }
  ],
  "tracking": [
@@ -3830,6 +3835,15 @@
   {
    "snapshot": "20261118T044236Z",
    "time": "2026-11-18T04:42:36+00:00",
+   "kxwarming_mid": 0.7,
+   "model_ipcc": 0.6714354852529033,
+   "model_history": 0.9270191416230286,
+   "kxgtemp_mid": 0.8825000000000001,
+   "kxgtemp_model": 0.839
+  },
+  {
+   "snapshot": "20261118T045829Z",
+   "time": "2026-11-18T04:58:29+00:00",
    "kxwarming_mid": 0.7,
    "model_ipcc": 0.6714354852529033,
    "model_history": 0.9270191416230286,
