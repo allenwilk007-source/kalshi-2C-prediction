@@ -1,13 +1,36 @@
-# Course climate model vs Kalshi's 2 °C market
+# Kalshi 2°C prediction: our class climate model vs the market
 
-Goal: use the Carbon Trading course model (Kaya → carbon cycle → temperature) to
-estimate P(world passes 2 °C before 2050), compare it with the Kalshi price, and
-analyse how the contract could work as a hedge.
+Carbon Trading class project. What is the chance that any single year before 2050 is at least 2.00°C above
+1850–1900, under the rules of Kalshi’s contract KXWARMING-50 (a year counts when the second-highest of NASA GISS,
+NOAA, Berkeley Earth and HadCRUT, rounded to 0.01, is ≥ 2.00)? We answer it with the HW2–HW5 class model
+(Kaya → 5-box carbon cycle → forcing → two-box temperature), simulated thousands of times with realistic year-to-year
+noise, and summarised as a probability density function of each future’s hottest reading.
+
+| View | Chance of a 2°C year before 2050 |
+|---|---|
+| Our model, 72 versions of the class model (equal weights) | **80.8%** |
+| Our model, uncertainty calibrated to IPCC AR6 | **67.1%** |
+| Kalshi market (18 Nov 2026, bid 68¢ / ask 72¢) | **70%** (fair range after fees 65.5–73.4%) |
+
+Every version puts the most likely first 2°C year around 2044; they differ in how wide the distribution is.
+Hypothetical class analysis only: no trades were placed and nothing here is investment advice.
+
+**Where to look**
+
+- [`excel/ensemble_72_versions.xlsx`](excel/ensemble_72_versions.xlsx): how the 80.8% is computed, with live formulas
+  (72 versions, 232,668 of 288,000 simulated futures reach 2°C), the Kalshi fee and decision math, and one simulated
+  future scored year by year with Kalshi’s rule.
+- [`static/decision_lab.html`](static/decision_lab.html): the interactive Decision Lab; download it and open it in a
+  browser, no install needed.
+- [`deck_short/`](deck_short/) and [`deck/`](deck/): slide sources (7-slide and 36-slide versions) with speaker notes.
+- `model.py` (the class model, checked against the HW5 workbook by `validate.py`), `phase2.py` … `phase12.py` (each
+  step of the analysis, documented below), `test_phase*.py` (63 tests).
 
 ## Quick start: the dashboard
 
+Needs Python 3.10+ with numpy, matplotlib and openpyxl (`pip install -r requirements.txt`). From this folder:
+
 ```bash
-cd climate_kalshi
 python serve.py
 ```
 
