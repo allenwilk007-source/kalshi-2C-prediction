@@ -1,2 +1,4 @@
 __pycache__/
 *.pyc
+deck_short/preview/
+deck_short/_tmp/

@@ -1,0 +1,80 @@
+:root {
+  --ink: #14213D;
+  --body: #3D4656;
+  --muted: #5B6475;
+  --paper: #F7F6F2;
+  --paper2: #ECEEF2;
+  --card: #FCFBF8;
+  --line: #D9DBD6;
+  --accent: #C2410C;
+  --accent-bright: #EA580C;
+  --blue: #1D4ED8;
+  --navy-text: #F7F6F2;
+  --navy-soft: #C9D3E6;
+  --navy-accent: #FB923C;
+}
+body { font-family: 'Inter', Arial, sans-serif; color: var(--ink); }
+section {
+  background: var(--paper);
+  padding: 128px 128px 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  counter-increment: page;
+}
+section.alt { background: var(--paper2); }
+section::after {
+  content: counter(page);
+  position: absolute;
+  right: 128px;
+  bottom: 64px;
+  width: 80px;
+  text-align: right;
+  font-size: 24px;
+  color: var(--muted);
+}
+h1 { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 112px; font-weight: 700; line-height: 1.02; color: var(--ink); }
+h2 { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 60px; font-weight: 600; line-height: 1.1; color: var(--ink); }
+.eyebrow { font-size: 24px; font-weight: 700; letter-spacing: 3px; color: var(--accent); }
+.head { display: flex; flex-direction: column; gap: 12px; }
+.lead { font-size: 32px; line-height: 1.4; color: var(--body); }
+.small { font-size: 24px; line-height: 1.35; color: var(--muted); }
+.two { display: flex; gap: 56px; align-items: flex-start; }
+.col { display: flex; flex-direction: column; gap: 16px; }
+ul.pts { font-size: 30px; line-height: 1.4; color: var(--body); display: flex; flex-direction: column; gap: 16px; padding-left: 36px; }
+.fig { background: #FCFBF8; border: 2px solid var(--line); border-radius: 16px; object-fit: contain; }
+.shot { background: #FFFFFF; border: 2px solid var(--line); border-radius: 14px; object-fit: contain; }
+.cards { display: flex; gap: 28px; }
+.card { flex: 1; background: var(--card); border: 2px solid var(--line); border-radius: 20px; padding: 28px 32px; display: flex; flex-direction: column; gap: 8px; }
+.card .ttl { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 30px; font-weight: 600; line-height: 1.2; color: var(--ink); }
+.card .label { font-size: 24px; line-height: 1.35; color: var(--body); }
+.card .step { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 26px; font-weight: 700; color: var(--accent); }
+.card.yes .ttl { color: var(--accent); }
+.card.no .ttl { color: var(--blue); }
+.card.pass .ttl { color: var(--muted); }
+.eq { font-size: 26px; line-height: 1.4; color: var(--body); background: var(--card); border: 2px solid var(--line); border-radius: 14px; padding: 14px 24px; }
+.eq .k { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; color: var(--accent); }
+.eq .f { font-weight: 600; color: var(--ink); }
+.callout { background: #FFF4EC; border: 2px solid #F5C9A9; border-radius: 16px; padding: 20px 28px; font-size: 28px; line-height: 1.4; color: var(--ink); }
+.shotcol { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+.cap { font-size: 24px; line-height: 1.35; color: var(--body); }
+.cap .n { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; color: var(--accent); }
+.cap .t { font-weight: 700; color: var(--ink); }
+
+/* cover */
+section.navy { background: var(--ink); }
+section.navy::after { color: var(--navy-soft); }
+section.navy h1 { color: var(--navy-text); }
+section.navy .eyebrow { color: var(--navy-accent); }
+section.navy .lead { color: var(--navy-soft); }
+.cover-stats { display: flex; gap: 28px; margin-top: 16px; }
+.cstat { flex: 1; border: 2px solid #33415E; border-radius: 20px; padding: 26px 32px; display: flex; flex-direction: column; gap: 8px; }
+.cstat .n { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 96px; font-weight: 700; line-height: 1; color: var(--navy-text); }
+.cstat .n.hot { color: var(--navy-accent); }
+.cstat .l { font-size: 26px; line-height: 1.35; color: var(--navy-soft); }
+
+/* gentle arrival motion */
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+.card, .cstat, .fig, .shot, .eq { animation: rise 500ms ease-out both; }
+.cards .card:nth-child(2), .cover-stats .cstat:nth-child(2), .shotcol:nth-child(2) .shot { animation-delay: 120ms; }
+.cards .card:nth-child(3), .cover-stats .cstat:nth-child(3), .shotcol:nth-child(3) .shot { animation-delay: 240ms; }

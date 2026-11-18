@@ -383,7 +383,7 @@ function playground(el, r, recSide, stake, who) {
     <div class="strip"></div>
     <div class="tally"></div>`;
   const { X, Y } = playChart.last;
-  const svg = el.querySelector("svg"), poly = svg.querySelector(".pl"), dots = svg.querySelector(".pts"), out = el.querySelector(".outcome");
+  const svg = el.querySelector("svg"), poly = svg.querySelector(".pl"), dots = svg.querySelector(".pts"), lbl = svg.querySelector(".lbl"), out = el.querySelector(".outcome");
   el.querySelectorAll(".bet").forEach(b => b.onclick = () => { bet = b.dataset.s;
     el.querySelectorAll(".bet").forEach(x => x.setAttribute("aria-pressed", x === b)); });
   const pnlOf = hit => {
@@ -399,14 +399,14 @@ function playground(el, r, recSide, stake, who) {
   el.querySelector('[data-a="one"]').onclick = () => {
     const i = Math.floor(Math.random() * r.n), ys = r.years;
     const pts = [`${X(2026).toFixed(1)},${Y(C.signal_2026.mean).toFixed(1)}`];
-    dots.innerHTML = ""; poly.setAttribute("points", pts[0]); el.querySelector(".strip").innerHTML = "";
+    dots.innerHTML = ""; lbl.innerHTML = ""; poly.setAttribute("points", pts[0]); el.querySelector(".strip").innerHTML = "";
     let t = 0, hit = null; lock(true);
     timer = setInterval(() => {
       const v = r.stat[t][i], y = ys[t];
       pts.push(`${X(y).toFixed(1)},${Y(v).toFixed(1)}`); poly.setAttribute("points", pts.join(" "));
       const over = v >= 2 - 1e-6;
       dots.insertAdjacentHTML("beforeend", `<circle cx="${X(y)}" cy="${Y(v)}" r="${over ? 5 : 3}" fill="${over ? "var(--accent-bright)" : "var(--ink)"}"/>`);
-      if (over && hit == null) { hit = y; dots.insertAdjacentHTML("beforeend", `<text x="${X(y)}" y="${Y(v) - 10}" text-anchor="middle" style="fill:var(--accent);font-weight:700">2°C in ${y}</text>`); }
+      if (over && hit == null) { hit = y; lbl.innerHTML = `<text x="${X(y) - 10}" y="${Y(v) - 12}" text-anchor="end" style="fill:var(--accent);font-weight:700;paint-order:stroke;stroke:var(--bg);stroke-width:5px">2°C in ${y}</text>`; }
       out.innerHTML = `<span class="big">${y}: ${v.toFixed(2)}°C</span> <span class="note">second-highest of the four datasets</span>`;
       if (++t >= ys.length) {
         clearInterval(timer); lock(false);
@@ -430,7 +430,7 @@ function playground(el, r, recSide, stake, who) {
       <div>2°C reached in ${w} of 100. ${bet === "pass" ? "" : `Each square is one future: green you won, red you lost ($${stake} a play).`}</div>`;
     drawTally();
   };
-  el.querySelector('[data-a="reset"]').onclick = () => { tally = { n: 0, w: 0, pnl: 0 }; drawTally(); out.innerHTML = ""; el.querySelector(".strip").innerHTML = ""; dots.innerHTML = ""; poly.setAttribute("points", ""); };
+  el.querySelector('[data-a="reset"]').onclick = () => { tally = { n: 0, w: 0, pnl: 0 }; drawTally(); out.innerHTML = ""; el.querySelector(".strip").innerHTML = ""; dots.innerHTML = ""; lbl.innerHTML = ""; poly.setAttribute("points", ""); };
 }
 function playChart(r) {
   const W = 640, H = 280, L = 34, T = 16, B = 26, x0 = 2015, x1 = 2050, y0 = 0.9, y1 = 2.7;
@@ -439,13 +439,13 @@ function playChart(r) {
   const obs = C.anchor_years.map((y, i) => y >= x0 ? `<circle cx="${X(y)}" cy="${Y(C.anchor_signal[i])}" r="2.6" fill="var(--muted)"/>` : "").join("")
     + `<circle cx="${X(2026)}" cy="${Y(C.signal_2026.mean)}" r="3.4" fill="var(--muted)"/>`;
   const yt = [1.0, 1.5, 2.0, 2.5].map(v => `<text x="${L - 4}" y="${Y(v) + 4}" text-anchor="end">${v.toFixed(1)}</text>`).join("");
-  const xt = [2015, 2020, 2025, 2030, 2035, 2040, 2045, 2050].map(v => `<text x="${X(v)}" y="${H - 6}" text-anchor="middle">${v}</text>`).join("");
+  const xt = [2015, 2020, 2025, 2030, 2035, 2040, 2045, 2050].map(v => `<text x="${X(v)}" y="${H - 6}" text-anchor="${v === x1 ? "end" : "middle"}">${v}</text>`).join("");
   playChart.last = { X, Y };
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="One simulated future of the contract reading, year by year">
     <path d="${band(0, 4)}" fill="var(--accent-bright)" opacity=".10"/>
     <line x1="${L}" x2="${W - 10}" y1="${Y(2)}" y2="${Y(2)}" stroke="var(--gold)" stroke-width="2" stroke-dasharray="6 4"/>
-    <text x="${W - 12}" y="${Y(2) - 6}" text-anchor="end" style="fill:var(--gold);font-weight:600">2.00°C: Yes pays</text>
-    ${obs}<polyline class="pl" fill="none" stroke="var(--ink)" stroke-width="2" points=""/><g class="pts"></g>${yt}${xt}</svg>`;
+    <text x="${L + 6}" y="${Y(2) - 8}" style="fill:var(--gold);font-weight:600">2.00°C: Yes pays</text>
+    ${obs}<polyline class="pl" fill="none" stroke="var(--ink)" stroke-width="2" points=""/><g class="pts"></g><g class="lbl"></g>${yt}${xt}</svg>`;
 }
 
 // ---------------------------------------------------------------- path B: step by step
@@ -726,7 +726,7 @@ function pathChart(r) {
   const obs = C.anchor_years.map((y, i) => `<circle cx="${X(y)}" cy="${Y(C.anchor_signal[i])}" r="2.6" fill="var(--ink)"/>`).join("")
     + `<circle cx="${X(2026)}" cy="${Y(C.signal_2026.mean)}" r="3.4" fill="var(--accent-bright)"/>`;
   const yt = [1.0, 1.5, 2.0, 2.5].map(v => `<text x="${L - 4}" y="${Y(v) + 4}" text-anchor="end">${v.toFixed(1)}</text>`).join("");
-  const xt = [2000, 2010, 2020, 2030, 2040, 2050, 2060].map(v => `<text x="${X(v)}" y="${H - 6}" text-anchor="middle">${v}</text>`).join("");
+  const xt = [2000, 2010, 2020, 2030, 2040, 2050, 2060].map(v => `<text x="${X(v)}" y="${H - 6}" text-anchor="${v === x1 ? "end" : "middle"}">${v}</text>`).join("");
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Temperature path with the range of simulated contract readings">
     <text x="${L}" y="14" style="font-weight:600;fill:var(--ink)">Temperature, °C above 1850–1900 (shaded: 90% and 50% of futures)</text>
     <path d="${band(0, 4)}" fill="var(--accent-bright)" opacity=".15"/><path d="${band(1, 3)}" fill="var(--accent-bright)" opacity=".25"/>
