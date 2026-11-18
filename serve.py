@@ -46,6 +46,7 @@ STEPS = [
     ("phase10.py", "Phase 10: temperature distributions across model versions"),
     ("phase11.py", "Phase 11: hypothetical trade idea (class project)"),
     ("phase12.py", "Phase 12: can small regular trades make money? (class project)"),
+    ("export_decision.py", "Decision Lab: model draws and live quote for the interactive page"),
 ]
 RESULT_FILES = ("phase2", "phase3", "phase4", "phase5", "phase6", "phase7", "phase9", "phase10", "phase11", "phase12")
 
@@ -181,6 +182,10 @@ class Handler(BaseHTTPRequestHandler):
             return self._file(HERE / "data", "hw5_inputs.json")
         if path == "/api/slider-context":               # nowcast, noise, offsets, Python reference values
             return self._file(RES, "slider_context.json")
+        if path in ("/play", "/play.html"):              # the Decision Lab
+            return self._file(SITE, "play.html")
+        if path == "/api/decision-context":             # model draws + Kalshi quote for the Decision Lab
+            return self._file(RES, "decision_context.json")
         if path.startswith("/figures/"):
             return self._file(FIG, path[len("/figures/"):])
         if path.startswith("/site/"):

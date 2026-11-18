@@ -83,30 +83,33 @@
 
   const round2 = x => Math.floor(x * 100 + 0.5 + 1e-9) / 100;
 
-  // Monte Carlo for KXWARMING-50 from the 2026 nowcast state (anchored, AR(1) noise, 2-of-4 rule)
-  function probability(res, opts) {
-    const o = Object.assign({ n: 4000, seed: 12345, lastYear: 2049 }, opts || {});
-    const T = res.T, c = CTX, N = o.n, randn = rng(o.seed);
+  function anchorBias(T) {
     let b = 0;
-    c.anchor_years.forEach((y, i) => { b += c.anchor_signal[i] - T[y - YEAR0]; });
-    b /= c.anchor_years.length;
-    const phi = c.ar1.phi, sig = c.ar1.sigma, cc = b * (1 - phi);
-    const years = []; for (let y = 2027; y <= o.lastYear; y++) years.push(y);
-    const Y = years.length;
+    CTX.anchor_years.forEach((y, i) => { b += CTX.anchor_signal[i] - T[y - YEAR0]; });
+    return b / CTX.anchor_years.length;
+  }
+
+  function makeAcc(N, years) {
+    return { years, N, stat: Array.from({ length: years.length }, () => new Float64Array(N)),
+             first: new Float64Array(N).fill(NaN), peak: new Float64Array(N), yes: 0 };
+  }
+
+  // Simulate n futures for one model path T (anchored, AR(1) noise, 2-of-4 rule) into acc[start..start+n)
+  function simInto(T, phi, sig, n, randn, acc, start, opts) {
+    const c = CTX, years = acc.years, Y = years.length;
+    const b = anchorBias(T), cc = b * (1 - phi);
     const d = c.offsets, K = d.delta.length;
-    const stat = Array.from({ length: Y }, () => new Float64Array(N));
-    const sig2049 = new Float64Array(N);
-    const first = new Float64Array(N).fill(NaN);
-    let yes = 0;
     const u = new Float64Array(K);
     const innov = d.rho.map((rho, k) => d.tau[k] * Math.sqrt(Math.max(0, 1 - rho * rho)));
-    for (let i = 0; i < N; i++) {
+    const useMom = c.momentum.used && !(opts && opts.noMomentum);
+    for (let j = 0; j < n; j++) {
+      const i = start + j;
       const s26 = c.signal_2026.mean + c.signal_2026.sd * randn();
       const r0 = s26 - T[2026 - YEAR0];
       let r = cc + phi * r0 + sig * randn();
-      if (c.momentum.used) r += (c.momentum.phi1 - phi) * (r0 - b) + c.momentum.phi2 * c.q4_minus_annual_2026;
+      if (useMom) r += (c.momentum.phi1 - phi) * (r0 - b) + c.momentum.phi2 * c.q4_minus_annual_2026;
       for (let k = 0; k < K; k++) u[k] = d.last_dev[k];
-      let hit = false;
+      let hit = false, peak = -Infinity;
       for (let t = 0; t < Y; t++) {
         if (t > 0) r = cc + phi * r + sig * randn();
         const S = T[years[t] - YEAR0] + r;
@@ -117,18 +120,52 @@
           const v = round2(S + d.delta[k] + u[k]);
           if (v > top) { second = top; top = v; } else if (v > second) second = v;
         }
-        stat[t][i] = second;
-        if (!hit && second >= 2.0 - 1e-9) { hit = true; first[i] = years[t]; }
-        if (t === Y - 1) sig2049[i] = S;
+        acc.stat[t][i] = second;
+        if (second > peak) peak = second;
+        if (!hit && second >= 2.0 - 1e-9) { hit = true; acc.first[i] = years[t]; }
       }
-      if (hit) yes++;
+      acc.peak[i] = peak;
+      if (hit) acc.yes++;
     }
+    return b;
+  }
+
+  function summarize(acc, extra) {
+    const N = acc.N;
     const q = (arr, p) => { const a = arr.filter(v => !isNaN(v)).sort();   // typed-array sort is numeric
       return a.length ? a[Math.min(a.length - 1, Math.floor(p * a.length))] : NaN; };
-    const fan = stat.map(col => { const s = col.slice().sort();
+    const fan = acc.stat.map(col => { const s = col.slice().sort();
       return [0.05, 0.25, 0.5, 0.75, 0.95].map(p => s[Math.min(N - 1, Math.floor(p * N))]); });
-    return { pYes: yes / N, b, years, fan, firstMedian: q(first, 0.5), firstP10: q(first, 0.1),
-             firstP90: q(first, 0.9), n: N };
+    return Object.assign({ pYes: acc.yes / N, years: acc.years, fan, peak: acc.peak, firstMedian: q(acc.first, 0.5),
+                           firstP10: q(acc.first, 0.1), firstP90: q(acc.first, 0.9), n: N }, extra || {});
+  }
+
+  const simYears = last => { const ys = []; for (let y = 2027; y <= last; y++) ys.push(y); return ys; };
+
+  // One model path, class-model noise (the What-if panel)
+  function probability(res, opts) {
+    const o = Object.assign({ n: 4000, seed: 12345, lastYear: 2049 }, opts || {});
+    const acc = makeAcc(o.n, simYears(o.lastYear));
+    const b = simInto(res.T, CTX.ar1.phi, CTX.ar1.sigma, o.n, rng(o.seed), acc, 0, o);
+    return summarize(acc, { b });
+  }
+
+  // Many model versions (climate x emissions draws), k futures each (the Decision Lab).
+  // items: [{ params: <run() params>, phi, sigma }]. Returns the pooled result plus the
+  // average anchored temperature path for charts.
+  function ensemble(items, opts) {
+    const o = Object.assign({ pathsEach: 10, seed: 777, lastYear: 2049 }, opts || {});
+    const N = items.length * o.pathsEach;
+    const acc = makeAcc(N, simYears(o.lastYear));
+    const randn = rng(o.seed);
+    let meanT = null;
+    items.forEach((it, j) => {
+      const r = run(it.params);
+      const b = simInto(r.T, it.phi, it.sigma, o.pathsEach, randn, acc, j * o.pathsEach, o);
+      if (!meanT) meanT = new Float64Array(r.T.length);
+      for (let t = 0; t < r.T.length; t++) meanT[t] += (r.T[t] + b) / items.length;
+    });
+    return summarize(acc, { meanT });
   }
 
   function check() {
@@ -139,5 +176,8 @@
     return { maxAbsDiffT: maxDiff, pRef: CTX.reference.template_p_yes, pJs: probability(r, { n: 20000 }).pYes };
   }
 
-  window.ClassModel = { setup, run, probability, check, DEFAULTS, ecs: p2 => p2 * FCOEF * Math.log(2), YEAR0 };
+  // Kalshi's standard taker fee for one order, rounded up to the cent
+  const fee = (price, contracts) => Math.ceil(0.07 * contracts * price * (1 - price) * 100 - 1e-9) / 100;
+
+  window.ClassModel = { setup, run, probability, ensemble, check, fee, DEFAULTS, ecs: p2 => p2 * FCOEF * Math.log(2), YEAR0 };
 })();

@@ -521,3 +521,32 @@ Kalshi's public price history; not investment advice.**
 
 `figures/p12_0_estimates.png` is the headline chart (Kalshi 70 % vs IPCC-calibrated 67 % vs ensemble
 81 % vs history-fit 93 % vs class model 99 %), shown on the dashboard and in the presentation deck.
+
+## Decision Lab: pick your own path (`/play`)
+
+`python serve.py`, then open <http://127.0.0.1:8000/play> (also linked at the top of the dashboard). The page pitches the
+question ("would you bet on a 2°C year before 2050?") with Kalshi's live price and offers two paths:
+
+- **Path A, take our recommendation.** The 72-version ensemble (Phase 11) says 81% vs Kalshi's 70%, so the hypothetical call is
+  **buy Yes** (cost 73.4¢ all-in, expected +$10 per $100). The IPCC-calibrated second opinion (67%) sits inside the after-fees
+  band (65–73%), so it says **pass**. Both PDFs are drawn side by side.
+- **Path B, build your own forecast.** Six steps: emissions (real-data Kaya draws, HW5, or four scenarios), climate certainty
+  (history-fit, IPCC-calibrated, wide, or your own p1/p2 sliders), land-use emissions, El Niño carry-over, whether 2049 counts,
+  and a hypothetical stake. The result shows your P(Yes) vs Kalshi, the Yes / No / Pass call with win/lose/expected dollars, a
+  histogram of the highest reading 2027–2049 and a temperature fan. Every factor can then be changed in place and the odds re-run.
+
+The class model runs in the browser (`site/model.js`, `ensemble()`): 400 climate draws paired with 400 Kaya draws, 10 futures
+each, about 0.1 s. `export_decision.py` (last pipeline step) writes the draws, the 2026 starting state and the quote to
+`results/decision_context.json`. Browser vs Python for the same settings:
+
+| Setting | Python | Browser |
+|---|---|---|
+| IPCC-calibrated, real-data emissions | 67.1% | 67.2% |
+| History-fit | 92.7% | 92.6% |
+| Wide (full AR6) | 53.7% | 53.9% |
+| IPCC + falling / flat / doubling | 43.8 / 59.3 / 74.6% | 43.7 / 59.4 / 74.6% |
+| IPCC + land use added | 72.6% | 72.6% |
+| Class model (HW5, p2 = 1.15) | 99.3% | 99.3% |
+
+Decision rule: buy Yes if P > Yes cost (73.4¢), buy No if 1 − P > No cost (34.5¢), otherwise pass. Hypothetical only; nothing
+places orders.
