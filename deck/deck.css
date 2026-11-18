@@ -72,6 +72,12 @@ table.grid .c-no { color: var(--blue); font-weight: 700; }
 table.grid .c-yes { color: var(--accent); font-weight: 700; }
 table.grid .c-pass { color: var(--muted); font-weight: 700; }
 
+/* method slides: equation blocks */
+.eqs { display: flex; flex-direction: column; gap: 14px; }
+.eq { font-size: 26px; line-height: 1.4; color: var(--body); background: var(--card); border: 2px solid var(--line); border-radius: 14px; padding: 14px 24px; }
+.eq .k { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; color: var(--accent); }
+.eq .f { font-weight: 600; color: var(--ink); }
+
 /* cover and statement slides: navy */
 section.navy { background: var(--ink); }
 section.navy::after { color: var(--navy-soft); }

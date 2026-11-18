@@ -1,0 +1,42 @@
+<section id="method3">
+<div class="head"><p class="eyebrow">THE MATH · 3 OF 5</p><h2>From many futures to a probability and a PDF</h2></div>
+<div class="two">
+<div class="eqs" style="width:760px">
+<div class="eq"><span class="k">Repeat</span> step 2 for N futures, each with its own climate settings, economy and noise</div>
+<div class="eq"><span class="k">Probability</span>: <span class="f">P = futures with a Yes year ÷ N</span>. With N = 100,000 the sampling error is about ±0.3 points</div>
+<div class="eq"><span class="k">PDF</span>: for each future take <span class="f">M = highest 2nd-highest reading, 2027–2049</span>; f(m) is the density of M</div>
+<div class="eq"><span class="k">Link</span>: a future pays Yes exactly when M ≥ 2.00, so <span class="f">P(Yes) = area under f(m) right of 2.00</span></div>
+</div>
+<div style="flex:1">
+<svg viewBox="0 0 900 420" width="848" height="396" aria-label="Probability density of the highest reading 2027 to 2049 in the IPCC-calibrated view, peaking near 2.07 degrees, with the area right of 2.00 degrees shaded: 67 percent of futures">
+<rect x="0" y="0" width="900" height="420" rx="16" fill="#FFFFFF"/>
+<path d="M411,360 L411,81 L423,73 L435,67 L447,61 L458,60 L470,67 L482,78 L493,88 L505,98 L517,109 L529,123 L540,138 L552,155 L564,179 L575,203 L587,224 L599,242 L611,259 L622,275 L634,287 L646,296 L657,304 L669,312 L681,318 L693,322 L704,328 L716,333 L728,338 L739,342 L751,345 L763,347 L775,348 L786,349 L798,350 L810,351 L821,353 L833,353 L845,354 L857,355 L868,355 L880,356 L880,360 Z" fill="#FDE3D2"/>
+<polyline points="60,359 72,359 83,358 95,357 107,356 119,355 130,353 142,351 154,348 165,345 177,341 189,336 201,332 212,328 224,323 236,317 247,307 259,296 271,285 283,275 294,264 306,249 318,229 329,208 341,190 353,177 365,164 376,145 388,121 400,97 411,81 423,73 435,67 447,61 458,60 470,67 482,78 493,88 505,98 517,109 529,123 540,138 552,155 564,179 575,203 587,224 599,242 611,259 622,275 634,287 646,296 657,304 669,312 681,318 693,322 704,328 716,333 728,338 739,342 751,345 763,347 775,348 786,349 798,350 810,351 821,353 833,353 845,354 857,355 868,355 880,356" fill="none" stroke="#1D4ED8" stroke-width="4"/>
+<line x1="411" y1="30" x2="411" y2="362" stroke="#CA8A04" stroke-width="4"/>
+<line x1="60" y1="362" x2="880" y2="362" stroke="#5B6475" stroke-width="2"/>
+<text x="425" y="40" font-size="24" font-weight="700" fill="#A16207">2.00°C</text>
+<text x="640" y="150" font-size="26" font-weight="700" fill="#C2410C">67% of futures:</text>
+<text x="640" y="182" font-size="26" font-weight="700" fill="#C2410C">pays Yes</text>
+<text x="90" y="200" font-size="26" font-weight="700" fill="#1D4ED8">33%: never</text>
+<text x="90" y="232" font-size="26" font-weight="700" fill="#1D4ED8">reaches 2°C</text>
+<text x="60" y="398" text-anchor="middle" font-size="24" fill="#5B6475">1.4</text>
+<text x="294" y="398" text-anchor="middle" font-size="24" fill="#5B6475">1.8</text>
+<text x="529" y="398" text-anchor="middle" font-size="24" fill="#5B6475">2.2</text>
+<text x="763" y="398" text-anchor="middle" font-size="24" fill="#5B6475">2.6</text>
+<text x="880" y="398" text-anchor="end" font-size="24" fill="#5B6475">°C</text>
+</svg>
+<p class="small">IPCC-calibrated view, 100,000 futures: highest contract reading 2027–2049.</p>
+</div>
+</div>
+<aside>Step three is how one future becomes a probability, and where the probability density function comes in.
+
+We repeat step two many times. Each future gets its own climate settings, its own economy and its own random noise. The probability is simply a count: the number of futures that have at least one Yes year, divided by the total. With 100,000 futures the standard error of that count is the square root of p times one minus p over N, about 0.15 points, so our numbers are accurate to roughly plus or minus 0.3 points.
+
+The PDF: for each future, we record the highest reading the contract would ever see between 2027 and 2049, meaning the highest second-highest dataset. Call it M. The probability density function of M shows where all the futures end up. Here it is for the IPCC-calibrated view: it peaks around 2.07°C and most futures land between about 1.7 and 2.4.
+
+The link between the two is exact. A future pays Yes if and only if its highest reading M is at least 2.00. So the probability of Yes is the area under the density to the right of the 2.00 line: 67% here. The other 33% of futures never reach 2°C before 2050.
+
+Why use a PDF and not just the count? Because it shows the shape. Two forecasts can have the same middle but different widths, and the width decides how much area falls past 2.00. That’s the whole story of our 81% versus 67%.
+
+A detail for accuracy: we always report the counted share. The curve is smoothed for display, and because readings are rounded to 0.01, the smoothing spreads the futures sitting at exactly 2.00 across both sides of the line. That’s why the smoothed area comes out at 66% while the count is 67.1%.</aside>
+</section>

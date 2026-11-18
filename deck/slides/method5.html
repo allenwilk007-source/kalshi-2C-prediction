@@ -1,0 +1,32 @@
+<section id="method5" class="alt">
+<div class="head"><p class="eyebrow">THE MATH · 4 OF 5</p><h2>Where 67% comes from: calibrating the uncertainty</h2></div>
+<div class="cards">
+<div class="card"><p class="step">1 · Grid</p><p class="label">2,751 climate settings: p1 0.010–0.060, p2 0.50–1.80</p></div>
+<div class="card"><p class="step">2 · Prior</p><p class="label">IPCC AR6 climate sensitivity, 2–5°C very likely (sensitivity = 3.71 × p2)</p></div>
+<div class="card"><p class="step">3 · Likelihood</p><p class="label">How well each setting fits 1880–2020 temperatures, with AR(1) errors</p></div>
+<div class="card"><p class="step">4 · Temper</p><p class="label">Likelihood to the power 1/11, so 2041–60 warming spans 0.67°C as in AR6</p></div>
+<div class="card"><p class="step">5 · Simulate</p><p class="label">20,000 settings × real-data Kaya economies × 5 noise paths</p></div>
+</div>
+<table class="grid tight">
+<tr><th>View</th><th>Weight on each setting</th><th>Sensitivity, 5–95%</th><th>2041–60 warming, 5–95%</th><th>P(Yes)</th></tr>
+<tr><td class="rowh">Fitted to history</td><td>prior × likelihood</td><td>3.0–4.7°C</td><td>1.92–2.13°C</td><td><b>93%</b></td></tr>
+<tr class="hl"><td class="rowh">IPCC-calibrated</td><td>prior × likelihood^(1/11)</td><td>2.3–4.9°C</td><td>1.59–2.26°C</td><td><b>67%</b></td></tr>
+<tr><td class="rowh">Wide</td><td>flattened as far as possible</td><td>2.1–5.0°C</td><td>1.50–2.34°C</td><td><b>54%</b></td></tr>
+<tr><td class="rowh">IPCC AR6 report</td><td>(SSP2-4.5)</td><td>2.0–5.0°C</td><td>1.6–2.5°C</td><td>not given</td></tr>
+</table>
+<aside>Step four explains the 67%, the number I’d defend most. The question is how uncertain we should be about the climate’s response, the two class parameters p1 and p2.
+
+One: we set up a grid of 2,751 combinations, p1 from 0.010 to 0.060 and p2 from 0.50 to 1.80.
+
+Two: the prior. Before looking at our data, we weight each combination by the IPCC AR6 assessment of climate sensitivity, which says 2 to 5°C per doubling of CO₂ is very likely. In the class model, sensitivity is 5.35 times ln 2 times p2, about 3.71 times p2, so the IPCC range maps onto p2.
+
+Three: the likelihood. For each combination we run the class model over 1880 to 2020 and measure how well it matches the observed temperatures, allowing AR(1) errors. Settings that reproduce history get more weight.
+
+If we simply multiply prior and likelihood, which is standard Bayesian updating, we get the history-fit view in the first row of the table. It’s very narrow: 2041–2060 warming between 1.92 and 2.13°C. That gives 93%. The problem is that a CO₂-only model fitted to history is over-confident: aerosols and methane also shaped past warming, and the model can’t see them, so the fit looks better than it really is.
+
+Four: so we temper the likelihood, raising it to the power one over T. We chose T by bisection so that the 5-to-95% spread of 2041–2060 warming equals 0.67°C. That target comes from AR6 Table SPM.1 under SSP2-4.5: the 2041–2060 range is 1.6 to 2.5°C, a half-width of 0.45, and the 2021–2040 range is 1.2 to 1.8°C, a half-width of 0.30. Because our model is anchored to observed temperatures, the near-term part of that uncertainty is already pinned down, so we remove it in quadrature: two times the square root of 0.45 squared minus 0.30 squared, which is 0.67°C. T came out at 11.
+
+Five: we draw 20,000 climate settings from that tempered posterior, pair each with a randomised Kaya economy weighted to match real 2019–2024 emissions growth, and simulate 5 noise paths each from the 2026 start. That’s 100,000 futures, and 67.1% of them reach 2°C.
+
+The table compares the views. The IPCC-calibrated row has a sensitivity range and a 2041–2060 range very close to the AR6 report’s own. The wide row flattens the likelihood as far as it will go; even then the spread is a little narrower than the full AR6 range, which we note as a limitation.</aside>
+</section>

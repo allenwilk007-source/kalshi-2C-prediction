@@ -1,0 +1,32 @@
+<section id="checks" class="alt">
+<div class="head"><p class="eyebrow">CHECKS &amp; ASSUMPTIONS</p><h2>How we tested it, and what it assumes</h2></div>
+<div class="two">
+<div class="text" style="width:780px">
+<h3>How we checked it</h3>
+<ul class="pts">
+<li>Python = HW5 workbook in every year of all 4 sheets (error 7 × 10⁻¹⁶)</li>
+<li>Noise back-test: fitted to 1999, 92% of 2000–2025 years fell in the 90% band</li>
+<li>2026 estimate back-tested on 2023–25; uncertainty widened to match</li>
+<li>63 automated tests; the browser version matches Python within 0.2 points</li>
+<li>Sampling error about ±0.3 points with 100,000 futures</li>
+</ul>
+</div>
+<div class="text" style="width:780px">
+<h3>What it assumes</h3>
+<ul class="pts">
+<li>Only CO₂ forcing: aerosols and methane are absorbed into p2 and the anchor</li>
+<li>Noise is AR(1) and normal; dataset offsets fixed at 1996–2025 levels</li>
+<li>No El Niño forecasts beyond the 2026 carry-over</li>
+<li>81%: 72 versions weighted equally, not by fit</li>
+<li>67%: tempering set so the spread matches AR6, a calibration choice</li>
+</ul>
+</div>
+</div>
+<aside>Before comparing with the market, here is how we checked the numbers and the assumptions behind them, because each one could change the answer.
+
+The checks. First, the Python model reproduces the HW5 workbook in every year of all four sheets, so we really are using the class model. Second, we tested the noise model out of sample: we fitted it using data only up to 1999, simulated 2000 to 2025, and 92% of the real years fell inside the model’s 90% band, so the year-to-year spread is about right. Third, the method that estimates 2026 before the year is over was back-tested on 2023 to 2025, and we widened its uncertainty by about a third until the errors matched. Fourth, there are 63 automated tests across the project, and the browser version used in the Decision Lab matches Python to within 0.2 points. Fifth, with 100,000 simulated futures the sampling error is only about plus or minus 0.3 points.
+
+The assumptions. The class model only has CO₂ forcing, so the effects of aerosols, methane and other gases are absorbed into p2 and the anchor; that’s the main reason a history fit is over-confident. The noise is assumed to be AR(1) with normal shocks, and the differences between the four datasets are held at their 1996–2025 averages. We use no El Niño forecasts beyond carrying part of the late-2026 warmth into 2027, and the market probably does. The 81% gives all 72 versions equal weight, which is a modelling choice. And the 67% depends on how we calibrated the spread to the IPCC, which is also a choice, though one tied to a published assessment.
+
+None of these assumptions changes the middle of the forecast much, about 2°C in the mid-to-late 2040s. They mostly change the width, and the width is what decides whether the probability is 67% or 81%.</aside>
+</section>

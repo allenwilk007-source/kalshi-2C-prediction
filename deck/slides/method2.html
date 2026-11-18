@@ -1,0 +1,33 @@
+<section id="method2" class="alt">
+<div class="head"><p class="eyebrow">THE MATH · 2 OF 5</p><h2>One simulated future, year by year</h2></div>
+<div class="two">
+<div class="eqs" style="width:820px">
+<div class="eq"><span class="k">Anchor</span> to where the world is now: <span class="f">b = average(observed − model), 2006–2025</span> = +0.02°C for the class settings</div>
+<div class="eq"><span class="k">Noise</span> (El Niño, volcanoes): <span class="f">r(t) = b + 0.53·(r(t−1) − b) + ε</span>, ε ~ Normal(0, 0.099²), fitted to the model’s errors 1880–2025</div>
+<div class="eq"><span class="k">Start</span> from 2026 at 1.52 ± 0.02°C (agency data plus daily ERA5); 2027 keeps part of the warm end of 2026</div>
+<div class="eq"><span class="k">Kalshi’s rule</span>: each dataset = signal + its offset (GISS −0.06, NOAA −0.09, Berkeley +0.11, HadCRUT +0.04) + small error, rounded to 0.01. <span class="f">Yes if the 2nd-highest ≥ 2.00</span></div>
+</div>
+<div style="flex:1; display:flex; flex-direction:column; gap:20px">
+<table class="grid tight">
+<tr><th>Year</th><th>Model + b</th><th>Noise</th><th>GISS / NOAA / Berk. / Had.</th><th>2nd</th></tr>
+<tr><td class="rowh">2027</td><td>1.39</td><td>+0.21</td><td>1.56 / 1.52 / 1.70 / 1.63</td><td>1.63</td></tr>
+<tr><td class="rowh">2035</td><td>1.63</td><td>+0.03</td><td>1.61 / 1.59 / 1.76 / 1.69</td><td>1.69</td></tr>
+<tr><td class="rowh">2040</td><td>1.79</td><td>−0.12</td><td>1.62 / 1.58 / 1.78 / 1.70</td><td>1.70</td></tr>
+<tr><td class="rowh">2041</td><td>1.82</td><td>+0.04</td><td>1.82 / 1.78 / 1.98 / 1.92</td><td>1.92</td></tr>
+<tr class="hl"><td class="rowh">2042</td><td>1.86</td><td>+0.20</td><td>1.99 / 1.98 / 2.17 / 2.09</td><td><b>2.09</b></td></tr>
+</table>
+<p class="small">A real draw with the class settings. This future pays <b>Yes in 2042</b>: two datasets (Berkeley 2.17, HadCRUT 2.09) are at or above 2.00.</p>
+</div>
+</div>
+<aside>Step two turns the smooth model line into one realistic future, using the same rules Kalshi uses.
+
+First, the anchor. The model doesn’t match the observed temperature exactly in recent years, so we measure the average gap between observations and the model over 2006 to 2025. For the class settings that gap, b, is only plus 0.02°C. Projections start from where the world actually is: model plus b.
+
+Second, noise. Real temperatures bounce around the trend because of El Niño, La Niña and volcanoes. We modelled the gap between observations and the model as an AR(1) process: each year it keeps 53% of last year’s deviation from b and adds a new random shock with a standard deviation of about 0.1°C. Both numbers were estimated from the model’s errors over 1880 to 2025, so the noise is what history shows, not a guess.
+
+Third, the start. 2026 isn’t finished, so we estimate it from the agencies’ published months plus the daily ERA5 reanalysis: 1.52°C give or take 0.02. Because late 2026 is unusually warm, part of that warmth carries into 2027, with weights we estimated from 1960 to 2025.
+
+Fourth, Kalshi’s rule. Each dataset sits at a slightly different level: GISS 0.06 below the four-dataset average, NOAA 0.09 below, Berkeley 0.11 above, HadCRUT 0.04 above, measured over 1996 to 2025. Each dataset also gets a small error of its own. We round each to two decimals, as the agencies do, and a year counts when the second-highest of the four is at least 2.00, which is what “two of four datasets” means.
+
+The table is one real simulated future with the class settings. In 2027 the El Niño noise is +0.21, but the second-highest dataset only reads 1.63. In 2040 a cool year, −0.12, keeps it at 1.70. In 2041 Berkeley alone reaches 1.98, but one dataset isn’t enough. In 2042 the trend is 1.86 and the noise +0.20, Berkeley reads 2.17 and HadCRUT 2.09, so the second-highest is 2.09: this future pays Yes in 2042.</aside>
+</section>

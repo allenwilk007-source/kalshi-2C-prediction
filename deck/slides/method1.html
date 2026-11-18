@@ -1,0 +1,35 @@
+<section id="method1">
+<div class="head"><p class="eyebrow">THE MATH · 1 OF 5</p><h2>The class model: four equations, run every year</h2></div>
+<div class="two">
+<div class="eqs" style="width:900px">
+<div class="eq"><span class="k">1 · Emissions (Kaya), 3 regions</span><br><span class="f">E = Σ population × GDP per person × energy per $ × CO₂ per energy</span>, each factor growing at its own rate</div>
+<div class="eq"><span class="k">2 · Carbon cycle, 5 boxes</span><br>Each year box j keeps e<span class="f">^(−1/τⱼ)</span> of its CO₂ and gains share aⱼ of E × 0.00047 ppm; a = 13/20/32/25/10%, τ = ∞/363/74/17/2 years</div>
+<div class="eq"><span class="k">3 · Radiative forcing</span><br><span class="f">F = 5.35 × ln(CO₂ ÷ 275)</span> W/m²</div>
+<div class="eq"><span class="k">4 · Two-box temperature</span><br><span class="f">T ← T + p1·(p2·F − T) + p3·(T_ocean − T)</span>, T_ocean ← T_ocean + p4·(T − T_ocean); then subtract the 1850–1900 mean</div>
+</div>
+<div style="flex:1; display:flex; flex-direction:column; gap:20px">
+<table class="grid">
+<tr><th>Year</th><th>Emissions (GtC)</th><th>CO₂ (ppm)</th><th>Forcing (W/m²)</th><th>Warming (°C)</th></tr>
+<tr><td class="rowh">2026</td><td>12.0</td><td>429</td><td>2.38</td><td>1.34</td></tr>
+<tr><td class="rowh">2040</td><td>16.2</td><td>482</td><td>3.00</td><td>1.77</td></tr>
+<tr><td class="rowh">2049</td><td>19.5</td><td>526</td><td>3.47</td><td>2.09</td></tr>
+</table>
+<p class="small">HW5 economy with the class settings p1 = 0.0256, p2 = 1.15 (≈4.3°C per CO₂ doubling), p3 = 0.00738, p4 = 0.00568. Our Python matches the HW5 workbook in every year of all four sheets (largest error 7 × 10⁻¹⁶).</p>
+</div>
+</div>
+<aside>Now the math, in five steps. Step one is the class model itself, exactly as in HW2 to HW5. I didn’t change any equation; I rebuilt the spreadsheet in Python and checked it.
+
+Equation one is the Kaya identity. For rich, middle and poor countries, emissions are population times GDP per person times energy per dollar times CO₂ per unit of energy. Each of the three factors grows at its own rate in each region, so there are nine growth rates. Those are the economic inputs.
+
+Equation two is the five-box carbon cycle. Each year’s emissions are split into five boxes: 13% stays forever, 20% decays with a 363-year lifetime, 32% with 74 years, 25% with 17 years and 10% with 2 years. One million tonnes of carbon adds 0.00047 ppm. CO₂ concentration is 275 plus what is in the boxes.
+
+Equation three turns concentration into radiative forcing: 5.35 times the natural log of CO₂ over 275, in watts per square metre.
+
+Equation four is the two-box temperature model. Each year the atmosphere moves a fraction p1 of the way toward its equilibrium, p2 times the forcing, and exchanges heat with the ocean through p3 and p4. Then we subtract the model’s own 1850–1900 average, because that’s the baseline Kalshi uses.
+
+The table runs it on the HW5 economy. In 2026 the model emits 12 gigatonnes of carbon, CO₂ is 429 ppm, forcing is 2.38 and warming 1.34°C. By 2049 emissions reach 19.5 gigatonnes, CO₂ 526 ppm, and the smooth model reaches 2.09°C.
+
+Why trust this step? We compared the Python output with every year of all four sheets of the HW5 workbook, 1750 to 2100. The largest difference is about 7 times ten to the minus 16, which is rounding error.
+
+One thing to notice: p2 equal to 1.15 implies about 4.3°C of warming for a doubling of CO₂, at the high end of the IPCC’s range. That matters for steps four and five.</aside>
+</section>
