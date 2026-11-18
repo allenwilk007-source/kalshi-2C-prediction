@@ -2,3 +2,4 @@ __pycache__/
 *.pyc
 deck_short/preview/
 deck_short/_tmp/
+deck_short/_pptx_img/
