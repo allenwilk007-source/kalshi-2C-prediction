@@ -4,41 +4,43 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>2°C Decision Lab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <style>
 :root {
   --bg: #f7f6f2; --panel: #ffffff; --ink: #14213d; --body: #3d4656; --muted: #6b7280; --line: #e2e3de;
   --accent: #c2410c; --accent-bright: #ea580c; --accent-soft: #fff1e6; --blue: #1d4ed8; --blue-soft: #e8efff;
-  --green: #15803d; --green-soft: #e7f6ec; --red: #b91c1c; --red-soft: #fdecec; --band: rgba(234,179,8,.28);
+  --green: #15803d; --green-soft: #e7f6ec; --red: #b91c1c; --red-soft: #fdecec; --gold: #ca8a04;
   --shadow: 0 1px 2px rgba(0,0,0,.05), 0 6px 20px rgba(0,0,0,.05);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #131416; --panel: #1d1f23; --ink: #eceae4; --body: #c9cbd1; --muted: #9a9ea8; --line: #33363c;
     --accent: #fb923c; --accent-bright: #fb923c; --accent-soft: #3a2414; --blue: #7aa2ff; --blue-soft: #1c2640;
-    --green: #4ade80; --green-soft: #15291c; --red: #f87171; --red-soft: #321a1a; --band: rgba(234,179,8,.22); --shadow: none;
+    --green: #4ade80; --green-soft: #15291c; --red: #f87171; --red-soft: #321a1a; --gold: #eab308; --shadow: none; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #131416; --panel: #1d1f23; --ink: #eceae4; --body: #c9cbd1; --muted: #9a9ea8; --line: #33363c;
   --accent: #fb923c; --accent-bright: #fb923c; --accent-soft: #3a2414; --blue: #7aa2ff; --blue-soft: #1c2640;
-  --green: #4ade80; --green-soft: #15291c; --red: #f87171; --red-soft: #321a1a; --band: rgba(234,179,8,.22); --shadow: none;
+  --green: #4ade80; --green-soft: #15291c; --red: #f87171; --red-soft: #321a1a; --gold: #eab308; --shadow: none; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px 72px; }
-header.top { border-bottom: 1px solid var(--line); }
-header.top .wrap { display: flex; align-items: center; gap: 12px; padding-top: 12px; padding-bottom: 12px; }
+.wrap { max-width: 1060px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-bottom: 72px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+header.top { border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 5; }
+header.top .wrap { display: flex; align-items: center; gap: 14px; padding-top: 10px; padding-bottom: 10px; flex-wrap: wrap; }
 header.top a { color: var(--muted); text-decoration: none; font-size: 14px; }
 header.top a:hover { color: var(--ink); }
 header.top b { flex: 1; }
 .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px; }
 h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.1; margin: 0 0 14px; }
-h2 { font-size: 26px; margin: 0 0 8px; }
-h3 { font-size: 18px; margin: 0 0 6px; }
+h2 { font-size: 26px; margin: 0 0 8px; line-height: 1.2; }
+h3 { font-size: 19px; margin: 0 0 6px; }
 p { margin: 0 0 12px; }
-.lead { font-size: 18px; color: var(--body); max-width: 760px; }
+.lead { font-size: 18px; color: var(--body); max-width: 780px; }
 .note { font-size: 14px; color: var(--muted); }
-.hero { padding: 40px 0 8px; }
+.hero { padding: 36px 0 8px; }
 .quote { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 24px; }
 .chip { background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 14px; }
 .chip b { font-variant-numeric: tabular-nums; }
@@ -49,11 +51,15 @@ p { margin: 0 0 12px; }
 .path .ico { font-size: 13px; font-weight: 700; letter-spacing: .06em; color: var(--accent); text-transform: uppercase; }
 .path h2 { margin: 6px 0; }
 .path p { color: var(--body); margin: 0; }
+.how { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 12px; margin-top: 22px; }
+.how div { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 14px; color: var(--body); }
+.how b { display: block; color: var(--ink); font-size: 15px; }
 .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); margin-top: 18px; }
 .hidden { display: none !important; }
-section.stage { margin-top: 34px; }
+section.stage { margin-top: 34px; scroll-margin-top: 60px; }
 button { font: inherit; }
 .btn { background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 9px 16px; cursor: pointer; }
+.btn:hover { border-color: var(--muted); }
 .btn.primary { background: var(--accent-bright); border-color: var(--accent-bright); color: #fff; font-weight: 600; }
 .btn:disabled { opacity: .5; cursor: default; }
 .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
@@ -70,20 +76,21 @@ button { font: inherit; }
 .slider { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; margin: 10px 0; font-size: 14px; }
 .slider input { grid-column: 1 / -1; width: 100%; accent-color: var(--accent-bright); }
 .slider .v { font-weight: 600; font-variant-numeric: tabular-nums; }
-.result-head { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 14px; }
+.result-head { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 14px; }
 .stat { background: var(--bg); border-radius: 12px; padding: 14px 16px; }
 .stat .k { font-size: 13px; color: var(--muted); }
-.stat .v { font-size: 34px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat .v { font-size: 32px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
 .verdict { border-radius: 14px; padding: 18px 20px; margin-top: 16px; }
 .verdict.yes { background: var(--green-soft); border: 1px solid color-mix(in srgb, var(--green) 40%, transparent); }
 .verdict.no { background: var(--blue-soft); border: 1px solid color-mix(in srgb, var(--blue) 40%, transparent); }
 .verdict.pass { background: var(--bg); border: 1px solid var(--line); }
-.verdict .call { font-size: 28px; font-weight: 800; }
+.verdict .call { font-size: 26px; font-weight: 800; }
 .verdict.yes .call { color: var(--green); } .verdict.no .call { color: var(--blue); }
 table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
 th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); }
-th { font-size: 13px; color: var(--muted); }
+th { font-size: 13px; color: var(--muted); font-weight: 600; }
 td.n, th.n { text-align: right; }
+.scroll { overflow-x: auto; }
 svg { width: 100%; height: auto; display: block; }
 svg text { fill: var(--muted); font-size: 12px; }
 .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 14px; margin-top: 14px; }
@@ -92,14 +99,43 @@ svg text { fill: var(--muted); font-size: 12px; }
 .tweak label { font-size: 13px; color: var(--muted); display: block; margin-bottom: 4px; }
 select, input[type=number] { width: 100%; font: inherit; padding: 7px 9px; border-radius: 9px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
 .busy { font-size: 14px; color: var(--muted); }
-.warn { background: var(--accent-soft); border-radius: 12px; padding: 12px 14px; font-size: 14px; margin-top: 14px; }
+/* play the future */
+.bets { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 12px; }
+.bet { border: 2px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 10px; padding: 8px 14px; cursor: pointer; font-weight: 600; }
+.bet[aria-pressed="true"].yes { border-color: var(--green); background: var(--green-soft); }
+.bet[aria-pressed="true"].no { border-color: var(--blue); background: var(--blue-soft); }
+.bet[aria-pressed="true"].pass { border-color: var(--muted); }
+.outcome { min-height: 52px; margin-top: 10px; font-size: 15px; }
+.outcome .big { font-size: 22px; font-weight: 800; }
+.win { color: var(--green); } .lose { color: var(--red); }
+.strip { display: grid; grid-template-columns: repeat(25, 1fr); gap: 3px; margin-top: 10px; max-width: 520px; }
+.strip i { aspect-ratio: 1; border-radius: 3px; background: var(--line); }
+.strip i.w { background: var(--green); } .strip i.l { background: var(--red); opacity: .75; } .strip i.p { background: var(--muted); opacity: .5; }
+.tally { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; color: var(--body); margin-top: 8px; }
+.tally b { color: var(--ink); font-variant-numeric: tabular-nums; }
+/* odds explorer */
+.heat td, .heat th { text-align: center; padding: 6px 4px; }
+.heat td { cursor: pointer; border: 2px solid transparent; border-radius: 6px; }
+.heat td.sel { border-color: var(--ink); }
+.heat td.kx { outline: 2px dashed var(--gold); outline-offset: -4px; }
+/* tornado */
+.trow { display: grid; grid-template-columns: 170px 1fr; gap: 6px 14px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.trow .tname { font-weight: 600; font-size: 15px; }
+.trow .tname span { display: block; font-weight: 400; font-size: 13px; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; grid-column: 2; }
+.ochip { border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 999px; padding: 3px 10px; font-size: 13px; cursor: pointer; }
+.ochip[aria-pressed="true"] { border-color: var(--accent-bright); background: var(--accent-soft); font-weight: 600; }
+.ochip .up { color: var(--accent); } .ochip .dn { color: var(--blue); }
+@media (prefers-reduced-motion: reduce) { .path { transition: none; } }
+@media (max-width: 560px) { .trow { grid-template-columns: 1fr; } .chips { grid-column: 1; } }
 footer { margin-top: 40px; font-size: 13px; color: var(--muted); }
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
   <b>2°C Decision Lab</b>
-  <a href="/">← Full dashboard</a>
+  <a href="#" id="navTop">Start</a><a href="#" id="navA">Recommendation</a><a href="#" id="navB">Build your own</a>
+  <a href="/" id="dashLink">Full dashboard →</a>
 </div></header>
 
 <main class="wrap">
@@ -113,9 +149,15 @@ footer { margin-top: 40px; font-size: 13px; color: var(--muted); }
     <div class="quote" id="quote"><span class="chip">Loading Kalshi’s price…</span></div>
     <div class="paths">
       <button class="path" id="goRec"><span class="ico">Path A</span><h2>Take our recommendation</h2>
-        <p>See what our model forecasts, what we’d do (buy Yes, buy No or pass), and the cautious second opinion.</p></button>
+        <p>See what our model forecasts, what we’d do (buy Yes, buy No or pass), then play out the future and see if the bet pays.</p></button>
       <button class="path" id="goBuild"><span class="ico">Path B</span><h2>Build your own forecast</h2>
-        <p>Choose each assumption yourself, step by step: emissions, climate, the rules. Then see your odds against Kalshi’s.</p></button>
+        <p>Choose each assumption yourself, step by step. Then see your odds against Kalshi’s and change anything live.</p></button>
+    </div>
+    <div class="how">
+      <div><b>1 · The contract</b>Pays $1 if, in any year up to 2049, at least 2 of NASA, NOAA, Berkeley Earth and HadCRUT read ≥ 2.00°C.</div>
+      <div><b>2 · Price = probability</b>A Yes price of 70¢ means the market thinks about 70%. Fees make it a 65–73% range.</div>
+      <div><b>3 · Our forecast</b>The HW5 model plus El Niño-style noise, started from 2026’s data, run thousands of times.</div>
+      <div><b>4 · The decision</b>Buy Yes if your chance beats Yes’s cost, buy No if the reverse, otherwise pass.</div>
     </div>
   </section>
 
@@ -123,9 +165,9 @@ footer { margin-top: 40px; font-size: 13px; color: var(--muted); }
   <section class="stage hidden" id="build"></section>
   <section class="stage hidden" id="result"></section>
 
-  <footer>Hypothetical analysis for a class presentation, not investment advice; nothing here places orders. Kalshi data from its public API.
-    Model: the HW5 class model in your browser, run over 400 versions of the climate and the economy, each with El Niño-style year-to-year noise
-    and Kalshi’s exact rule (second-highest of four datasets ≥ 2.00°C).</footer>
+  <footer>Hypothetical analysis for a class presentation, not investment advice; nothing here places orders. Kalshi prices from its public API
+    <span id="asof"></span>. Model: the HW5 class model running in your browser over hundreds of versions of the climate and the economy, each with
+    El Niño-style year-to-year noise and Kalshi’s exact rule (second-highest of four datasets ≥ 2.00°C).</footer>
 </main>
 
 <script src="/site/model.js"></script>
@@ -133,13 +175,14 @@ footer { margin-top: 40px; font-size: 13px; color: var(--muted); }
 const $ = s => document.querySelector(s);
 const pct = (x, d = 0) => (x == null || isNaN(x)) ? "–" : (100 * x).toFixed(d) + "%";
 const cents = x => (100 * x).toFixed(1) + "¢";
-const usd = v => (v < 0 ? "−$" : "+$") + Math.abs(v).toLocaleString(undefined, { maximumFractionDigits: 0 });
+const usd = v => (v < -0.5 ? "−$" : "+$") + Math.abs(v).toLocaleString(undefined, { maximumFractionDigits: 0 });
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-let C = null;                      // decision context from the server
+let C = null;                      // decision context (model draws + Kalshi quote)
+const SCEN = ["falling", "flat", "rising", "doubling"];
 
 // ---------------------------------------------------------------- the factors
 const FACTORS = [
-  { key: "emis", q: "How will emissions grow from here?",
+  { key: "emis", name: "Emissions", q: "How will emissions grow from here?",
     why: "Emissions set how fast CO₂ builds up. Most warming before 2050 is already locked in, so this matters less than you might think, but it still moves the odds.",
     opts: [
       ["kaya", "Today’s real-world trend", "The class Kaya model with growth rates matched to actual 2019–24 emissions (400 versions).", true],
@@ -148,52 +191,71 @@ const FACTORS = [
       ["flat", "Flat at today’s level", "Middle of the road (like SSP2-4.5)."],
       ["rising", "Rising slowly", "Doubling by 2100 (like SSP3-7.0)."],
       ["doubling", "Doubling by 2050", "Very high emissions (like SSP5-8.5)."]] },
-  { key: "clim", q: "How sure are we about how fast warming continues?",
-    why: "This is the biggest factor. The class model fitted to history is very confident; the IPCC thinks more uncertainty is honest, because aerosols and methane also matter.",
+  { key: "clim", name: "Climate certainty", q: "How sure are we about how fast warming continues?",
+    why: "This is the biggest factor. The class model fitted to history is very confident; the IPCC thinks more uncertainty is honest, because aerosols and methane also matter and a CO₂-only model can’t see them.",
     opts: [
       ["ipcc", "IPCC-calibrated", "Uncertainty matched to the IPCC’s ranges. Our most defensible view.", true],
       ["history", "Fitted to history (confident)", "Trust the class model’s fit to 1880–2020 completely: a narrow range."],
+      ["grid", "Class model ± settings", "Our trade-idea grid: sensitivity 1.00/1.15/1.30 × speed 0.020/0.0256/0.032."],
       ["ipcc_full", "Wide (full IPCC range)", "Even more uncertainty, including what’s already been observed."],
       ["custom", "I’ll pick the climate settings", "Set the climate sensitivity and response speed yourself with sliders."]] },
-  { key: "lu", q: "Include the land-use emissions the class model leaves out?",
-    why: "The Kaya block only counts fossil fuels, so projected emissions drop about 1 billion tonnes of carbon a year in 2021 compared with the historical data.",
+  { key: "lu", name: "Land-use emissions", q: "Include the land-use emissions the class model leaves out?",
+    why: "The Kaya block only counts fossil fuels, so projected emissions drop by about 1 billion tonnes of carbon a year in 2021 compared with the historical data.",
     opts: [["off", "Leave them out", "Exactly as in the class model.", true], ["on", "Add them back", "+990 million tonnes of carbon a year."]] },
-  { key: "mom", q: "Does this year’s El Niño carry into 2027?",
+  { key: "mom", name: "El Niño carry-over", q: "Does this year’s El Niño carry into 2027?",
     why: "Late 2026 is unusually warm. Historically a warm end of year carries into the next one. It barely matters for the 2040s, but you can switch it off.",
     opts: [["on", "Yes", "Use the carry-over we measured from 1960–2025.", true], ["off", "No", "Let the warmth fade at the normal rate."]] },
-  { key: "y49", q: "Should the year 2049 count?",
+  { key: "y49", name: "Does 2049 count?", q: "Should the year 2049 count?",
     why: "The contract expires on 8 January 2050, but agencies usually publish each year’s figure in mid-January, so 2049 might not make it in time.",
     opts: [["yes", "Yes, as written", "Any year up to 2049 counts.", true], ["no", "No, only up to 2048", "If 2049’s data arrives too late."]] },
   { key: "stake", q: "How much would you put in (hypothetically)?", why: "Used to show what you could win or lose. Nothing is traded.", stake: true },
 ];
+const FKEYS = ["emis", "clim", "lu", "mom", "y49"];
 const REC = { emis: "kaya", clim: "ipcc", lu: "off", mom: "on", y49: "yes", stake: 100, p1: 0.0256, p2: 1.15 };
 let choice = Object.assign({}, REC);
 let step = 0;
+let pinned = [];
+try { pinned = JSON.parse(localStorage.getItem("dlab_pins") || "[]"); } catch (e) { pinned = []; }
+const savePins = () => { try { localStorage.setItem("dlab_pins", JSON.stringify(pinned)); } catch (e) {} };
 
 // ---------------------------------------------------------------- load
 (async function init() {
   try {
-    const [inputs, ctx] = await Promise.all([fetch("/api/model-inputs").then(r => r.json()), fetch("/api/decision-context").then(r => r.json())]);
+    let inputs, ctx;
+    if (window.__DLAB__) { inputs = window.__DLAB__.inputs; ctx = window.__DLAB__.ctx; $("#dashLink").classList.add("hidden"); }
+    else [inputs, ctx] = await Promise.all([fetch("/api/model-inputs").then(r => r.json()), fetch("/api/decision-context").then(r => r.json())]);
     C = ctx;
     ClassModel.setup(inputs, Object.assign({}, ctx, { ar1: ctx.class_ar1 }));
     const k = C.kalshi;
     $("#quote").innerHTML = `<span class="chip">Kalshi price for “Yes”: <b>${Math.round(k.bid * 100)}¢</b> to sell · <b>${Math.round(k.ask * 100)}¢</b> to buy</span>
       <span class="chip">Market’s probability: <b>${pct(k.mid)}</b></span>
       <span class="chip">After fees, it’s fair anywhere from <b>${pct(k.band[0])}</b> to <b>${pct(k.band[1])}</b></span>`;
+    if (C.fetched_utc) $("#asof").textContent = `(snapshot ${String(C.fetched_utc).slice(0, 10)})`;
   } catch (e) {
     $("#quote").innerHTML = `<span class="chip">Couldn’t load the model data. Run the pipeline from the dashboard first.</span>`;
   }
 })();
 $("#goRec").onclick = () => { show("rec"); renderRec(); };
 $("#goBuild").onclick = () => { show("build"); step = 0; renderStep(); };
+$("#navTop").onclick = e => { e.preventDefault(); $("#pitch").scrollIntoView({ behavior: "smooth" }); };
+$("#navA").onclick = e => { e.preventDefault(); show("rec"); renderRec(); };
+$("#navB").onclick = e => { e.preventDefault(); show("build"); step = 0; renderStep(); };
 function show(id) {
   ["rec", "build", "result"].forEach(s => $("#" + s).classList.toggle("hidden", s !== id));
   $("#" + id).scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-// ---------------------------------------------------------------- the trade decision
-function decide(P, stake) {
-  const k = C.kalshi, yc = k.yes_cost, nc = k.no_cost;
+// ---------------------------------------------------------------- prices and the trade decision
+// A hypothetical quote at another mid price: 4-cent spread, Kalshi's fee on a 100-contract order.
+function quoteAt(mid) {
+  if (Math.abs(mid - C.kalshi.mid) < 0.004) return C.kalshi;
+  const ask = Math.min(0.99, mid + 0.02), bid = Math.max(0.01, mid - 0.02);
+  const yc = ask + ClassModel.fee(ask, 100) / 100, nc = (1 - bid) + ClassModel.fee(1 - bid, 100) / 100;
+  return { bid, ask, mid, yes_cost: yc, no_cost: nc, band: [1 - nc, yc], apy: C.kalshi.apy };
+}
+function decide(P, stake, k) {
+  k = k || C.kalshi;
+  const yc = k.yes_cost, nc = k.no_cost;
   if (P > yc) {
     const n = Math.floor(stake / yc);
     return { side: "yes", call: "Buy YES", cost: yc, n, win: n - n * yc, lose: -n * yc, ev: n * P - n * yc, pLose: 1 - P,
@@ -204,9 +266,8 @@ function decide(P, stake) {
     return { side: "no", call: "Buy NO", cost: nc, n, win: n - n * nc, lose: -n * nc, ev: n * (1 - P) - n * nc, pLose: P,
       why: `At ${pct(P, 1)}, there’s a ${pct(1 - P, 1)} chance 2°C is not reached, but No only costs ${cents(nc)} including the fee.` };
   }
-  return { side: "pass", call: "Pass: no trade", why: `${pct(P, 1)} sits inside the range Kalshi’s price allows after fees (${pct(k.band[0])}–${pct(k.band[1])}), so neither Yes nor No is worth buying on your numbers.` };
+  return { side: "pass", call: "Pass: no trade", why: `${pct(P, 1)} sits inside the range Kalshi’s price allows after fees (${pct(k.band[0])}–${pct(k.band[1])}), so neither Yes nor No is worth buying on these numbers.` };
 }
-
 function verdictHTML(d, stake) {
   if (d.side === "pass") return `<div class="verdict pass"><div class="call">${d.call}</div><p style="margin:6px 0 0">${d.why}</p></div>`;
   return `<div class="verdict ${d.side}"><div class="call">${d.call}</div><p style="margin:6px 0 10px">${d.why}</p>
@@ -218,35 +279,173 @@ function verdictHTML(d, stake) {
     <p class="note" style="margin:8px 0 0">The money is tied up until the year 2°C is reached or until 2050; Kalshi pays ${pct(C.kalshi.apy, 1)} interest on positions meanwhile.</p></div>`;
 }
 
+// ---------------------------------------------------------------- running the model
+const GRID72 = [];
+for (const p2 of [1.0, 1.15, 1.3]) for (const p1 of [0.02, 0.0256, 0.032])
+  for (const em of ["hw5", "falling", "flat", "rising"]) for (const lu of ["off", "on"]) GRID72.push({ p2, p1, em, lu });
+
+function econOf(emis, i) {
+  const K = C.kaya_draws;
+  return emis === "kaya" ? { g: K.gdp_per_capita_growth[i], ei: K.energy_intensity_change[i], ci: K.emissions_intensity_change[i] }
+                         : { g: C.hw5.g, ei: C.hw5.ei, ci: C.hw5.ci };
+}
+const futOf = emis => SCEN.includes(emis) ? C.scenario_paths_mtc[emis] : null;
+
+function compute(ch, preset) {
+  const ar = C.class_ar1, items = [];
+  if (preset === "grid72") {           // Phase 11's 72 versions, as in Python
+    GRID72.forEach(v => items.push({ params: Object.assign({ p1: v.p1, p2: v.p2, fill: v.lu === "on" ? C.land_use_fill_mtc : 0,
+      future: futOf(v.em) }, econOf("hw5")), phi: ar.phi, sigma: ar.sigma }));
+    return ClassModel.ensemble(items, { pathsEach: 56, lastYear: 2049 });
+  }
+  const fill = ch.lu === "on" ? C.land_use_fill_mtc : 0, future = futOf(ch.emis);
+  const nK = C.kaya_draws.gdp_per_capita_growth.length;
+  const push = (p1, p2, phi, sigma, i) => items.push({ params: Object.assign({ p1, p2, fill, future }, econOf(ch.emis, i)), phi, sigma });
+  if (ch.clim === "custom") {
+    const n = ch.emis === "kaya" ? nK : 1;
+    for (let i = 0; i < n; i++) push(ch.p1, ch.p2, ar.phi, ar.sigma, i);
+  } else if (ch.clim === "grid") {
+    const m = ch.emis === "kaya" ? 44 : 1;
+    let i = 0;
+    for (const p2 of [1.0, 1.15, 1.3]) for (const p1 of [0.02, 0.0256, 0.032]) for (let j = 0; j < m; j++) push(p1, p2, ar.phi, ar.sigma, (i++) % nK);
+  } else {
+    const D = C.climate_draws[ch.clim];
+    for (let i = 0; i < nK; i++) push(D.p1[i], D.p2[i], D.phi[i], D.sigma[i], i);
+  }
+  return ClassModel.ensemble(items, { pathsEach: Math.max(10, Math.round(4000 / items.length)), lastYear: ch.y49 === "yes" ? 2049 : 2048,
+                                      noMomentum: ch.mom === "off" });
+}
+// running maximum of the contract reading per future, by year: P(any year ≥ x by Y)
+function runMax(r) {
+  const out = []; let prev = null;
+  r.stat.forEach(col => { const cur = new Float32Array(col.length);
+    for (let i = 0; i < col.length; i++) cur[i] = prev ? Math.max(prev[i], col[i]) : col[i];
+    out.push(cur); prev = cur; });
+  return out;
+}
+function pReach(rm, years, thr, year) {
+  const t = years.indexOf(year); if (t < 0) return NaN;
+  const a = rm[t]; let c = 0;
+  for (let i = 0; i < a.length; i++) if (a[i] >= thr - 1e-6) c++;
+  return c / a.length;
+}
+
 // ---------------------------------------------------------------- path A: recommendation
 function renderRec() {
   if (!C) return;
-  const ens = C.reference.ensemble_72, ip = C.reference.ipcc, k = C.kalshi, stake = 100;
-  const dE = decide(ens, stake), dI = decide(ip, stake);
-  $("#rec").innerHTML = `<p class="eyebrow">Path A · our recommendation</p>
-    <h2>Our model says ${pct(ens)}. The market says ${pct(k.mid)}.</h2>
-    <p class="lead">We ran the class model 72 ways, changing climate sensitivity, how fast the atmosphere responds, the emissions path and
-      land-use emissions, 4,000 futures each. Averaging them gives our estimate.</p>
-    <div class="panel">
-      <div class="result-head">
-        <div class="stat"><div class="k">Our estimate (72 versions)</div><div class="v" style="color:var(--accent-bright)">${pct(ens)}</div></div>
-        <div class="stat"><div class="k">Kalshi</div><div class="v">${pct(k.mid)}</div></div>
-        <div class="stat"><div class="k">Cautious check (IPCC-calibrated)</div><div class="v" style="color:var(--blue)">${pct(ip)}</div></div>
+  $("#rec").innerHTML = `<p class="eyebrow">Path A · our recommendation</p><div class="panel"><p class="busy">Re-running our 72 model versions in your browser…</p></div>`;
+  setTimeout(() => {
+    const r = compute(null, "grid72");
+    const ens = C.reference.ensemble_72, ip = C.reference.ipcc, k = C.kalshi, stake = 100;
+    const dE = decide(ens, stake), dI = decide(ip, stake);
+    $("#rec").innerHTML = `<p class="eyebrow">Path A · our recommendation</p>
+      <h2>Our model says ${pct(ens)}. The market says ${pct(k.mid)}.</h2>
+      <p class="lead">We ran the class model 72 ways, changing climate sensitivity, how fast the atmosphere responds, the emissions path and
+        land-use emissions, thousands of futures each. Averaging them gives our estimate. (Your browser just re-ran it: ${pct(r.pYes, 1)}.)</p>
+      <div class="panel">
+        <div class="result-head">
+          <div class="stat"><div class="k">Our estimate (72 versions)</div><div class="v" style="color:var(--accent-bright)">${pct(ens)}</div></div>
+          <div class="stat"><div class="k">Kalshi</div><div class="v">${pct(k.mid)}</div></div>
+          <div class="stat"><div class="k">Cautious check (IPCC-calibrated)</div><div class="v" style="color:var(--blue)">${pct(ip)}</div></div>
+        </div>
+        ${verdictHTML(dE, stake)}
+        <div class="charts"><div class="chart">${pdfChart([[C.ensemble_pdf.grid, C.ensemble_pdf.pdf, "var(--accent-bright)", "our model (72 versions)"],
+          [C.ipcc_pdf.grid, C.ipcc_pdf.pdf, "var(--blue)", "IPCC-calibrated"]], "Highest reading 2027–2049: area right of 2.00°C = chance of Yes")}</div></div>
       </div>
-      ${verdictHTML(dE, stake)}
-      <div class="charts"><div class="chart">${pdfChart([[C.ensemble_pdf.grid, C.ensemble_pdf.pdf, "var(--accent-bright)", "our model (72 versions)"],
-        [C.ipcc_pdf.grid, C.ipcc_pdf.pdf, "var(--blue)", "IPCC-calibrated"]], "Highest reading 2027–2049: area right of 2.00°C = chance of Yes")}</div></div>
-    </div>
-    <div class="panel">
-      <h3>The second opinion: ${dI.side === "pass" ? "pass, no trade" : dI.call}</h3>
-      <p>${dI.why} Both views agree on the middle, about 2°C in the late 2040s. They differ on how sure to be: our 72-version model is
-        narrow, the IPCC’s uncertainty is wider, so more of its futures fall short of 2°C.</p>
-      <p class="note">So our recommendation only holds if you trust the class model’s confidence over the IPCC’s. That’s the honest caveat.</p>
-      <div class="row" style="margin-top:10px"><button class="btn primary" id="recToBuild">Now build your own forecast →</button>
-        <button class="btn" id="recBack">Back to the start</button></div>
-    </div>`;
-  $("#recToBuild").onclick = () => { show("build"); step = 0; renderStep(); };
-  $("#recBack").onclick = () => $("#pitch").scrollIntoView({ behavior: "smooth" });
+      <div class="panel" id="recPlay"></div>
+      <div class="panel">
+        <h3>The second opinion: ${dI.side === "pass" ? "pass, no trade" : dI.call}</h3>
+        <p>${dI.why} Both views agree on the middle, about 2°C in the late 2040s. They differ on how sure to be: our 72-version model is
+          narrow, the IPCC’s uncertainty is wider, so more of its futures fall short of 2°C.</p>
+        <p class="note">So our recommendation only holds if you trust the class model’s confidence over the IPCC’s. That’s the key caveat.</p>
+        <div class="row" style="margin-top:10px"><button class="btn primary" id="recToBuild">Now build your own forecast →</button>
+          <button class="btn" id="recBack">Back to the start</button></div>
+      </div>`;
+    playground($("#recPlay"), r, dE.side, stake, "our 72-version model");
+    $("#recToBuild").onclick = () => { show("build"); step = 0; renderStep(); };
+    $("#recBack").onclick = () => $("#pitch").scrollIntoView({ behavior: "smooth" });
+  }, 30);
+}
+
+// ---------------------------------------------------------------- play the future (both paths)
+function playground(el, r, recSide, stake, who) {
+  const k = C.kalshi, P = r.pYes;
+  let bet = recSide, tally = { n: 0, w: 0, pnl: 0 }, timer = null;
+  const label = { yes: "Buy YES", no: "Buy NO", pass: "Pass" };
+  el.innerHTML = `<h3>Make your call, then play out the future</h3>
+    <p class="note">Each play draws one of ${r.n.toLocaleString()} simulated futures from ${esc(who)} and reads the contract year by year.
+      The green tag marks what the numbers recommend; you can bet against it.</p>
+    <div class="bets">${["yes", "no", "pass"].map(s => `<button class="bet ${s}" data-s="${s}" aria-pressed="${s === bet}">${label[s]}${s === recSide ? '<span class="tag">Recommended</span>' : ""}</button>`).join("")}</div>
+    <div class="row"><button class="btn primary" data-a="one">▶ Play one future</button><button class="btn" data-a="hundred">Play 100 futures at once</button>
+      <button class="btn" data-a="reset">Reset tally</button></div>
+    <div class="chart" style="margin-top:12px">${playChart(r)}</div>
+    <div class="outcome" aria-live="polite"></div>
+    <div class="strip"></div>
+    <div class="tally"></div>`;
+  const { X, Y } = playChart.last;
+  const svg = el.querySelector("svg"), poly = svg.querySelector(".pl"), dots = svg.querySelector(".pts"), out = el.querySelector(".outcome");
+  el.querySelectorAll(".bet").forEach(b => b.onclick = () => { bet = b.dataset.s;
+    el.querySelectorAll(".bet").forEach(x => x.setAttribute("aria-pressed", x === b)); });
+  const pnlOf = hit => {
+    if (bet === "yes") { const n = Math.floor(stake / k.yes_cost); return hit ? n - n * k.yes_cost : -n * k.yes_cost; }
+    if (bet === "no") { const n = Math.floor(stake / k.no_cost); return hit ? -n * k.no_cost : n - n * k.no_cost; }
+    return 0;
+  };
+  const hitOf = i => { for (let t = 0; t < r.years.length; t++) if (r.stat[t][i] >= 2 - 1e-6) return r.years[t]; return null; };
+  const drawTally = () => { el.querySelector(".tally").innerHTML = tally.n ? `<span>Futures played <b>${tally.n}</b></span>
+      <span>2°C reached in <b>${tally.w}</b> (${pct(tally.w / tally.n)})</span><span>Your total <b class="${tally.pnl >= 0 ? "win" : "lose"}">${usd(tally.pnl)}</b>
+      on $${stake} a play</span><span>Model’s chance: <b>${pct(P)}</b></span>` : ""; };
+  const lock = on => el.querySelectorAll("button").forEach(b => b.disabled = on);
+  el.querySelector('[data-a="one"]').onclick = () => {
+    const i = Math.floor(Math.random() * r.n), ys = r.years;
+    const pts = [`${X(2026).toFixed(1)},${Y(C.signal_2026.mean).toFixed(1)}`];
+    dots.innerHTML = ""; poly.setAttribute("points", pts[0]); el.querySelector(".strip").innerHTML = "";
+    let t = 0, hit = null; lock(true);
+    timer = setInterval(() => {
+      const v = r.stat[t][i], y = ys[t];
+      pts.push(`${X(y).toFixed(1)},${Y(v).toFixed(1)}`); poly.setAttribute("points", pts.join(" "));
+      const over = v >= 2 - 1e-6;
+      dots.insertAdjacentHTML("beforeend", `<circle cx="${X(y)}" cy="${Y(v)}" r="${over ? 5 : 3}" fill="${over ? "var(--accent-bright)" : "var(--ink)"}"/>`);
+      if (over && hit == null) { hit = y; dots.insertAdjacentHTML("beforeend", `<text x="${X(y)}" y="${Y(v) - 10}" text-anchor="middle" style="fill:var(--accent);font-weight:700">2°C in ${y}</text>`); }
+      out.innerHTML = `<span class="big">${y}: ${v.toFixed(2)}°C</span> <span class="note">second-highest of the four datasets</span>`;
+      if (++t >= ys.length) {
+        clearInterval(timer); lock(false);
+        const pnl = pnlOf(hit != null);
+        tally.n++; if (hit != null) tally.w++; tally.pnl += pnl;
+        let peak = -Infinity; for (let j = 0; j < ys.length; j++) peak = Math.max(peak, r.stat[j][i]);
+        const res = hit != null ? `2°C was reached in ${hit}: the contract pays <b>Yes</b>.` : `No year reached 2°C (peak ${peak.toFixed(2)}°C): the contract pays <b>No</b>.`;
+        out.innerHTML = `<span class="big ${pnl > 0 ? "win" : pnl < 0 ? "lose" : ""}">${bet === "pass" ? "You passed: $0" : (pnl >= 0 ? "You win $" : "You lose $") + Math.abs(pnl).toFixed(0)}</span>
+          <div>${res} ${bet === "pass" ? `Buying Yes would have ${hit != null ? "won" : "lost"}.` : ""}</div>`;
+        drawTally();
+      }
+    }, 75);
+  };
+  el.querySelector('[data-a="hundred"]').onclick = () => {
+    let w = 0, pnl = 0, cells = "";
+    for (let j = 0; j < 100; j++) { const i = Math.floor(Math.random() * r.n), h = hitOf(i) != null, p = pnlOf(h);
+      if (h) w++; pnl += p; cells += `<i class="${bet === "pass" ? "p" : p > 0 ? "w" : "l"}" title="${h ? "2°C reached" : "not reached"}"></i>`; }
+    tally.n += 100; tally.w += w; tally.pnl += pnl;
+    el.querySelector(".strip").innerHTML = cells;
+    out.innerHTML = `<span class="big ${pnl > 0 ? "win" : pnl < 0 ? "lose" : ""}">100 futures: ${bet === "pass" ? "$0, you passed" : usd(pnl)}</span>
+      <div>2°C reached in ${w} of 100. ${bet === "pass" ? "" : `Each square is one future: green you won, red you lost ($${stake} a play).`}</div>`;
+    drawTally();
+  };
+  el.querySelector('[data-a="reset"]').onclick = () => { tally = { n: 0, w: 0, pnl: 0 }; drawTally(); out.innerHTML = ""; el.querySelector(".strip").innerHTML = ""; dots.innerHTML = ""; poly.setAttribute("points", ""); };
+}
+function playChart(r) {
+  const W = 640, H = 280, L = 34, T = 16, B = 26, x0 = 2015, x1 = 2050, y0 = 0.9, y1 = 2.7;
+  const X = v => L + (v - x0) / (x1 - x0) * (W - L - 10), Y = v => T + (1 - (v - y0) / (y1 - y0)) * (H - T - B);
+  const band = (a, b) => `M${r.years.map((y, i) => `${X(y).toFixed(1)},${Y(r.fan[i][b]).toFixed(1)}`).join("L")}L${r.years.slice().reverse().map((y, i) => `${X(y).toFixed(1)},${Y(r.fan[r.years.length - 1 - i][a]).toFixed(1)}`).join("L")}Z`;
+  const obs = C.anchor_years.map((y, i) => y >= x0 ? `<circle cx="${X(y)}" cy="${Y(C.anchor_signal[i])}" r="2.6" fill="var(--muted)"/>` : "").join("")
+    + `<circle cx="${X(2026)}" cy="${Y(C.signal_2026.mean)}" r="3.4" fill="var(--muted)"/>`;
+  const yt = [1.0, 1.5, 2.0, 2.5].map(v => `<text x="${L - 4}" y="${Y(v) + 4}" text-anchor="end">${v.toFixed(1)}</text>`).join("");
+  const xt = [2015, 2020, 2025, 2030, 2035, 2040, 2045, 2050].map(v => `<text x="${X(v)}" y="${H - 6}" text-anchor="middle">${v}</text>`).join("");
+  playChart.last = { X, Y };
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="One simulated future of the contract reading, year by year">
+    <path d="${band(0, 4)}" fill="var(--accent-bright)" opacity=".10"/>
+    <line x1="${L}" x2="${W - 10}" y1="${Y(2)}" y2="${Y(2)}" stroke="var(--gold)" stroke-width="2" stroke-dasharray="6 4"/>
+    <text x="${W - 12}" y="${Y(2) - 6}" text-anchor="end" style="fill:var(--gold);font-weight:600">2.00°C: Yes pays</text>
+    ${obs}<polyline class="pl" fill="none" stroke="var(--ink)" stroke-width="2" points=""/><g class="pts"></g>${yt}${xt}</svg>`;
 }
 
 // ---------------------------------------------------------------- path B: step by step
@@ -269,7 +468,7 @@ function renderStep() {
       ${body}
       <div class="row"><button class="btn" id="prev" ${step === 0 ? "disabled" : ""}>← Back</button>
         <button class="btn primary" id="next">${step === FACTORS.length - 1 ? "See my result →" : "Next →"}</button>
-        <button class="btn" id="useRec">Use the recommended settings for the rest</button></div>
+        <button class="btn" id="useRec">Skip to my result</button></div>
     </div>`;
   $("#build").querySelectorAll(".opt").forEach(b => b.onclick = () => {
     choice[f.key] = b.dataset.v;
@@ -282,7 +481,6 @@ function renderStep() {
   $("#next").onclick = () => { if (step < FACTORS.length - 1) { step++; renderStep(); } else { show("result"); renderResult(); } };
   $("#useRec").onclick = () => { show("result"); renderResult(); };
 }
-
 function climSliders() {
   return `<div class="slider"><span>Climate sensitivity (Parameter 2)</span><span class="v" id="vP2"></span>
       <input type="range" id="sP2" min="0.6" max="1.6" step="0.01" value="${choice.p2}" aria-label="Climate sensitivity"></div>
@@ -298,83 +496,194 @@ function bindClimSliders(onChange) {
   p1.oninput = () => { choice.p1 = +p1.value; lab(); onChange && onChange(); };
   lab();
 }
+const optLabel = (key, v) => { const f = FACTORS.find(x => x.key === key); const o = f.opts.find(x => x[0] === v); return o ? o[1] : v; };
+const summary = ch => FKEYS.filter(x => ch[x] !== REC[x]).map(x => optLabel(x, ch[x]) + (x === "clim" && ch.clim === "custom" ? ` (P2 ${ch.p2.toFixed(2)}, P1 ${ch.p1.toFixed(4)})` : "")).join(" · ") || "Recommended settings";
 
-// ---------------------------------------------------------------- compute a forecast for the current choices
-function compute(ch) {
-  const items = [];
-  const fill = ch.lu === "on" ? C.land_use_fill_mtc : 0;
-  const future = ["falling", "flat", "rising", "doubling"].includes(ch.emis) ? C.scenario_paths_mtc[ch.emis] : null;
-  const custom = ch.clim === "custom";
-  const many = !custom || ch.emis === "kaya";
-  const n = many ? C.kaya_draws.gdp_per_capita_growth.length : 1;
-  for (let i = 0; i < n; i++) {
-    const cl = custom ? { p1: ch.p1, p2: ch.p2, phi: C.class_ar1.phi, sigma: C.class_ar1.sigma }
-                      : { p1: C.climate_draws[ch.clim].p1[i], p2: C.climate_draws[ch.clim].p2[i],
-                          phi: C.climate_draws[ch.clim].phi[i], sigma: C.climate_draws[ch.clim].sigma[i] };
-    const econ = ch.emis === "kaya" ? { g: C.kaya_draws.gdp_per_capita_growth[i], ei: C.kaya_draws.energy_intensity_change[i],
-                                         ci: C.kaya_draws.emissions_intensity_change[i] }
-                                    : { g: C.hw5.g, ei: C.hw5.ei, ci: C.hw5.ci };
-    items.push({ params: Object.assign({ p1: cl.p1, p2: cl.p2, fill, future }, econ), phi: cl.phi, sigma: cl.sigma });
-  }
-  return ClassModel.ensemble(items, { pathsEach: Math.max(10, Math.round(4000 / items.length)), lastYear: ch.y49 === "yes" ? 2049 : 2048,
-                                      noMomentum: ch.mom === "off" });
-}
-
-// ---------------------------------------------------------------- results (with live tweaks)
+// ---------------------------------------------------------------- results
+let CUR = null, explore = { thr: 2.0, year: 2049 }, tornadoJob = 0;
 function renderResult() {
-  $("#result").innerHTML = `<p class="eyebrow">Your result</p><div class="panel"><p class="busy">Running ${C ? "the class model over 400 versions" : "…"}…</p></div>`;
-  setTimeout(() => {
-    const t0 = performance.now();
-    const r = compute(choice);
-    const ms = performance.now() - t0;
-    drawResult(r, ms);
-  }, 30);
+  $("#result").innerHTML = `<p class="eyebrow">Your result</p><div class="panel"><p class="busy">Running the class model over hundreds of versions…</p></div>`;
+  setTimeout(() => { const t0 = performance.now(); const r = compute(choice); drawResult(r, performance.now() - t0); }, 30);
 }
-
-function label(key, v) { const f = FACTORS.find(x => x.key === key); const o = f.opts.find(x => x[0] === v); return o ? o[1] : v; }
+function rerun() {
+  clearTimeout(rerun.t);
+  rerun.t = setTimeout(() => { const t0 = performance.now(); const r = compute(choice); drawResult(r, performance.now() - t0); }, 120);
+}
 
 function drawResult(r, ms) {
   const k = C.kalshi, P = r.pYes, stake = choice.stake, d = decide(P, stake);
+  CUR = { r, rm: runMax(r) };
+  explore.year = Math.min(explore.year, r.years[r.years.length - 1]);
   const gap = (P - k.mid) * 100;
-  const changed = ["emis", "clim", "lu", "mom", "y49"].filter(x => choice[x] !== REC[x]);
-  const selects = ["emis", "clim", "lu", "mom", "y49"].map(key => {
+  const selects = FKEYS.map(key => {
     const f = FACTORS.find(x => x.key === key);
-    return `<div><label for="t_${key}">${esc(f.q)}</label><select id="t_${key}">${f.opts.map(([v, t]) =>
+    return `<div><label for="t_${key}">${esc(f.name)}</label><select id="t_${key}">${f.opts.map(([v, t]) =>
       `<option value="${v}" ${choice[key] === v ? "selected" : ""}>${esc(t)}</option>`).join("")}</select></div>`;
   }).join("");
   $("#result").innerHTML = `<p class="eyebrow">Your result</p>
     <h2>You say ${pct(P)}. Kalshi says ${pct(k.mid)}.</h2>
+    <p class="note">${esc(summary(choice))}</p>
     <div class="panel">
       <div class="result-head">
-        <div class="stat"><div class="k">Your chance of a 2°C year by ${choice.y49 === "yes" ? 2049 : 2048}</div><div class="v" style="color:var(--accent-bright)">${pct(P, 1)}</div></div>
+        <div class="stat"><div class="k">Your chance of a 2°C year by ${r.years[r.years.length - 1]}</div><div class="v" style="color:var(--accent-bright)">${pct(P, 1)}</div></div>
         <div class="stat"><div class="k">Kalshi (market)</div><div class="v">${pct(k.mid)}</div></div>
         <div class="stat"><div class="k">Difference</div><div class="v">${gap >= 0 ? "+" : "−"}${Math.abs(gap).toFixed(1)} pts</div></div>
-        <div class="stat"><div class="k">Median year it happens</div><div class="v">${isNaN(r.firstMedian) ? "after 2049" : r.firstMedian}</div></div>
+        <div class="stat"><div class="k">Median first 2°C year (if reached)</div><div class="v">${isNaN(r.firstMedian) ? "–" : r.firstMedian}</div></div>
       </div>
       ${verdictHTML(d, stake)}
-      <div class="charts">
-        <div class="chart">${histChart(r.peak)}</div>
-        <div class="chart">${pathChart(r)}</div>
-      </div>
-      <p class="note">${r.n.toLocaleString()} simulated futures in ${Math.round(ms)} ms.
-        ${changed.length ? "You changed: " + changed.map(x => `<b>${esc(label(x, choice[x]))}</b>`).join(", ") + "." : "These are the recommended settings."}
-        For comparison: our 72-version model says ${pct(C.reference.ensemble_72)}, the IPCC-calibrated view ${pct(C.reference.ipcc)}.</p>
+      <div class="charts"><div class="chart">${histChart(r.peak)}</div><div class="chart">${pathChart(r)}</div></div>
+      <p class="note">${r.n.toLocaleString()} simulated futures in ${Math.round(ms)} ms. For comparison: our 72-version model says ${pct(C.reference.ensemble_72)},
+        the IPCC-calibrated view ${pct(C.reference.ipcc)}.</p>
     </div>
+
     <div class="panel"><h3>Change any factor and watch the odds move</h3>
       <div class="tweak">${selects}
         <div><label for="t_stake">Stake ($, hypothetical)</label><input type="number" id="t_stake" min="1" step="10" value="${stake}"></div></div>
       <div id="tweakClim" class="${choice.clim === "custom" ? "" : "hidden"}" style="margin-top:8px">${climSliders()}</div>
       <div class="row" style="margin-top:12px"><button class="btn" id="resRec">Reset to recommended</button>
-        <button class="btn" id="resSteps">Walk through the steps again</button><button class="btn" id="resTop">Back to the start</button></div>
-    </div>`;
-  let pending = null;
-  const rerun = () => { clearTimeout(pending); pending = setTimeout(() => { const t0 = performance.now(); const rr = compute(choice); drawResult(rr, performance.now() - t0); }, 120); };
-  ["emis", "clim", "lu", "mom", "y49"].forEach(key => $("#t_" + key).onchange = e => { choice[key] = e.target.value; rerun(); });
+        <button class="btn" id="pinBtn">Pin this forecast</button>
+        <button class="btn" id="resSteps">Walk through the steps again</button></div>
+    </div>
+
+    <div class="panel"><h3>What moves the odds most?</h3>
+      <p class="note">Each row changes one factor and keeps the rest of your settings. Click any option to switch to it.</p>
+      <div id="tornado"><p class="busy">Testing every option…</p></div></div>
+
+    <div class="panel" id="resPlay"></div>
+
+    <div class="panel"><h3>Odds explorer: other thresholds and deadlines</h3>
+      <p class="note">Kalshi only asks about 2.00°C by 2049. Your forecast answers every version of the question. Click a cell or drag the sliders.</p>
+      <div class="tweak">
+        <div class="slider"><span>Threshold</span><span class="v" id="vThr"></span><input type="range" id="sThr" min="1.5" max="2.5" step="0.05" value="${explore.thr}" aria-label="Threshold"></div>
+        <div class="slider"><span>By the end of</span><span class="v" id="vYr"></span><input type="range" id="sYr" min="${r.years[0]}" max="${r.years[r.years.length - 1]}" step="1" value="${explore.year}" aria-label="Deadline year"></div>
+      </div>
+      <div class="result-head" style="margin:6px 0 12px"><div class="stat"><div class="k" id="kExp"></div><div class="v" id="vExp"></div></div></div>
+      <div class="charts" style="margin-top:0"><div class="chart" id="curve"></div><div class="chart scroll" id="heat"></div></div>
+    </div>
+
+    <div class="panel"><h3>What if Kalshi’s price moved?</h3>
+      <p class="note">Your forecast stays fixed; drag the market price and see where your call flips. Away from the live price, costs assume a 4¢ spread and Kalshi’s fee.</p>
+      <div class="slider"><span>Market price for Yes</span><span class="v" id="vMid"></span>
+        <input type="range" id="sMid" min="5" max="95" step="1" value="${Math.round(k.mid * 100)}" aria-label="Hypothetical market price"></div>
+      <div class="chart" id="zones"></div><div id="zoneCall"></div>
+    </div>
+
+    <div class="panel"><h3>Pinned forecasts</h3><div id="pins"></div></div>`;
+
+  FKEYS.forEach(key => $("#t_" + key).onchange = e => { choice[key] = e.target.value; $("#tweakClim").classList.toggle("hidden", choice.clim !== "custom"); rerun(); });
   $("#t_stake").onchange = e => { choice.stake = Math.max(1, +e.target.value || 100); rerun(); };
   bindClimSliders(rerun);
   $("#resRec").onclick = () => { choice = Object.assign({}, REC); renderResult(); };
   $("#resSteps").onclick = () => { show("build"); step = 0; renderStep(); };
-  $("#resTop").onclick = () => $("#pitch").scrollIntoView({ behavior: "smooth" });
+  $("#pinBtn").onclick = () => { pinned.unshift({ ch: Object.assign({}, choice), p: P, call: d.call, label: summary(choice) }); pinned = pinned.slice(0, 8); savePins(); drawPins(); };
+  playground($("#resPlay"), r, d.side, stake, "your forecast");
+  bindExplorer(); bindPrice(P); drawPins(); runTornado(P);
+}
+
+// ---------------------------------------------------------------- odds explorer
+function bindExplorer() {
+  const { r, rm } = CUR;
+  const st = $("#sThr"), sy = $("#sYr"), last = r.years[r.years.length - 1];
+  const draw = () => {
+    explore.thr = +st.value; explore.year = +sy.value;
+    $("#vThr").textContent = explore.thr.toFixed(2) + "°C"; $("#vYr").textContent = explore.year;
+    const p = pReach(rm, r.years, explore.thr, explore.year);
+    $("#kExp").textContent = `Chance any year reaches ${explore.thr.toFixed(2)}°C by the end of ${explore.year}`;
+    $("#vExp").innerHTML = pct(p, 1) + (Math.abs(explore.thr - 2) < 1e-6 && explore.year === 2049 ? ` <span class="note" style="font-size:14px;font-weight:400">= the Kalshi question (market ${pct(C.kalshi.mid)})</span>` : "");
+    $("#curve").innerHTML = curveChart(r, rm, explore.thr);
+    const thrs = [1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3], yrs = [2030, 2035, 2040, 2045, last];
+    $("#heat").innerHTML = `<table class="heat"><tr><th>Threshold</th>${yrs.map(y => `<th>by ${y}</th>`).join("")}</tr>${thrs.map(t => `<tr><th>${t.toFixed(1)}°C</th>${yrs.map(y => {
+      const v = pReach(rm, r.years, t, y), sel = Math.abs(t - explore.thr) < 1e-6 && y === explore.year, kx = Math.abs(t - 2) < 1e-6 && y === 2049;
+      return `<td data-t="${t}" data-y="${y}" class="${sel ? "sel" : ""} ${kx ? "kx" : ""}" style="background:color-mix(in srgb, var(--accent-bright) ${Math.round(v * 75)}%, transparent)">${pct(v)}</td>`; }).join("")}</tr>`).join("")}</table>
+      <p class="note" style="margin:6px 0 0">Dashed cell: Kalshi’s contract.</p>`;
+    $("#heat").querySelectorAll("td").forEach(td => td.onclick = () => { st.value = td.dataset.t; sy.value = td.dataset.y; draw(); });
+  };
+  st.oninput = draw; sy.oninput = draw; draw();
+}
+function curveChart(r, rm, thr) {
+  const W = 640, H = 250, L = 40, T = 26, B = 26, x0 = r.years[0] - 1, x1 = r.years[r.years.length - 1];
+  const X = v => L + (v - x0) / (x1 - x0) * (W - L - 10), Y = v => T + (1 - v) * (H - T - B);
+  const pts = r.years.map(y => [y, pReach(rm, r.years, thr, y)]);
+  const d = pts.map(([y, v], i) => `${i ? "L" : "M"}${X(y).toFixed(1)},${Y(v).toFixed(1)}`).join("");
+  const yt = [0, 0.25, 0.5, 0.75, 1].map(v => `<line x1="${L}" x2="${W - 10}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${L - 4}" y="${Y(v) + 4}" text-anchor="end">${v * 100}%</text>`).join("");
+  const xt = [2030, 2035, 2040, 2045].map(v => `<text x="${X(v)}" y="${H - 6}" text-anchor="middle">${v}</text>`).join("");
+  const kx = Math.abs(thr - 2) < 1e-6 && x1 >= 2049 ? `<circle cx="${X(2049)}" cy="${Y(C.kalshi.mid)}" r="6" fill="none" stroke="var(--gold)" stroke-width="2.5"/><text x="${X(2049) - 10}" y="${Y(C.kalshi.mid) + 20}" text-anchor="end" style="fill:var(--gold);font-weight:600">Kalshi ${pct(C.kalshi.mid)}</text>` : "";
+  const sel = pts.find(p => p[0] === explore.year);
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Chance of reaching the threshold by each year">
+    <text x="${L}" y="14" style="font-weight:600;fill:var(--ink)">Chance of a ${thr.toFixed(2)}°C year by each deadline</text>${yt}
+    <path d="${d}" fill="none" stroke="var(--accent-bright)" stroke-width="2.5"/>${sel ? `<circle cx="${X(sel[0])}" cy="${Y(sel[1])}" r="5" fill="var(--accent-bright)"/>` : ""}${kx}${xt}</svg>`;
+}
+
+// ---------------------------------------------------------------- price slider
+function bindPrice(P) {
+  const s = $("#sMid");
+  const draw = () => {
+    const mid = +s.value / 100, q = quoteAt(mid), d = decide(P, choice.stake, q);
+    $("#vMid").textContent = `${Math.round(mid * 100)}¢${Math.abs(mid - C.kalshi.mid) < 0.004 ? " (live price)" : ""}`;
+    const W = 640, H = 96, X = v => 10 + v * (W - 20);
+    const lo = 1 - q.no_cost, hi = q.yes_cost;
+    $("#zones").innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Decision zones for your probability">
+      <rect x="${X(0)}" y="30" width="${X(lo) - X(0)}" height="26" fill="var(--blue)" opacity=".35"/>
+      <rect x="${X(lo)}" y="30" width="${X(hi) - X(lo)}" height="26" fill="var(--muted)" opacity=".25"/>
+      <rect x="${X(hi)}" y="30" width="${X(1) - X(hi)}" height="26" fill="var(--green)" opacity=".35"/>
+      ${lo > 0.08 ? `<text x="${(X(0) + X(lo)) / 2}" y="48" text-anchor="middle" style="fill:var(--ink);font-weight:600">Buy NO</text>` : ""}
+      ${hi - lo > 0.06 ? `<text x="${(X(lo) + X(hi)) / 2}" y="48" text-anchor="middle" style="fill:var(--ink)">Pass</text>` : ""}
+      ${1 - hi > 0.08 ? `<text x="${(X(hi) + X(1)) / 2}" y="48" text-anchor="middle" style="fill:var(--ink);font-weight:600">Buy YES</text>` : ""}
+      <line x1="${X(P)}" x2="${X(P)}" y1="18" y2="66" stroke="var(--accent-bright)" stroke-width="3"/>
+      <text x="${X(P)}" y="14" text-anchor="middle" style="fill:var(--accent);font-weight:700">you ${pct(P)}</text>
+      <line x1="${X(mid)}" x2="${X(mid)}" y1="30" y2="66" stroke="var(--gold)" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="${X(mid)}" y="80" text-anchor="middle" style="fill:var(--gold)">market ${Math.round(mid * 100)}%</text>
+      ${[0, 0.25, 0.5, 0.75, 1].map(v => `<text x="${X(v)}" y="${H - 2}" text-anchor="${v === 0 ? "start" : v === 1 ? "end" : "middle"}">${v * 100}%</text>`).join("")}</svg>`;
+    $("#zoneCall").innerHTML = `<p style="margin:8px 0 0"><b style="color:${d.side === "yes" ? "var(--green)" : d.side === "no" ? "var(--blue)" : "var(--ink)"}">${d.call}</b>${d.side === "pass" ? `: your ${pct(P, 1)} is inside the ${pct(lo)}–${pct(hi)} band.` : `: expected ${usd(d.ev)} on $${choice.stake}.`}
+      <span class="note">Yes costs ${cents(q.yes_cost)}, No costs ${cents(q.no_cost)} including fees.</span></p>`;
+  };
+  s.oninput = draw; draw();
+}
+
+// ---------------------------------------------------------------- what moves the odds: one factor at a time
+function runTornado(P0) {
+  const job = ++tornadoJob, base = Object.assign({}, choice), rows = {}, tasks = [];
+  FKEYS.forEach(key => {
+    rows[key] = [[base[key], P0]];
+    FACTORS.find(f => f.key === key).opts.forEach(([v]) => { if (v !== base[key] && v !== "custom") tasks.push([key, v]); });
+  });
+  const spread = a => { const ps = a.map(x => x[1]); return Math.max(...ps) - Math.min(...ps); };
+  const draw = done => {
+    const W = 380, X = v => 8 + v * (W - 16);
+    const order = FKEYS.slice().sort((a, b) => spread(rows[b]) - spread(rows[a]));
+    $("#tornado").innerHTML = order.map(key => {
+      const f = FACTORS.find(x => x.key === key), ps = rows[key].map(x => x[1]), lo = Math.min(...ps), hi = Math.max(...ps);
+      return `<div class="trow"><div class="tname">${esc(f.name)}<span>${pct(lo)} to ${pct(hi)}</span></div>
+        <div><svg viewBox="0 0 ${W} 22" style="max-width:${W}px" aria-label="${esc(f.name)}: ${pct(lo)} to ${pct(hi)}"><rect x="8" y="9" width="${W - 16}" height="4" rx="2" fill="var(--line)"/>
+          <rect x="${X(lo)}" y="5" width="${Math.max(3, X(hi) - X(lo))}" height="12" rx="3" fill="var(--accent-bright)" opacity=".55"/>
+          <line x1="${X(C.kalshi.mid)}" x2="${X(C.kalshi.mid)}" y1="1" y2="21" stroke="var(--gold)" stroke-width="2"/>
+          <circle cx="${X(P0)}" cy="11" r="5" fill="var(--ink)"/></svg></div>
+        <div class="chips">${f.opts.filter(([v]) => rows[key].some(x => x[0] === v)).map(([v, t]) => { const p = rows[key].find(x => x[0] === v)[1], dd = (p - P0) * 100;
+          return `<button class="ochip" data-k="${key}" data-v="${v}" aria-pressed="${v === base[key]}">${esc(t)} <b>${pct(p)}</b>${v === base[key] ? "" : ` <span class="${dd >= 0 ? "up" : "dn"}">${dd >= 0 ? "+" : "−"}${Math.abs(dd).toFixed(0)}</span>`}</button>`; }).join("")}</div></div>`;
+    }).join("") + `<p class="note" style="margin:8px 0 0">Bar: the range of answers for that factor. Dot: your forecast. Gold line: Kalshi ${pct(C.kalshi.mid)}.${done ? "" : " Still testing…"}</p>`;
+    $("#tornado").querySelectorAll(".ochip").forEach(b => b.onclick = () => { if (b.dataset.v === choice[b.dataset.k]) return; choice[b.dataset.k] = b.dataset.v; renderResult(); });
+  };
+  let i = 0;
+  const next = () => {
+    if (job !== tornadoJob || !$("#tornado")) return;
+    if (i >= tasks.length) return draw(true);
+    const [key, v] = tasks[i++];
+    rows[key].push([v, compute(Object.assign({}, base, { [key]: v })).pYes]);
+    if (i % 3 === 0) draw(false);
+    setTimeout(next, 0);
+  };
+  draw(false); setTimeout(next, 50);
+}
+
+// ---------------------------------------------------------------- pins
+function drawPins() {
+  const el = $("#pins"); if (!el) return;
+  if (!pinned.length) { el.innerHTML = `<p class="note">Pin a forecast to compare it with others side by side.</p>`; return; }
+  el.innerHTML = `<div class="scroll"><table><tr><th>Settings</th><th class="n">Chance</th><th class="n">vs Kalshi</th><th>Call</th><th></th></tr>
+    ${pinned.map((p, i) => `<tr><td>${esc(p.label)}</td><td class="n"><b>${pct(p.p, 1)}</b></td><td class="n">${((p.p - C.kalshi.mid) >= 0 ? "+" : "−") + Math.abs((p.p - C.kalshi.mid) * 100).toFixed(1)}</td>
+      <td>${esc(p.call)}</td><td class="n" style="white-space:nowrap"><button class="btn" data-load="${i}">Load</button> <button class="btn" data-del="${i}" aria-label="Remove">✕</button></td></tr>`).join("")}</table></div>`;
+  el.querySelectorAll("[data-load]").forEach(b => b.onclick = () => { choice = Object.assign({}, pinned[+b.dataset.load].ch); renderResult(); });
+  el.querySelectorAll("[data-del]").forEach(b => b.onclick = () => { pinned.splice(+b.dataset.del, 1); savePins(); drawPins(); });
 }
 
 // ---------------------------------------------------------------- charts (inline SVG)
@@ -392,21 +701,20 @@ function pdfChart(series, title) {
     return `<path d="${d}" fill="none" stroke="${col}" stroke-width="2.5"/><rect x="${L + 6 + j * 210}" y="${T - 14}" width="12" height="4" fill="${col}"/>
       <text x="${L + 22 + j * 210}" y="${T - 9}">${esc(lab)}</text>`; }).join("");
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)}"><text x="${L}" y="14" style="font-weight:600;fill:var(--ink)">${esc(title)}</text>
-    <line x1="${X(2)}" x2="${X(2)}" y1="${T}" y2="${H - B}" stroke="#eab308" stroke-width="2.5"/>${lines}${ticks}</svg>`;
+    <line x1="${X(2)}" x2="${X(2)}" y1="${T}" y2="${H - B}" stroke="var(--gold)" stroke-width="2.5"/>${lines}${ticks}</svg>`;
 }
 function histChart(peak) {
   const lo = 1.3, hi = 2.9, bw = 0.04, nb = Math.round((hi - lo) / bw);
   const counts = new Array(nb).fill(0);
-  let inRange = 0;
-  for (const v of peak) { const b = Math.floor((v - lo) / bw); if (b >= 0 && b < nb) { counts[b]++; inRange++; } }
+  for (const v of peak) { const b = Math.floor((v - lo) / bw + 1e-9); if (b >= 0 && b < nb) counts[b]++; }
   const W = 640, H = 260, L = 12, T = 30, B = 26;
   const { X, ticks } = axes(W, H, L, B, lo, hi, [1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8], v => v.toFixed(1) + "°C");
   const m = Math.max(...counts), Y = c => T + (1 - c / m) * (H - T - B);
   const bars = counts.map((c, i) => { const x = lo + i * bw; const over = x + 1e-9 >= 2.0;
-    return `<rect x="${X(x) + 1}" y="${Y(c)}" width="${Math.max(1, X(x + bw) - X(x) - 2)}" height="${H - B - Y(c)}" fill="${over ? "var(--accent-bright)" : "var(--blue)"}" opacity="${over ? 0.85 : 0.55}"/>`; }).join("");
+    return `<rect x="${X(x) + 1}" y="${Y(c)}" width="${Math.max(1, X(x + bw) - X(x) - 2)}" height="${H - B - Y(c)}" fill="${over ? "var(--accent-bright)" : "var(--blue)"}" opacity="${over ? 0.85 : 0.55}"><title>${x.toFixed(2)}–${(x + bw).toFixed(2)}°C: ${c} futures</title></rect>`; }).join("");
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Distribution of the highest reading 2027 to 2049">
     <text x="${L}" y="14" style="font-weight:600;fill:var(--ink)">Your futures: highest reading 2027–2049 (orange = 2°C reached)</text>
-    ${bars}<line x1="${X(2)}" x2="${X(2)}" y1="${T}" y2="${H - B}" stroke="#eab308" stroke-width="2.5"/>${ticks}</svg>`;
+    ${bars}<line x1="${X(2)}" x2="${X(2)}" y1="${T}" y2="${H - B}" stroke="var(--gold)" stroke-width="2.5"/>${ticks}</svg>`;
 }
 function pathChart(r) {
   const W = 640, H = 260, L = 34, T = 30, B = 26, x0 = 2000, x1 = 2060, y0 = 0.6, y1 = 2.8;
@@ -422,7 +730,7 @@ function pathChart(r) {
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Temperature path with the range of simulated contract readings">
     <text x="${L}" y="14" style="font-weight:600;fill:var(--ink)">Temperature, °C above 1850–1900 (shaded: 90% and 50% of futures)</text>
     <path d="${band(0, 4)}" fill="var(--accent-bright)" opacity=".15"/><path d="${band(1, 3)}" fill="var(--accent-bright)" opacity=".25"/>
-    <line x1="${L}" x2="${W - 10}" y1="${Y(2)}" y2="${Y(2)}" stroke="#eab308" stroke-width="2"/>
+    <line x1="${L}" x2="${W - 10}" y1="${Y(2)}" y2="${Y(2)}" stroke="var(--gold)" stroke-width="2"/>
     <path d="${line}" fill="none" stroke="var(--ink)" stroke-width="1.8"/>${obs}${yt}${xt}</svg>`;
 }
 </script>

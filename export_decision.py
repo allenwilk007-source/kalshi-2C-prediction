@@ -1,7 +1,7 @@
 """Data for the Decision Lab page (site/play.html): model draws, the 2026 starting state and the live
 Kalshi quote, so the browser can re-run the class model for any choice of factors.
 
-    python export_decision.py      # results/decision_context.json
+    python export_decision.py      # results/decision_context.json + static/decision_lab.html
 
 Contents
   climate_draws   400 (p1, p2, AR(1) phi, sigma) draws for each climate view: history-fit, IPCC-calibrated,
@@ -28,7 +28,28 @@ from phase5 import nowcast_state
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "results"
+STATIC = HERE / "static"
 N = 400
+
+
+def build_static(ctx: dict) -> Path:
+    """One self-contained HTML file: site/play.html with model.js and the data inlined (no server needed)."""
+    page = (HERE / "site" / "play.html").read_text(encoding="utf-8")
+    js = (HERE / "site" / "model.js").read_text(encoding="utf-8")
+    inputs = (HERE / "data" / "hw5_inputs.json").read_text(encoding="utf-8")
+    tag = '<script src="/site/model.js"></script>'
+    assert tag in page
+    data = json.dumps({"inputs": json.loads(inputs), "ctx": ctx}, separators=(",", ":")).replace("</", "<\\/")
+    page = page.replace(tag, f"<script>window.__DLAB__ = {data};</script>\n<script>\n{js}\n</script>")
+    STATIC.mkdir(exist_ok=True)
+    out = STATIC / "decision_lab.html"
+    out.write_text(page, encoding="utf-8")
+    # the same page without its own document wrapper, for hosts that add one (the published artifact)
+    head = page.split("<head>", 1)[1].split("</head>", 1)[0]
+    head = "\n".join(l for l in head.splitlines() if "<meta charset" not in l and 'name="viewport"' not in l)
+    body = page.split("<body>", 1)[1].rsplit("</body>", 1)[0]
+    (STATIC / "decision_lab_embed.html").write_text(head.strip() + "\n" + body.strip() + "\n", encoding="utf-8")
+    return out
 
 
 def main():
@@ -84,6 +105,8 @@ def main():
         "ipcc_pdf": {"grid": p10["grid"], "pdf": p10["variants"]["ipcc"]["pdf_peak"]},
     }
     (OUT / "decision_context.json").write_text(json.dumps(ctx))
+    page = build_static(ctx)
+    print(f"wrote {page} ({page.stat().st_size / 1024:.0f} KB, runs without the server)")
     print(f"wrote {OUT / 'decision_context.json'}: {N} climate draws x 3 views, {N} Kaya draws; "
           f"Kalshi {snap['yes_bid']:.2f}/{snap['yes_ask']:.2f}, Yes costs {yes_cost:.3f}, No costs {no_cost:.3f}")
 

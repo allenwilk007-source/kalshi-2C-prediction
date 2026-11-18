@@ -136,7 +136,8 @@
       return a.length ? a[Math.min(a.length - 1, Math.floor(p * a.length))] : NaN; };
     const fan = acc.stat.map(col => { const s = col.slice().sort();
       return [0.05, 0.25, 0.5, 0.75, 0.95].map(p => s[Math.min(N - 1, Math.floor(p * N))]); });
-    return Object.assign({ pYes: acc.yes / N, years: acc.years, fan, peak: acc.peak, firstMedian: q(acc.first, 0.5),
+    return Object.assign({ pYes: acc.yes / N, years: acc.years, fan, peak: acc.peak, stat: acc.stat, first: acc.first,
+                           firstMedian: q(acc.first, 0.5),
                            firstP10: q(acc.first, 0.1), firstP90: q(acc.first, 0.9), n: N }, extra || {});
   }
 

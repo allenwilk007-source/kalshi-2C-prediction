@@ -550,3 +550,23 @@ each, about 0.1 s. `export_decision.py` (last pipeline step) writes the draws, t
 
 Decision rule: buy Yes if P > Yes cost (73.4¢), buy No if 1 − P > No cost (34.5¢), otherwise pass. Hypothetical only; nothing
 places orders.
+
+Interactive tools on the result (and Path A):
+
+- **Play the future**: pick Buy Yes / Buy No / Pass, then draw one simulated future (animated year by year) or 100 at once and see the
+  hypothetical winnings tally.
+- **What moves the odds**: every option of every factor tested from your current settings, ranked; click an option to switch to it.
+- **Odds explorer**: chance of any threshold (1.5–2.5°C) by any deadline (2027–2049), as a curve and a clickable table.
+- **Price slider**: move Kalshi's price and see where your Yes / No / Pass call flips.
+- **Pinned forecasts**: save settings and compare them side by side (kept in the browser).
+- Path A reruns Phase 11's 72-version grid in the browser: 80.6% vs Python's 80.8%.
+
+`export_decision.py` also writes `static/decision_lab.html`, a self-contained copy (model and data inlined) that opens without the
+server, and `static/decision_lab_embed.html`, the same page without its document wrapper for hosts that add one.
+
+## Slide deck
+
+`deck/` holds the presentation's source (24 slides, speaker notes in each `<aside>`): the question and why compare a model with a
+market, the class model and its uncertainty, model vs Kalshi vs the IPCC report across dimensions (probability, timing, range,
+deadlines, thresholds, drivers), how a forecast becomes a Yes / No / Pass decision, the hypothetical trades, and the Decision Lab.
+Images are referenced from the published deck.
