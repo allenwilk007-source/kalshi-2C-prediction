@@ -277,5 +277,42 @@ text(s, 128, 800, 980, 90, [[("Try it: ", {"bold": True, "color": TEXT}), ("Tool
 pic(s, "shots_dark/lab_play_g.png", 1164, 290, 628, 486)
 text(s, 1164, 790, 628, 70, ["Play the future: watch a bet win or lose, one simulated year at a time"], size=24)
 
+def sources_slide():
+    s = new_slide(sid="refs")
+    head(s, "WHERE THE DATA COMES FROM", "Sources")
+    b = {"bold": True, "color": TEXT}
+    grp = lambda t: [(t, {"size": 32, "color": GREEN, "font": HEAD, "bold": True})]
+    left = [grp("The market"),
+            [("Kalshi", b), (", KXWARMING-50 market page, rules and public Trade API v2 (order book of 18 Nov 2026)", {})],
+            [("Kalshi", b), (" fee schedule (taker fee 0.07 × contracts × price × (1 − price))", {})],
+            [("U.S. Treasury", b), (", Daily Treasury Par Yield Curve Rates", {})],
+            grp("Temperature: the four datasets"),
+            [("NASA GISS", b), (" GISTEMP v4 · ", {}), ("NOAA NCEI", b), (" NOAAGlobalTemp", {})],
+            [("Berkeley Earth", b), (" Land/Ocean · ", {}), ("Met Office / CRU", b), (" HadCRUT5", {})],
+            [("Copernicus / ECMWF", b), (" ERA5 daily (Climate Pulse), for 2026", {})]]
+    right = [grp("Emissions and CO₂"),
+             [("Our World in Data", b), (" CO₂ dataset / ", {}), ("Global Carbon Budget", b)],
+             [("NOAA GML", b), (" Mauna Loa CO₂, monthly and daily", {})],
+             grp("The model"),
+             [("FECON 390 Carbon Trading", b), (", Duke (Prof. Daniel Egger): HW2–HW5 class model and HW5 workbook", {})],
+             [("Kaya, Y. (1990)", b), (", the Kaya identity, IPCC Response Strategies WG", {})],
+             [("IPCC (2021)", b), (", AR6 WGI Summary for Policymakers: sensitivity 2–5°C, Table SPM.1", {})],
+             grp("Social cost of carbon"),
+             [("Tol, R.S.J. (2023)", b), (", The social cost of carbon; SCC meta-analysis database v2026.1", {})]]
+    text(s, 128, 290, 800, 560, left, size=24, color=BODY, spacing=8)
+    text(s, 992, 290, 800, 600, right, size=24, color=BODY, spacing=8)
+    text(s, 128, 900, 1664, 40, [[("Full list with links: ", {}), (REPO + "/blob/main/SOURCES.md", {"color": GREEN})]], size=24, color=MUTED)
+
+
+sources_slide()
 prs.save(OUT)
 print(OUT, f"{OUT.stat().st_size / 1024:.0f} KB, {len(prs.slides)} slides")
+
+# the Sources slide on its own, to import into a deck that is already in Google Slides
+prs = Presentation()
+prs.slide_width, prs.slide_height = px(1920), px(1080)
+BLANK = prs.slide_layouts[6]
+sources_slide()
+ONE = HERE / "sources_slide.pptx"
+prs.save(ONE)
+print(ONE, f"{ONE.stat().st_size / 1024:.0f} KB")

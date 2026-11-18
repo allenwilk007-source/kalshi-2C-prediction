@@ -44,6 +44,7 @@ dashboard below.
 
 **Where to look**
 
+- [`SOURCES.md`](SOURCES.md): every data source and reference the project uses, with links.
 - [`excel/ensemble_72_versions.xlsx`](excel/ensemble_72_versions.xlsx): how the 80.8% is computed, with live formulas
   (72 versions, 232,668 of 288,000 simulated futures reach 2°C), the Kalshi fee and decision math, and one simulated
   future scored year by year with Kalshi’s rule.
