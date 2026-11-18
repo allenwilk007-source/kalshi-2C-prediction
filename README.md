@@ -18,7 +18,11 @@ Hypothetical class analysis only: no trades were placed and nothing here is inve
 ## ▶ Tool Dashboard: try it in your browser (no install)
 
 The **Tool Dashboard** compares your own forecast for a 2°C year before 2050 with Kalshi’s market price. It is one
-file and runs entirely in your web browser: no Python, no account, works offline.
+file and runs entirely in your web browser: no Python, no account.
+
+### **[Open the Tool Dashboard online →](https://allenwilk007-source.github.io/kalshi-2C-prediction/)**
+
+One click, nothing to download. Or, to use it offline:
 
 1. Click **[`Tool Dashboard.html`](Tool%20Dashboard.html)** (also in the file list above).
 2. On the file page, click the **download button** (the ↓ arrow, “Download raw file”, at the top right).
