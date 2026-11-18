@@ -495,3 +495,29 @@ record year. Buying Yes on one and No on the other pays exactly $1, so it's arbi
 two cost less than $1 after fees. On 18 Nov 2026 they cost about $1.02–1.03, so there's no arbitrage;
 the prices would need to drift 2–3 ¢ further apart (the dashboard shows the live figure). Risk: if Kalshi treats "-27" as a 2027 market, they
 stop being the same bet.
+
+## Phase 12: small regular trades (class project)
+
+`phase12.py`, `test_phase12.py` (5 tests). On the dashboard: **Small trades**. **Hypothetical back-test on
+Kalshi's public price history; not investment advice.**
+
+**Setup:** $10 a week from listing (6 Jun 2025) to 18 Nov 2026, three methods, each valued under our
+80.8 % and under the IPCC-calibrated 67.1 %.
+
+| Method | Contracts (avg cost) | If 81 % | If 67 % | Sold today |
+|---|---|---|---|---|
+| Weekly buy at the ask (taker fee) | 731 (0.799) | +$6 | −$94 | −$98 |
+| Weekly limit order, bid + 1 ¢ (no maker fee) | 691 (0.756) | +$36 | −$58 | −$63 |
+| Spread capture, 10 contracts a side | 52 round trips | +$14 | +$12 | +$12 |
+
+**Findings:**
+- **Fees are rounded up per order,** so 1 contract pays 2 ¢ against 1.42 ¢ in a 100-contract order.
+- **Going forward,** buying at the ask needs P > 73.5 % to break even, and limit orders need
+  P > 69 %, right at the market.
+- **Verdict:** small regular bets only pay if the narrow class-model view (81 %) is right. The
+  IPCC-calibrated model agrees with the market, so on that view they lose slowly. The only edge
+  that doesn't depend on who's right is spread capture: about $10 a year at these sizes, assuming
+  fills that a thin market may not give.
+
+`figures/p12_0_estimates.png` is the headline chart (Kalshi 70 % vs IPCC-calibrated 67 % vs ensemble
+81 % vs history-fit 93 % vs class model 99 %), shown on the dashboard and in the presentation deck.

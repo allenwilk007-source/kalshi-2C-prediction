@@ -1,0 +1,108 @@
+{
+ "snapshot": "20261118T045829Z",
+ "hypothetical": true,
+ "weekly_dollars": 10.0,
+ "estimates": {
+  "kalshi_mid": 0.7,
+  "kalshi_bid": 0.68,
+  "kalshi_ask": 0.72,
+  "ensemble": 0.807875,
+  "ipcc": 0.6714354852529034,
+  "history": 0.9270191416230287,
+  "class_hw5": 0.99256,
+  "kalshi_band": [
+   0.6639999999999999,
+   0.735
+  ]
+ },
+ "period": [
+  "2025-06-06",
+  "2026-11-18"
+ ],
+ "dca_at_ask": {
+  "contracts": 731,
+  "spent": 584.43,
+  "avg_cost": 0.7994938440492475,
+  "expected_profit_ensemble": 6.126625000000104,
+  "expected_profit_ipcc": -93.61066028012755,
+  "sell_now_at_bid": -98.4899999999999,
+  "fees": 8.679999999999998,
+  "orders": 61,
+  "filled_orders": 61
+ },
+ "limit_orders": {
+  "contracts": 691,
+  "spent": 522.1,
+  "avg_cost": 0.7555716353111434,
+  "expected_profit_ensemble": 36.141624999999976,
+  "expected_profit_ipcc": -58.138079690243785,
+  "sell_now_at_bid": -62.74999999999994,
+  "fees": 0.0,
+  "orders": 61,
+  "filled_orders": 55
+ },
+ "spread_capture": {
+  "bought": 540,
+  "sold": 520,
+  "cash": -1.700000000000001,
+  "inventory": 20,
+  "round_trips": 52,
+  "inventory_value_at_bid": 13.600000000000001,
+  "profit_marked_at_bid": 11.9,
+  "expected_profit_ensemble": 14.457499999999998,
+  "expected_profit_ipcc": 11.728709705058067
+ },
+ "fee_by_order_size": [
+  {
+   "contracts": 1,
+   "fee": 0.02,
+   "fee_per_contract": 0.02
+  },
+  {
+   "contracts": 2,
+   "fee": 0.03,
+   "fee_per_contract": 0.015
+  },
+  {
+   "contracts": 5,
+   "fee": 0.08,
+   "fee_per_contract": 0.016
+  },
+  {
+   "contracts": 10,
+   "fee": 0.15,
+   "fee_per_contract": 0.015
+  },
+  {
+   "contracts": 25,
+   "fee": 0.36,
+   "fee_per_contract": 0.0144
+  },
+  {
+   "contracts": 100,
+   "fee": 1.42,
+   "fee_per_contract": 0.014199999999999999
+  }
+ ],
+ "forward_one_year": {
+  "buy at the ask": {
+   "price": 0.72,
+   "all_in": 0.7346153846153846,
+   "contracts_per_year": 676,
+   "spent": 496.59999999999997,
+   "expected_ensemble": 49.52350000000007,
+   "expected_ipcc": -42.70961196903727,
+   "break_even_probability": 0.7346153846153846
+  },
+  "limit order at the bid + 1c": {
+   "price": 0.6900000000000001,
+   "all_in": 0.6900000000000001,
+   "contracts_per_year": 728,
+   "spent": 502.32000000000005,
+   "expected_ensemble": 85.81299999999999,
+   "expected_ipcc": -13.514966735886333,
+   "break_even_probability": 0.6900000000000001
+  }
+ },
+ "avg_weekly_volume": 356.6313114754098
+}

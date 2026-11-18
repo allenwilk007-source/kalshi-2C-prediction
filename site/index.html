@@ -131,7 +131,7 @@ footer { margin-top: 48px; font-size: 12.5px; color: var(--muted); }
 <body>
 <header class="top"><div class="wrap">
   <h1>2°C before 2050? Course model vs Kalshi</h1>
-  <nav><a href="#trade">Trade idea</a><a href="#dist">Distributions</a><a href="#markets">Markets</a><a href="#explore">Explore</a><a href="#whatif">What if?</a><a href="#scc">SCC</a><a href="#history">History</a><a href="#model">Model</a><a href="#p2">Phase 2</a><a href="#p3">Phase 3</a><a href="#p4">Phase 4</a><a href="#p5">Phase 5</a></nav>
+  <nav><a href="#trade">Trade idea</a><a href="#small">Small trades</a><a href="#dist">Distributions</a><a href="#markets">Markets</a><a href="#explore">Explore</a><a href="#whatif">What if?</a><a href="#scc">SCC</a><a href="#history">History</a><a href="#model">Model</a><a href="#p2">Phase 2</a><a href="#p3">Phase 3</a><a href="#p4">Phase 4</a><a href="#p5">Phase 5</a></nav>
   <span class="pill" id="runpill"></span>
   <button class="primary" id="runbtn" title="Fetch fresh Kalshi data and re-run every phase (about 2 minutes)">Refresh data &amp; re-run</button>
 </div></header>
@@ -150,6 +150,11 @@ footer { margin-top: 48px; font-size: 12.5px; color: var(--muted); }
   <section id="trade">
     <h2>Hypothetical trade idea (class project)</h2>
     <div id="secTrade"></div>
+  </section>
+
+  <section id="small">
+    <h2>Small, regular trades: can they make money? (class project)</h2>
+    <div id="secSmall"></div>
   </section>
 
   <section id="dist">
@@ -254,6 +259,10 @@ const CAPS = {
   "p5_3_fan_nowcast.png": "Starting from the 2026 nowcast vs from 2025",
   "p5_4_loss_vs_outcome.png": "Hypothetical damage loss vs contract outcome",
   "p5_5_basis_risk.png": "How much damage risk each instrument removes",
+  "p12_0_estimates.png": "Our ensemble says ~80%; the IPCC-calibrated model lands on Kalshi's ~70%",
+  "p12_1_weekly_buys.png": "$10 a week since listing: prices paid by each method",
+  "p12_2_methods.png": "Small regular trades: profit depends on whose probability is right",
+  "p12_3_fees.png": "Fee per contract by order size: tiny orders pay more",
   "p11_1_ensemble_pdf.png": "Our ensemble PDF: 72 versions of the class model; shaded area = our estimate",
   "p11_2_edge.png": "Expected profit per contract vs your probability; break-even at Kalshi's cost",
   "p11_3_payoffs.png": "Hypothetical $1,000: value bet vs hedged version",
@@ -287,7 +296,7 @@ async function load() {
 
 function render() {
   renderRun(R.pipeline);
-  renderVersus(); renderCards(); renderTrade(); renderDist(); renderMarkets(); renderExplore(); renderSCC(); renderHistory();
+  renderVersus(); renderCards(); renderTrade(); renderSmall(); renderDist(); renderMarkets(); renderExplore(); renderSCC(); renderHistory();
   renderModel(); renderP2(); renderP3(); renderP4(); renderP5();
   if (typeof WI !== "undefined" && WI.ctx) wiSchedule();      // refresh "vs Kalshi" once market data is in
 }
@@ -302,6 +311,10 @@ function renderTrade() {
   const outs = Object.entries(B.outcomes).map(([k, v]) => [esc(k), usd(v)]);
   el.innerHTML = `<div class="warn"><b>Hypothetical, for a class presentation.</b> This shows how a model estimate turns into a trading idea.
       It isn't investment advice and nothing here places orders.</div>
+    ${R.phase12 ? `<div class="panel" style="margin-top:12px"><b>The key comparison:</b> our ensemble of the class model says
+      <b>${pct(e.p_yes)}</b>, but once its uncertainty is widened to IPCC size the same model says <b>${pct(R.phase12.estimates.ipcc)}</b>,
+      almost exactly Kalshi's <b>${pct(p.kalshi.mid)}</b>. The trade below only makes money if the narrower class-model view is right.</div>
+      ${figs(["p12_0_estimates.png"])}` : ""}
     <p class="lead" style="margin-top:12px">Step 1: run the class model ${e.n_versions} times, changing its most important settings (climate sensitivity,
       adjustment speed, emissions path, missing land-use emissions), ${e.paths_per_version.toLocaleString()} futures each. Our estimate is the mean of that
       ensemble's probability distribution.</p>
@@ -333,6 +346,38 @@ function renderTrade() {
         ${C.arbitrage_now ? `<b>Arbitrage:</b> locks ${(C.best.locked_profit_per_pair * 100).toFixed(1)}¢ per pair.` : `No arbitrage right now: the prices would need to drift ${C.gap_needed_cents.toFixed(1)}¢ further apart.`}</p>
       <p class="note">Risk: one ticker says “27”. If Kalshi treats it as a 2027 market, the two would no longer be the same bet.</p>` : missing("The arbitrage check")}</div>
     ${figs(["p11_2_edge.png", "p11_3_payoffs.png"])}`;
+}
+
+// ------------------------------------------------------------------ Phase 12: small regular trades
+function renderSmall() {
+  const p = R.phase12, el = $("#secSmall");
+  if (!p) { el.innerHTML = missing("The small-trades analysis"); return; }
+  const e = p.estimates, d = p.dca_at_ask, l = p.limit_orders, s = p.spread_capture, fw = p.forward_one_year;
+  const usd = v => (v < 0 ? "−$" : "+$") + Math.abs(v).toFixed(0);
+  const fA = fw["buy at the ask"], fL = fw["limit order at the bid + 1c"];
+  el.innerHTML = `<div class="warn"><b>Hypothetical back-test for a class presentation,</b> on Kalshi's public price history. Not investment advice.</div>
+    <p class="lead" style="margin-top:12px">What if you spent <b>$${p.weekly_dollars} every week</b> since the market listed (${p.period[0]} to ${p.period[1]})?
+      Three simple methods, each judged under our ${pct(e.ensemble)} and under the IPCC-calibrated ${pct(e.ipcc)}.</p>
+    <div class="panel">${table(["method", "what you'd hold", "if our 81% is right", "if the IPCC 67% is right", "sold today at the bid"], [
+      ["<b>1. Weekly buy at the ask</b><div class='note'>dollar-cost averaging; pays the taker fee</div>", `${d.contracts} contracts, avg ${f(d.avg_cost, 3)}`,
+        usd(d.expected_profit_ensemble), usd(d.expected_profit_ipcc), usd(d.sell_now_at_bid)],
+      ["<b>2. Weekly limit order</b><div class='note'>bid 1¢ above the best bid; no fee for makers; ${l.filled_orders}/${l.orders} filled</div>",
+        `${l.contracts} contracts, avg ${f(l.avg_cost, 3)}`, usd(l.expected_profit_ensemble), usd(l.expected_profit_ipcc), usd(l.sell_now_at_bid)],
+      ["<b>3. Spread capture</b><div class='note'>quote both sides, 10 contracts; ${s.round_trips} round trips</div>",
+        `${s.inventory} contracts left`, usd(s.expected_profit_ensemble), usd(s.expected_profit_ipcc), usd(s.profit_marked_at_bid)],
+    ], [2, 3, 4])}</div>
+    <div class="cards">
+      ${card("Buying regularly at the ask", "Loses", `needs P above ${pct(fA.break_even_probability, 1)} to break even; under the IPCC estimate the next 12 months expect ${usd(fA.expected_ipcc)} on $${Math.round(fA.spent)}`)}
+      ${card("Patient limit orders", "≈ Break-even", `no fee and ~4¢ cheaper: break-even ${pct(fL.break_even_probability, 1)}, right at the market's ${pct(e.kalshi_mid)}; still ${usd(fL.expected_ipcc)}/yr under IPCC`)}
+      ${card("Spread capture", `${usd(s.profit_marked_at_bid)}`, `the only method that doesn't depend on who's right about the climate, but it's tiny and assumes both sides fill each week`)}
+    </div>
+    <p class="note">Kalshi rounds each order's fee up to the cent, so a 1-contract order pays ${(p.fee_by_order_size[0].fee_per_contract * 100).toFixed(1)}¢
+      vs ${(p.fee_by_order_size.at(-1).fee_per_contract * 100).toFixed(2)}¢ per contract in a 100-contract order. Average weekly volume is only
+      ~${Math.round(p.avg_weekly_volume)} contracts, and money is tied up until the 2040s (Kalshi pays ${pct(R.phase11 ? R.phase11.strategy_A_value_bet.kalshi_apy : 0.035, 1)} interest meanwhile).</p>
+    <div class="panel"><b>Verdict:</b> small, regular <i>bets</i> only make money if our 81% is right and the market's 70% is wrong. The IPCC-calibrated version
+      of the same model agrees with the market, so on that view they lose slowly to fees and the spread. The only model-free edge is acting as a
+      patient market maker and earning the spread, and on this thin market that's worth about $10 a year on these sizes.</div>
+    ${figs(["p12_2_methods.png", "p12_1_weekly_buys.png", "p12_3_fees.png"])}`;
 }
 
 // ------------------------------------------------------------------ Phase 10: temperature distributions
