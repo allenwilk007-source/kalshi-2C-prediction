@@ -1,0 +1,20 @@
+<section id="model">
+<div class="head"><p class="eyebrow">STEP 1</p><h2>The class model, line for line</h2></div>
+<div class="two">
+<div class="text" style="width:660px">
+<ul class="pts">
+<li>Kaya: people × GDP per person × energy intensity × carbon intensity</li>
+<li>5-box carbon cycle → CO₂ ppm</li>
+<li>Forcing 5.35·ln(C/275) → two-box temperature</li>
+<li>Matches every year of all four HW5 sheets, 1750–2100</li>
+</ul>
+<div class="card"><p class="label">HW5 template economy</p><p class="num">2047</p><p class="label">first year ≥ 2°C; 4.6°C by 2100</p></div>
+</div>
+<div class="chart"><img class="fig" src="/_blob/9295394dbceb5d5565f04801d21b7474" alt="Observed temperatures from four datasets, 1850 to 2025, with the class model’s path to 2050" style="width:944px; height:472px"></div>
+</div>
+<aside>First we rebuilt the HW5 workbook in Python. Population, GDP per person, energy intensity and carbon intensity for rich, middle and poor countries give emissions. Emissions go into the five-box carbon cycle, which gives CO₂ in parts per million. Forcing is 5.35 times the log of concentration over 275, and the two-box model turns forcing into atmospheric and ocean temperature.
+
+We checked it against every year of all four HW5 sheets, and the largest difference is about ten to the minus sixteen: rounding error. So everything later in the talk really is the class model.
+
+On the HW5 template economy, where emissions keep climbing, the smooth model crosses 2°C in 2047 and reaches 4.6°C by 2100. The chart shows the model’s path against the four real datasets: it tracks 150 years of observations well. One thing we found: Parameter 2 implies about 4.3°C of warming per doubling of CO₂, at the high end of the IPCC range.</aside>
+</section>
