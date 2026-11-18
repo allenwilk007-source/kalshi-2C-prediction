@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2°C vs Kalshi</title>
+<style>
+:root {
+  --bg: #f7f7f5; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6b66; --line: #e3e3de;
+  --accent: #c2410c; --accent-soft: #fdebdc; --blue: #2563eb; --red: #dc2626; --green: #15803d;
+  --band: rgba(234, 179, 8, .28); --shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141413; --panel: #1e1e1c; --ink: #ecebe6; --muted: #a3a29b; --line: #34332f;
+    --accent: #fb923c; --accent-soft: #3a2414; --blue: #60a5fa; --red: #f87171; --green: #4ade80;
+    --band: rgba(234, 179, 8, .25); --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141413; --panel: #1e1e1c; --ink: #ecebe6; --muted: #a3a29b; --line: #34332f;
+  --accent: #fb923c; --accent-soft: #3a2414; --blue: #60a5fa; --red: #f87171; --green: #4ade80;
+  --band: rgba(234, 179, 8, .25); --shadow: none;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px 64px; }
+header.top { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; gap: 12px; align-items: center; padding-top: 10px; padding-bottom: 10px; flex-wrap: wrap; }
+header.top h1 { font-size: 17px; margin: 0; flex: 1 1 auto; }
+nav a { color: var(--muted); text-decoration: none; margin-right: 12px; font-size: 13px; }
+nav a:hover { color: var(--ink); }
+button { font: inherit; border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+  border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+button:disabled { opacity: .55; cursor: default; }
+.pill { font-size: 12px; color: var(--muted); }
+h2 { font-size: 20px; margin: 40px 0 6px; }
+h3 { font-size: 15px; margin: 22px 0 8px; }
+p.lead { color: var(--muted); margin: 0 0 14px; max-width: 760px; }
+.hero { padding: 28px 0 6px; }
+.hero h2 { font-size: 26px; margin: 0 0 6px; }
+.versus { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: stretch;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); margin: 18px 0 8px; overflow: hidden; }
+.versus .side { padding: 20px 24px; }
+.versus .side .who { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.versus .side .num { font-size: 64px; line-height: 1.05; font-weight: 800; font-variant-numeric: tabular-nums; margin: 6px 0 4px; }
+.versus .side .sub { font-size: 13.5px; color: var(--muted); }
+.versus .side.ours .num { color: var(--accent); }
+.versus .mid { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 12px;
+  border-left: 1px solid var(--line); border-right: 1px solid var(--line); min-width: 120px; text-align: center; }
+.versus .mid .vs { font-size: 13px; font-weight: 800; color: var(--muted); letter-spacing: .1em; }
+.versus .mid .gap { font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; margin: 4px 0; }
+.versus .bar { grid-column: 1 / -1; border-top: 1px solid var(--line); padding: 8px 24px 4px; }
+.versus .alt { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.versus .alt button { font-size: 12px; padding: 3px 9px; }
+.versus .alt button.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+@media (max-width: 760px) {
+  .versus { grid-template-columns: 1fr; }
+  .versus .mid { border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 12px; flex-direction: row; gap: 12px; }
+  .versus .side .num { font-size: 52px; }
+}
+.whatif { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 20px; }
+@media (max-width: 860px) { .whatif { grid-template-columns: minmax(0, 1fr); } }
+.wi-group { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 14px 0 2px; }
+.wi-row { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: center; margin: 6px 0; font-size: 13px; }
+.wi-row input[type=range] { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); }
+.wi-row .val { font-variant-numeric: tabular-nums; font-weight: 600; }
+.wi-check { display: flex; gap: 6px; align-items: flex-start; margin-top: 12px; }
+#wiReset { margin-top: 12px; width: 100%; }
+.wi-head { display: flex; gap: 18px; align-items: baseline; flex-wrap: wrap; }
+.wi-head .big { color: var(--accent); }
+.wi-charts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 10px; }
+.wi-charts svg { width: 100%; height: auto; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; }
+.wi-charts svg .ax { stroke: var(--line); }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 12px; margin: 16px 0; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; box-shadow: var(--shadow); }
+.card .k { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.card .v { font-size: 28px; font-weight: 700; margin: 2px 0; font-variant-numeric: tabular-nums; }
+.card .s { font-size: 13px; color: var(--muted); }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; font-size: 12px; }
+td.n, th.n { text-align: right; }
+.tablewrap { overflow-x: auto; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 12px; margin-top: 12px; }
+@media (max-width: 760px) {
+  header.top { position: static; }
+  header.top h1 { font-size: 15px; }
+  header.top nav { order: 3; width: 100%; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+  header.top nav::-webkit-scrollbar { display: none; }
+  .hero h2 { font-size: 21px; }
+  .explore { grid-template-columns: minmax(0, 1fr); }
+}
+.figs figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px; }
+.figs img { width: 100%; height: auto; display: block; border-radius: 6px; background: #fff; cursor: zoom-in; }
+.figs figcaption { font-size: 12px; color: var(--muted); padding: 6px 4px 0; }
+.explore { display: grid; grid-template-columns: 280px 1fr; gap: 16px; }
+@media (max-width: 760px) { .explore { grid-template-columns: 1fr; } }
+label { display: block; font-size: 13px; color: var(--muted); margin: 10px 0 4px; }
+select { width: 100%; font: inherit; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+.seg { display: flex; gap: 6px; flex-wrap: wrap; }
+.seg button.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.big { font-size: 44px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.verdict { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+.v-in { background: color-mix(in srgb, var(--green) 18%, transparent); color: var(--green); }
+.v-above { background: color-mix(in srgb, var(--red) 16%, transparent); color: var(--red); }
+.v-below { background: color-mix(in srgb, var(--blue) 16%, transparent); color: var(--blue); }
+svg text { fill: var(--muted); font-size: 11px; }
+.steps { list-style: none; padding: 0; margin: 8px 0 0; }
+.steps li { display: flex; gap: 10px; align-items: baseline; padding: 4px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+.steps .st { width: 76px; font-size: 12px; font-weight: 700; }
+.st.done { color: var(--green); } .st.failed { color: var(--red); } .st.running { color: var(--accent); }
+.st.pending, .st.skipped { color: var(--muted); }
+pre.log { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px; max-height: 240px;
+  overflow: auto; font-size: 12px; white-space: pre-wrap; }
+.note { font-size: 13px; color: var(--muted); }
+.warn { background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: 10px; padding: 10px 14px; font-size: 14px; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.8); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px; }
+.lightbox img { max-width: 100%; max-height: 100%; background: #fff; border-radius: 8px; }
+.lightbox.on { display: flex; }
+.spinner { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); animation: pulse 1s infinite; }
+@keyframes pulse { 50% { opacity: .25; } }
+footer { margin-top: 48px; font-size: 12.5px; color: var(--muted); }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>2°C before 2050? Course model vs Kalshi</h1>
+  <nav><a href="#dist">Distributions</a><a href="#markets">Markets</a><a href="#explore">Explore</a><a href="#whatif">What if?</a><a href="#scc">SCC</a><a href="#history">History</a><a href="#model">Model</a><a href="#p2">Phase 2</a><a href="#p3">Phase 3</a><a href="#p4">Phase 4</a><a href="#p5">Phase 5</a></nav>
+  <span class="pill" id="runpill"></span>
+  <button class="primary" id="runbtn" title="Fetch fresh Kalshi data and re-run every phase (about 2 minutes)">Refresh data &amp; re-run</button>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <h2>Will any year reach 2°C above pre-industrial before 2050?</h2>
+    <p class="lead">Kalshi contract <b>KXWARMING-50</b> pays $1 if, in any calendar year up to 2049, at least two of NASA, NOAA,
+      Berkeley Earth and HadCRUT report ≥ 2.00°C above 1850–1900. This page runs the Carbon Trading class model
+      (HW2–HW5) forward with uncertainty and compares its probability with the market's.</p>
+    <div id="versus"></div>
+    <div id="runpanel" class="panel" style="display:none"></div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section id="dist">
+    <h2>Temperature distributions: every model version vs Kalshi</h2>
+    <div id="secDist"></div>
+  </section>
+
+  <section id="markets">
+    <h2>Every Kalshi climate market the model can price</h2>
+    <div id="secMarkets"></div>
+  </section>
+
+  <section id="explore">
+    <h2>Explore</h2>
+    <p class="lead">Pick a view of the climate and an emissions path. The dot is the model's probability; the shaded band is
+      what the market price implies after Kalshi's fees and the bid–ask spread.</p>
+    <div class="panel explore">
+      <div>
+        <label>Climate response</label>
+        <div class="seg" id="segClimate"></div>
+        <label>Emissions path</label>
+        <select id="selEmis"></select>
+        <label><input type="checkbox" id="chk2049" checked> Count 2049 (Kalshi expires 8 Jan 2050, data for 2049 usually lands mid-January)</label>
+        <p class="note" id="climateNote"></p>
+      </div>
+      <div id="exploreOut"></div>
+    </div>
+  </section>
+
+  <section id="whatif">
+    <h2>What if? Run the class model yourself</h2>
+    <p class="lead">This is HW5 running live in your browser: Kaya → emissions → carbon cycle → temperature, then
+      4,000 simulated futures from today's (2026) temperatures with Kalshi's exact 2-of-4 rule. Drag anything and
+      watch the 2°C probability change.</p>
+    <div class="panel whatif">
+      <div class="wi-controls">
+        <label for="wiEmis">Emissions after 2024</label>
+        <select id="wiEmis">
+          <option value="kaya">Kaya model (sliders below)</option>
+          <option value="falling">Falling to net zero by 2070 (SSP1-2.6-like)</option>
+          <option value="flat">Flat at today's level (SSP2-4.5-like)</option>
+          <option value="rising">Rising, doubling by 2100 (SSP3-7.0-like)</option>
+          <option value="doubling">Doubling by 2050 (SSP5-8.5-like)</option>
+        </select>
+        <div id="wiKaya"></div>
+        <div class="wi-group">Climate response</div>
+        <div id="wiClimate"></div>
+        <label class="wi-check"><input type="checkbox" id="wiFill"> Add the ~1 GtC/yr the Kaya block leaves out (land use)</label>
+        <button id="wiReset">Reset to HW5 template</button>
+      </div>
+      <div class="wi-out" id="wiOut"><p class="note">Loading the model…</p></div>
+    </div>
+  </section>
+
+  <section id="scc"><h2>The social cost of carbon from the class model</h2><div id="secSCC"></div></section>
+  <section id="history"><h2>Market history: does Kalshi react to the data?</h2><div id="secHistory"></div></section>
+
+  <section id="model"><h2>The class model in Python</h2><div id="secModel"></div></section>
+  <section id="p2"><h2>Phase 2 · Real data, year-to-year noise, the 2-of-4 rule</h2><div id="secP2"></div></section>
+  <section id="p3"><h2>Phase 3 · Uncertainty in emissions and climate response</h2><div id="secP3"></div></section>
+  <section id="p4"><h2>Phase 4 · What probability the price implies</h2><div id="secP4"></div></section>
+  <section id="p5"><h2>Phase 5 · 2026 nowcast and the climate-damage hedge</h2><div id="secP5"></div></section>
+
+  <footer>
+    Data: Kalshi public API (no login), NASA GISS, NOAA NCEI, Berkeley Earth, Met Office HadCRUT 5.1, Copernicus ERA5
+    (Climate Pulse), Our World in Data / Global Carbon Budget, US Treasury, IPCC AR6 WGI SPM, Tol SCC database (course file).
+    Model results are analysis of a class model, not trading advice.
+  </footer>
+</main>
+<div class="lightbox" id="lightbox"><img alt=""></div>
+<script src="/site/model.js"></script>
+
+<script>
+const $ = s => document.querySelector(s);
+const pct = (x, d = 0) => x == null || isNaN(x) ? "–" : (100 * x).toFixed(d) + "%";
+const f = (x, d = 2) => x == null || isNaN(x) ? "–" : Number(x).toFixed(d);
+const money = x => x == null || isNaN(x) ? "–" : (x < 0 ? "−$" : "$") + Math.abs(Math.round(x)).toLocaleString();
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+let R = null, polling = null, state = { cv: "ipcc", emis: "Kaya randomised + 2019-24 weighting" };
+
+const CAPS = {
+  "1_obs_vs_model.png": "Four datasets vs the class model (A) and the fitted version (B), 1850–2049",
+  "2_residuals.png": "Observed minus model, with the year-to-year noise fit",
+  "3_dataset_offsets.png": "How the four datasets differ from their average",
+  "4_fan_chart.png": "Phase 2: second-highest dataset, simulated 2026–2049 (HW5 economy fixed)",
+  "5_first_crossing.png": "Phase 2: year the contract would resolve Yes",
+  "6_backtest.png": "Back-test: fit to 1999, simulate 2000–2025",
+  "p3_1_emissions.png": "Emission paths: randomised Kaya (weighted to real 2019–24 data) and IPCC-style scenarios",
+  "p3_2_climate_posterior.png": "Which climate settings fit history (left) vs IPCC-calibrated (right)",
+  "p3_3_midterm_vs_ar6.png": "2041–2060 warming vs the IPCC AR6 range",
+  "p3_4_drivers.png": "What drives P(Yes): bottom vs top 20% of each input",
+  "p3_5_pyes_by_scenario.png": "P(Yes) by emissions assumption, with the Kalshi band",
+  "p3_6_first_crossing.png": "Year the contract resolves Yes (headline)",
+  "p3_7_fan.png": "Phase 3 fan chart of the contract statistic",
+  "p4_1_price_history.png": "Kalshi trades vs the model",
+  "p4_2_depth.png": "Cost per contract vs order size (thin book)",
+  "p4_3_implied_vs_delta.png": "Implied probability vs the cost of tying up money",
+  "p4_4_model_vs_band.png": "Every model cell vs the market band",
+  "p4_5_payment_timing.png": "When each side gets paid",
+  "p5_1_nowcast_2026.png": "2026 so far, with ERA5-filled months",
+  "p5_2_kxgtemp26.png": "Model vs Kalshi's '2026 hottest year' market",
+  "p5_3_fan_nowcast.png": "Starting from the 2026 nowcast vs from 2025",
+  "p5_4_loss_vs_outcome.png": "Hypothetical damage loss vs contract outcome",
+  "p5_5_basis_risk.png": "How much damage risk each instrument removes",
+  "p10_1_pdf_peak_versions.png": "Probability density of the highest reading 2027–2049, by model version",
+  "p10_2_pdf_2049_versions.png": "Probability density of the 2049 temperature, by model version",
+  "p10_3_pdf_peak_scenarios.png": "IPCC view: densities by emissions path and sensitivity",
+  "p10_4_exceedance.png": "Chance of reaching each temperature before 2050, with Kalshi at 2.00°C",
+  "p10_5_pyes_versions.png": "Every model version's P(2°C before 2050) vs Kalshi's range",
+  "p6_1_scc_distribution.png": "SCC distribution at a 1.5% pure rate of time preference: class model vs Tol's database",
+  "p6_2_scc_by_prtp.png": "SCC by discount choice: class model vs the literature",
+  "p6_3_pulse.png": "Anatomy of the SCC: extra warming and damages from one extra gigatonne",
+  "p6_4_scc_vs_pyes.png": "Higher-emission worlds: more likely 2°C, costlier carbon",
+  "p7_1_scanner.png": "All priced markets: model vs the market's range after fees",
+  "p7_2_co2.png": "Mauna Loa CO₂: simulated monthly means to 2029 vs Kalshi's strikes",
+  "p9_1_kxgtemp_vs_model.png": "KXGTEMP-26: price vs the model as it would have read each day",
+  "p9_2_lead_lag.png": "Lead-lag between daily model and market moves",
+  "p9_3_kxwarming_history.png": "KXWARMING-50 price and volume since listing",
+};
+const figs = names => `<div class="figs">${names.filter(n => R.figures.includes(n)).map(n =>
+  `<figure><img loading="lazy" src="/figures/${n}?t=${encodeURIComponent(R.phase5_mtime || R.generated)}" alt="${esc(CAPS[n] || n)}"><figcaption>${esc(CAPS[n] || n)}</figcaption></figure>`).join("")}</div>`;
+const table = (head, rows, numeric = []) => `<div class="tablewrap"><table><thead><tr>${head.map((h, i) =>
+  `<th class="${numeric.includes(i) ? "n" : ""}">${h}</th>`).join("")}</tr></thead><tbody>${rows.map(r =>
+  `<tr>${r.map((c, i) => `<td class="${numeric.includes(i) ? "n" : ""}">${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+const missing = what => `<p class="note">${what} hasn't been computed yet. Press “Refresh data &amp; re-run”.</p>`;
+
+async function load() {
+  R = await (await fetch("/api/results", { cache: "no-store" })).json();
+  render();
+  if (R.pipeline && R.pipeline.running) startPolling();
+}
+
+function render() {
+  renderRun(R.pipeline);
+  renderVersus(); renderCards(); renderDist(); renderMarkets(); renderExplore(); renderSCC(); renderHistory();
+  renderModel(); renderP2(); renderP3(); renderP4(); renderP5();
+  if (typeof WI !== "undefined" && WI.ctx) wiSchedule();      // refresh "vs Kalshi" once market data is in
+}
+
+// ------------------------------------------------------------------ Phase 10: temperature distributions
+const DIST = { metric: "peak", on: new Set(["class_hw5", "history", "ipcc", "blend"]) };
+const DCOL = { class_hw5: "#7c3aed", class_real: "#0891b2", history: "#2563eb", ipcc: "#dc2626", blend: "var(--ink)",
+  ipcc_full: "#f97316", ipcc_fill: "#a16207", ipcc_nomom: "#db2777", ipcc_falling: "#16a34a", ipcc_flat: "#65a30d",
+  ipcc_rising: "#ea580c", ipcc_doubling: "#991b1b" };
+function renderDist() {
+  const p = R.phase10, el = $("#secDist");
+  if (!p) { el.innerHTML = missing("The temperature distributions"); return; }
+  const V = p.variants, keys = Object.keys(V), g = p.grid, k = p.kalshi;
+  const field = DIST.metric === "peak" ? "pdf_peak" : "pdf_t2049";
+  const shown = keys.filter(x => DIST.on.has(x));
+  const W = 900, H = 300, L = 44, Rm = 12, T = 16, B = 30, x0 = 1.3, x1 = 2.9;
+  const ymax = Math.max(0.5, ...shown.map(x => Math.max(...V[x][field].filter((_, i) => g[i] >= x0 && g[i] <= x1)))) * 1.08;
+  const X = v => L + (v - x0) / (x1 - x0) * (W - L - Rm), Y = v => T + (1 - v / ymax) * (H - T - B);
+  const path = arr => g.map((gx, i) => [gx, arr[i]]).filter(([gx]) => gx >= x0 && gx <= x1)
+    .map(([gx, v], i) => `${i ? "L" : "M"}${X(gx).toFixed(1)},${Y(v).toFixed(1)}`).join("");
+  const shadeKey = shown.includes("ipcc") ? "ipcc" : shown[0];
+  const shade = shadeKey ? (() => { const pts = g.map((gx, i) => [gx, V[shadeKey][field][i]]).filter(([gx]) => gx >= 2.0 && gx <= x1);
+    return `M${X(2.0)},${Y(0)}` + pts.map(([gx, v]) => `L${X(gx).toFixed(1)},${Y(v).toFixed(1)}`).join("") + `L${X(pts.at(-1)[0])},${Y(0)}Z`; })() : "";
+  const xt = []; for (let v = 1.4; v <= 2.81; v += 0.2) xt.push(+v.toFixed(1));
+  const svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Probability density of predicted temperatures">
+    ${xt.map(v => `<line x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${H - B}" stroke="var(--line)"/><text x="${X(v)}" y="${H - 10}" text-anchor="middle">${v.toFixed(1)}°C</text>`).join("")}
+    ${shade ? `<path d="${shade}" fill="${DCOL[shadeKey]}" opacity="0.13"/>` : ""}
+    <line x1="${X(2)}" x2="${X(2)}" y1="${T}" y2="${H - B}" stroke="#eab308" stroke-width="2.5"/>
+    <text x="${X(2) + 6}" y="${T + 12}" style="fill:#ca8a04;font-weight:700">2.00°C</text>
+    ${shown.map(x => `<path d="${path(V[x][field])}" fill="none" stroke="${DCOL[x]}" stroke-width="${x === "ipcc" || x === "blend" ? 3 : 2}"/>`).join("")}
+    <text x="${L - 6}" y="${T + 10}" text-anchor="end">↑</text><text x="${L - 6}" y="${H - B}" text-anchor="end">0</text>
+  </svg>`;
+  const groups = ["model version", "sensitivity", "emissions"];
+  const toggles = groups.map(gr => `<div class="wi-group">${gr === "model version" ? "Model versions" : gr === "sensitivity" ? "Sensitivities (IPCC view)" : "Emissions paths (IPCC view)"}</div>
+    <div class="seg">${keys.filter(x => V[x].group === gr).map(x => `<button data-k="${x}" class="${DIST.on.has(x) ? "on" : ""}"
+      style="${DIST.on.has(x) ? `background:${DCOL[x]};border-color:${DCOL[x]};color:#fff` : `border-left:4px solid ${DCOL[x]}`}">${esc(V[x].label)}</button>`).join("")}</div>`).join("");
+  const rows = keys.map(x => { const v = V[x], pk = v.peak.p5_25_50_75_95, tq = v.t2049.p5_25_50_75_95;
+    return [`<span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${DCOL[x]};margin-right:6px"></span>${esc(v.label)}`,
+      `<b>${pct(v.p_yes, 1)}</b>`, `${v.gap_vs_kalshi_pts >= 0 ? "+" : "−"}${Math.abs(v.gap_vs_kalshi_pts).toFixed(1)}`,
+      `<span class="verdict v-${v.position === "inside" ? "in" : v.position}">${v.position === "inside" ? "agrees" : v.position}</span>`,
+      `${f(pk[2])} <span class="note">[${f(pk[0])}–${f(pk[4])}]</span>`, `${f(tq[2])} <span class="note">[${f(tq[0])}–${f(tq[4])}]</span>`,
+      pct(v.t2049.p_ge_2), v.first_year_p10_50_90[1] ?? "–", `${v.shift_to_match_kalshi_C >= 0 ? "+" : "−"}${Math.abs(v.shift_to_match_kalshi_C).toFixed(2)}°C`]; });
+  el.innerHTML = `<p class="lead">Each version of the model simulates 100,000 futures from today's 2026 temperatures. The curves are probability densities:
+      where the predicted temperatures pile up. For the <b>highest contract reading 2027–2049</b>, the area to the right of the 2.00°C line
+      is exactly the chance Kalshi's contract pays Yes. Kalshi is at <b>${pct(k.mid)}</b> (${f(k.bid)}/${f(k.ask)}; ${pct(k.band[0])}–${pct(k.band[1])} after fees).</p>
+    <div class="panel">
+      <div class="seg" style="margin-bottom:8px">
+        <button data-m="peak" class="${DIST.metric === "peak" ? "on" : ""}">Highest reading 2027–2049 (decides the contract)</button>
+        <button data-m="t2049" class="${DIST.metric === "t2049" ? "on" : ""}">Temperature in 2049</button></div>
+      ${svg}
+      <p class="note">Shaded: ${shadeKey ? esc(V[shadeKey].label) : ""}, area right of 2.00°C${DIST.metric === "peak" && shadeKey ? ` = ${pct(V[shadeKey].p_yes)}` : ""}.
+        Click the buttons below to add or remove versions.</p>
+      ${toggles}
+    </div>
+    <h3>All versions vs Kalshi (${pct(k.mid)})</h3>
+    <div class="panel">${table(["model version", "P(2°C before 2050)", "vs Kalshi (pts)", "", "peak reading: median [5–95%]",
+      "2049 temp: median [5–95%]", "P(2049 ≥ 2°C)", "median year", "shift to match Kalshi"], rows, [1, 2, 4, 5, 6, 7, 8])}
+      <p class="note">“Shift to match Kalshi” is how far the version's whole distribution would have to slide for its probability to equal Kalshi's
+        mid; negative means the version runs hotter than the market. Model-vs-market comparison, not trading advice.</p></div>
+    ${figs(["p10_1_pdf_peak_versions.png", "p10_4_exceedance.png", "p10_3_pdf_peak_scenarios.png", "p10_2_pdf_2049_versions.png", "p10_5_pyes_versions.png"])}`;
+  el.querySelectorAll("button[data-m]").forEach(b => b.onclick = () => { DIST.metric = b.dataset.m; renderDist(); });
+  el.querySelectorAll("button[data-k]").forEach(b => b.onclick = () => {
+    const x = b.dataset.k; DIST.on.has(x) ? DIST.on.delete(x) : DIST.on.add(x); renderDist(); });
+}
+
+// ------------------------------------------------------------------ Phase 7: market scanner
+let mkSort = "gap";
+function renderMarkets() {
+  const p = R.phase7, el = $("#secMarkets");
+  if (!p) { el.innerHTML = missing("The market scanner"); return; }
+  const rows = p.rows.slice().sort((a, b) => mkSort === "gap" ? Math.abs(b.gap) - Math.abs(a.gap)
+    : (a.series + a.ticker).localeCompare(b.series + b.ticker));
+  const pos = r => `<span class="verdict v-${r.position === "inside" ? "in" : r.position}">${r.position === "inside" ? "agrees" : "model " + r.position}</span>`;
+  const big = rows.filter(r => r.position !== "inside").length;
+  el.innerHTML = `<p class="lead">${rows.length} live contracts across ${new Set(rows.map(r => r.series)).size} series, priced with the same models.
+      “Agrees” means the model's probability falls inside the range the market price implies after Kalshi's fees and spread.
+      ${big} of ${rows.length} fall outside it. Model-vs-market comparisons, not trading advice.</p>
+    <div class="panel"><div class="seg" style="margin-bottom:8px">
+        <button class="${mkSort === "gap" ? "on" : ""}" data-s="gap">Biggest disagreement first</button>
+        <button class="${mkSort === "series" ? "on" : ""}" data-s="series">By series</button></div>
+      ${table(["contract", "", "Kalshi bid / ask", "model", "alt. reading", "range after fees", "model − mid", ""],
+        rows.map(r => [`<b>${esc(r.ticker)}</b><div class="note">${esc(r.method)}</div>`, esc(r.label),
+          `${f(r.bid)} / ${f(r.ask)}`, `<b>${pct(r.p_model, 1)}</b>`, r.p_alt == null ? "" : pct(r.p_alt, 1),
+          `${pct(r.band[0])}–${pct(r.band[1])}`, `${r.gap >= 0 ? "+" : "−"}${Math.abs(r.gap * 100).toFixed(1)} pts`, pos(r)]), [2, 3, 4, 5, 6])}
+      ${p.notes.map(n => `<div class="warn" style="margin-top:10px">${esc(n)}</div>`).join("")}
+      <p class="note">CO₂ contracts: the rule doesn't say whether a monthly mean or a single day's reading counts; “model” uses the
+        Mauna Loa monthly mean and “alt. reading” the highest daily value. The model's CO₂ growth comes from the class carbon cycle plus
+        the link between warm (El Niño) years and faster CO₂ growth (+${f(p.co2.kappa_ppm_per_C, 1)} ppm/yr per °C).
+        Highest reading since the market opened: ${f(p.co2.observed_max_monthly_since_open)} ppm monthly, ${f(p.co2.observed_max_daily_since_open)} ppm daily.</p></div>
+    ${figs(["p7_1_scanner.png", "p7_2_co2.png"])}`;
+  el.querySelectorAll(".seg button").forEach(b => b.onclick = () => { mkSort = b.dataset.s; renderMarkets(); });
+}
+
+// ------------------------------------------------------------------ Phase 6: SCC
+function renderSCC() {
+  const p = R.phase6, el = $("#secSCC");
+  if (!p) { el.innerHTML = missing("The SCC analysis"); return; }
+  const c = 12 / 44, fmt = s => `$${Math.round(s.median).toLocaleString()} <span class="note">[${Math.round(s.p5)}–${Math.round(s.p95)}]</span>`;
+  const rows = Object.keys(p.views.ipcc).map(k => {
+    const rho = k.startsWith("Ramsey") ? parseFloat(k.split("=")[1]) : null;      // tol keys are "0.0", "1.5", ...
+    const r = rho == null ? null : Object.entries(p.tol).find(([key]) => key !== "all" && parseFloat(key) === rho)?.[1];
+    return [esc(k), fmt(p.views.ipcc[k]), `$${Math.round(p.views.ipcc[k].median * c)}`, fmt(p.views.history[k]),
+      r ? `$${Math.round(r.p5_50_95[1]).toLocaleString()} / $${Math.round(r.mean).toLocaleString()} <span class="note">(n=${r.n})</span>` : ""];
+  });
+  const sc = Object.entries(p.scenarios).map(([k, v]) => [esc(k), `$${Math.round(v["scc_rho1.5"].median)}`, `$${Math.round(v["scc_rho1.5"].median * c)}`, v.p_yes_ipcc == null ? "–" : pct(v.p_yes_ipcc)]);
+  const d = p.drivers.ipcc, x = p.by_trend_crossing.ipcc;
+  el.innerHTML = `<p class="lead">Your first question: how to predict the SCC. Here the class model computes it directly: add one
+      extra gigatonne of carbon in 2027, follow the extra warming to 2300, turn it into damages with the SCC spreadsheet's damage
+      estimates, and discount it back (the HW1 NPV method). Then compare with Tol's 14,141 published estimates.</p>
+    <div class="panel">${table(["discounting", "class model, IPCC view: median $/tC [5–95%]", "$/tCO₂", "history view", "Tol database: median / mean"], rows, [1, 2, 3, 4])}
+      <p class="note">Ramsey discounting: r = ρ + η·g with η = ${p.eta} and g = growth in income per person. ${pct(p.views.ipcc["Ramsey rho=1.5%"].share_negative)} of
+        draws come out negative because a few studies in the database find net benefits from warming.</p></div>
+    <div class="cards">
+      ${card("What drives the spread", pct(d.var_share_damage_coef), "of the variation comes from how costly warming is (the damage estimates), not from climate or economics")}
+      ${card("Worlds that cross 2°C by 2049", `$${Math.round(x.median_scc_if_cross)}`, `median SCC/tC, vs $${Math.round(x.median_scc_if_not)} where the trend stays below`)}
+      ${card("Sensitivity", `$${Math.round(p.sensitivities.ipcc["horizon 2100 only"].median)}–${Math.round(p.sensitivities.ipcc["eta=1.0"].median)}`, "median $/tC at ρ 1.5%: counting damages only to 2100 vs a lower η of 1")}
+    </div>
+    <div class="panel">${table(["emissions path (IPCC view, ρ 1.5%)", "SCC $/tC", "$/tCO₂", "P(2°C before 2050)"], sc, [1, 2, 3])}</div>
+    ${figs(["p6_2_scc_by_prtp.png", "p6_1_scc_distribution.png", "p6_3_pulse.png", "p6_4_scc_vs_pyes.png"])}`;
+}
+
+// ------------------------------------------------------------------ Phase 9: history
+function renderHistory() {
+  const p = R.phase9, el = $("#secHistory");
+  if (!p) { el.innerHTML = missing("The market history"); return; }
+  const k = p.kxgtemp, w = p.kxwarming;
+  const best = k.best_lag_days;
+  const tr = (p.tracking || []).slice(-8).reverse().map(t => [esc(new Date(t.time).toLocaleString()), pct(t.kxwarming_mid, 1),
+    pct(t.model_ipcc, 1), pct(t.model_history, 1), pct(t.kxgtemp_mid, 1), pct(t.kxgtemp_model, 1)]);
+  el.innerHTML = `<p class="lead">Kalshi's daily price history is public. For the liquid “2026 hottest year” market, the page re-runs the
+      nowcast for every day of 2026 using only the data that existed that day, then asks whether price moves follow the data.</p>
+    <div class="cards">
+      ${card("KXGTEMP-26: model vs market", f(k.corr_levels), `correlation of levels over ${k.days} days; average gap ${pct(k.mean_abs_gap)}; today ${k.gap_last >= 0 ? "+" : "−"}${Math.abs(k.gap_last * 100).toFixed(1)} pts`)}
+      ${card("Who moves first?", best < 0 ? `market, ${-best} days` : best > 0 ? `model, ${best} days` : "same day",
+        `strongest lead-lag correlation of daily changes is only ${f(k.lead_lag[best])}: daily moves barely line up`)}
+      ${card("KXWARMING-50 since listing", `${f(w.price_first)} → ${f(w.price_last)}`, `averaged ${f(w.mean_before_sweep)} before the 22 Sep 2026 sweep and ${f(w.mean_after_sweep)} after`)}
+    </div>
+    <div class="warn">The market priced a record 2026 months before the temperature data showed it: about 80¢ by late August, while a model that
+      only reads published and ERA5 data stayed below 40% until the exceptionally warm first days of November arrived. Traders were
+      likely using El Niño forecasts the model doesn't have. Since November the two agree (${pct(p.kxgtemp_daily.at(-1).model)} vs ${pct(p.kxgtemp_daily.at(-1).market)}).</div>
+    ${tr.length ? `<h3>Model vs market at each pipeline run</h3><div class="panel">${table(["run", "KXWARMING mid", "model (IPCC)", "model (history)", "KXGTEMP-26 mid", "model"], tr, [1, 2, 3, 4, 5])}</div>` : ""}
+    <p class="note">Assumed publication dates: ERA5 two days behind; GISS/NOAA month m on the 15th of month m+1; HadCRUT on the 15th of m+3.</p>
+    ${figs(["p9_1_kxgtemp_vs_model.png", "p9_3_kxwarming_history.png", "p9_2_lead_lag.png"])}`;
+}
+
+// Head-to-head: Kalshi's probability vs ours, at the top of the page.
+let vsView = "ipcc";
+function renderVersus() {
+  const p4 = R.phase4, p5 = R.phase5, el = $("#versus");
+  if (!p4 || !p5) { el.innerHTML = ""; return; }
+  const s = p4.snapshot, [lo, hi] = p5.band;
+  const cell = p5.p_yes["Kaya randomised + 2019-24 weighting"];
+  const views = { ipcc: "IPCC-calibrated", history: "fitted to history" };
+  const ours = cell[vsView].p_yes, other = vsView === "ipcc" ? "history" : "ipcc";
+  const gap = (ours - s.mid) * 100;
+  const inBand = ours >= lo && ours <= hi;
+  const verdict = inBand ? ["in", "Agree"] : ours > hi ? ["above", "We're higher"] : ["below", "We're lower"];
+  const W = 900, H = 78, x = p => 24 + p * (W - 48);
+  el.innerHTML = `<div class="versus">
+    <div class="side">
+      <div class="who">Kalshi says</div>
+      <div class="num">${pct(s.mid)}</div>
+      <div class="sub">price ${Math.round(s.yes_bid * 100)}¢ bid / ${Math.round(s.yes_ask * 100)}¢ ask · last ${Math.round(s.last * 100)}¢<br>
+        after fees and spread: <b>${pct(lo)}–${pct(hi)}</b></div>
+    </div>
+    <div class="mid">
+      <div class="vs">VS</div>
+      <div class="gap">${gap >= 0 ? "+" : "−"}${Math.abs(gap).toFixed(1)} pts</div>
+      <span class="verdict v-${verdict[0]}">${verdict[1]}</span>
+    </div>
+    <div class="side ours">
+      <div class="who">Our model says</div>
+      <div class="num">${pct(ours)}</div>
+      <div class="sub">${views[vsView]}, emissions weighted to real data, starting from 2026<br>
+        the other view (${views[other]}): <b>${pct(cell[other].p_yes)}</b> · median crossing ${f(cell[vsView].first_median, 0)}</div>
+      <div class="alt">${Object.entries(views).map(([k, v]) => `<button data-v="${k}" class="${k === vsView ? "on" : ""}">${v}</button>`).join("")}</div>
+    </div>
+    <div class="bar"><svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Kalshi range vs model probabilities">
+      <rect x="${x(lo)}" y="16" width="${x(hi) - x(lo)}" height="24" fill="var(--band)" rx="4"/>
+      <line x1="${x(0)}" x2="${x(1)}" y1="28" y2="28" stroke="var(--line)" stroke-width="2"/>
+      ${[0, .25, .5, .75, 1].map(t => `<text x="${x(t)}" y="74" text-anchor="middle">${t * 100}%</text>`).join("")}
+      <line x1="${x(s.mid)}" x2="${x(s.mid)}" y1="12" y2="44" stroke="var(--ink)" stroke-width="2"/>
+      <text x="${x(s.mid)}" y="9" text-anchor="middle">Kalshi</text>
+      ${["ipcc", "history"].map(k => `<circle cx="${x(cell[k].p_yes)}" cy="28" r="${k === vsView ? 9 : 6}"
+        fill="${k === vsView ? "var(--accent)" : "none"}" stroke="var(--accent)" stroke-width="2"/>
+        <text x="${x(cell[k].p_yes)}" y="56" text-anchor="middle">${k === "ipcc" ? "model · IPCC" : "model · history"}</text>`).join("")}
+    </svg></div>
+  </div>`;
+  el.querySelectorAll(".alt button").forEach(b => b.onclick = () => { vsView = b.dataset.v; renderVersus(); });
+}
+
+function renderRun(p) {
+  const pill = $("#runpill"), btn = $("#runbtn"), panel = $("#runpanel");
+  btn.disabled = !!(p && p.running);
+  if (p && p.running) {
+    const cur = p.steps.find(s => s.status === "running");
+    pill.innerHTML = `<span class="spinner"></span> running ${cur ? esc(cur.script) : ""}`;
+  } else if (p && p.finished) {
+    pill.textContent = `last run ${new Date(p.finished).toLocaleString()}${p.ok === false ? " (failed)" : ""}`;
+  } else {
+    pill.textContent = R && R.phase5_mtime ? `results from ${new Date(R.phase5_mtime).toLocaleString()}` : "";
+  }
+  const show = p && (p.running || p.ok === false);
+  panel.style.display = show ? "block" : "none";
+  if (!show) return;
+  const cur = p.steps.find(s => s.status === "running" || s.status === "failed") || p.steps[p.steps.length - 1];
+  panel.innerHTML = `<b>${p.running ? "Running the pipeline…" : "The last run failed"}</b>
+    <span class="note"> · the full run takes about 2 minutes; results appear when it finishes</span>
+    <ul class="steps">${p.steps.map(s => `<li><span class="st ${s.status}">${s.status}</span>
+      <span style="flex:1">${esc(s.label)} <span class="note">(${esc(s.script)})</span></span>
+      <span class="note">${s.seconds != null ? s.seconds + " s" : ""}</span></li>`).join("")}</ul>
+    ${cur && cur.log ? `<pre class="log">${esc(cur.log.split("\n").slice(-25).join("\n"))}</pre>` : ""}`;
+}
+
+function renderCards() {
+  const c = [], p4 = R.phase4, p5 = R.phase5;
+  if (p4) c.push(card("Kalshi price (Yes)", `${f(p4.snapshot.yes_bid)} / ${f(p4.snapshot.yes_ask)}`,
+    `bid / ask · last ${f(p4.snapshot.last)} · open interest ${Math.round(p4.snapshot.open_interest).toLocaleString()}`));
+  if (p5) c.push(card("Market range after costs", `${f(p5.band[0])}–${f(p5.band[1])}`,
+    "beliefs where neither side beats cash on Kalshi"));
+  if (p5) {
+    const h = p5.p_yes["Kaya randomised + 2019-24 weighting"];
+    c.push(card("Model · IPCC-calibrated", pct(h.ipcc.p_yes), `median crossing year ${f(h.ipcc.first_median, 0)} · ${h.ipcc.position}`));
+    c.push(card("Model · fitted to history", pct(h.history.p_yes), `median crossing year ${f(h.history.first_median, 0)} · ${h.history.position}`));
+    c.push(card("2026 so far", `${f(p5.signal_2026.mean)}°C`, `above 1850–1900 (±${f(p5.signal_2026.sd)}) · 2026 record: model ${pct(p5.p_kxgtemp_model)} vs Kalshi ${f(p5.kxgtemp_26.bid)}/${f(p5.kxgtemp_26.ask)}`));
+  }
+  $("#cards").innerHTML = c.length ? c.join("") : missing("Nothing");
+}
+const card = (k, v, s) => `<div class="card"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`;
+
+function renderExplore() {
+  const p5 = R.phase5;
+  if (!p5) { $("#exploreOut").innerHTML = missing("The explorer"); return; }
+  const cvs = { ipcc: "IPCC-calibrated", history: "Fitted to history" };
+  $("#segClimate").innerHTML = Object.entries(cvs).map(([k, v]) =>
+    `<button data-cv="${k}" class="${state.cv === k ? "on" : ""}">${v}</button>`).join("");
+  $("#segClimate").querySelectorAll("button").forEach(b => b.onclick = () => { state.cv = b.dataset.cv; renderExplore(); });
+  const labels = Object.keys(p5.p_yes);
+  const sel = $("#selEmis");
+  if (!sel.options.length) {
+    sel.innerHTML = labels.map(l => `<option ${l === state.emis ? "selected" : ""}>${esc(l)}</option>`).join("");
+    sel.onchange = () => { state.emis = sel.value; renderExplore(); };
+    $("#chk2049").onchange = renderExplore;
+  }
+  $("#climateNote").textContent = state.cv === "ipcc"
+    ? "Uncertainty in how fast warming continues is widened to match the IPCC AR6 ranges."
+    : "The class model fitted to 1880–2020 temperatures. It's very sure about the warming rate, too sure according to the IPCC.";
+  const cell = p5.p_yes[state.emis][state.cv];
+  const use2049 = $("#chk2049").checked;
+  const P = use2049 ? cell.p_yes : cell.p_yes_2048;
+  const [lo, hi] = p5.band;
+  const mid = R.phase4 ? R.phase4.snapshot.mid : (lo + hi) / 2;
+  const v = P > hi ? ["above", "Model above the market range"] : P < lo ? ["below", "Model below the market range"] : ["in", "Inside the market range"];
+  const W = 640, H = 70, x = p => 20 + p * (W - 40);
+  const svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="model vs market">
+    <rect x="${x(lo)}" y="18" width="${x(hi) - x(lo)}" height="26" fill="var(--band)" rx="4"/>
+    <line x1="${x(0)}" x2="${x(1)}" y1="31" y2="31" stroke="var(--line)" stroke-width="2"/>
+    ${[0, .25, .5, .75, 1].map(t => `<text x="${x(t)}" y="62" text-anchor="middle">${t * 100}%</text>`).join("")}
+    <line x1="${x(mid)}" x2="${x(mid)}" y1="14" y2="48" stroke="var(--muted)" stroke-dasharray="3 3"/>
+    <text x="${x(mid)}" y="11" text-anchor="middle">market mid ${f(mid)}</text>
+    <circle cx="${x(P)}" cy="31" r="8" fill="var(--accent)"/>
+  </svg>`;
+  $("#exploreOut").innerHTML = `
+    <div class="big">${pct(P, 1)}</div>
+    <div><span class="verdict v-${v[0]}">${v[1]}</span>
+      <span class="note"> · market range after costs ${f(lo, 3)}–${f(hi, 3)}</span></div>
+    ${svg}
+    <p class="note">Median year the contract would resolve Yes: <b>${f(cell.first_median, 0)}</b> (10–90%: ${f(cell.first_p10, 0)}–${f(cell.first_p90, 0)}).
+      Starting from 2025 instead of the 2026 nowcast gave ${pct(cell.p_yes_2025_start, 1)}.
+      Monte Carlo error ±${pct(cell.mc_se, 1)}.</p>`;
+}
+
+function renderModel() {
+  const m = R.model;
+  if (!m || m.error) { $("#secModel").innerHTML = missing("The model summary"); return; }
+  const val = R.pipeline && R.pipeline.steps ? (R.pipeline.steps.find(s => s.script === "validate.py") || {}).log : "";
+  const pass = val ? (val.trim().split("\n").filter(l => /PASS|FAIL/.test(l)).pop() || "") : "";
+  $("#secModel").innerHTML = `<p class="lead">Your HW5 spreadsheet translated line for line: Kaya (3 regions) → emissions → 5-box carbon cycle →
+      CO₂ ppm → forcing → two-box temperature. ${pass ? `Check against every year of all four HW5 sheets: <b>${esc(pass)}</b>.` : ""}
+      Parameter 2 (1.15) implies ${f(m.ecs)}°C of eventual warming per CO₂ doubling.</p>
+    <div class="panel">${table(["HW5 sheet", "°C in 2050", "°C in 2100", "ppm in 2100", "first year ≥ 2°C"],
+      m.scenarios.map(s => [esc(s.sheet), f(s.t2050), f(s.t2100), Math.round(s.ppm2100), s.first_2c ?? "after 2100"]), [1, 2, 3, 4])}</div>
+    ${figs(["1_obs_vs_model.png"])}`;
+}
+
+function renderP2() {
+  const p = R.phase2;
+  if (!p) { $("#secP2").innerHTML = missing("Phase 2"); return; }
+  const rows = Object.entries(p.variants).map(([k, v]) => [esc(k), f(v.p2, 3), f(v.implied_ecs),
+    `<b>${f(v.rules["2of4"].p_yes, 3)}</b>`, f(v.rules.any1.p_yes, 3), f(v.rules.mean4.p_yes, 3), f(v.rules["20yr"].p_yes, 3),
+    f(v.rules["2of4"].first_year_median, 0)]);
+  const bt = p.backtest;
+  $("#secP2").innerHTML = `<p class="lead">Real temperatures from the four settlement datasets (re-baselined to 1850–1900), the model on the same
+      baseline, El Niño-style year-to-year noise, and Kalshi's exact rule. Here the economy is fixed at the HW5 template, so these numbers are
+      conditional on that high-emissions path.</p>
+    <div class="panel">${table(["variant", "p2", "ECS", "P(Yes) 2-of-4", "any 1 dataset", "4-dataset mean", "20-yr mean", "median year"], rows, [1, 2, 3, 4, 5, 6, 7])}
+    <p class="note">Back-test (fit to 1999, simulate 2000–2025): version A covered ${pct(bt.A.coverage_5_95)} of observed years in its 90% band;
+      version B ${pct(bt.B.coverage_5_95)}.</p></div>
+    ${figs(["4_fan_chart.png", "2_residuals.png", "3_dataset_offsets.png", "6_backtest.png", "5_first_crossing.png"])}`;
+}
+
+function renderP3() {
+  const p = R.phase3;
+  if (!p) { $("#secP3").innerHTML = missing("Phase 3"); return; }
+  const rows = Object.entries(p.headline).map(([k, v]) => [esc(k), f(v.history.p_yes, 3), f(v.ipcc.p_yes, 3), f(v.ipcc.first_median, 0)]);
+  const c = p.climate;
+  const crow = (k, lab) => [lab, `${f(c[k].w_mid_5_50_95[1])} [${f(c[k].w_mid_5_50_95[0])}–${f(c[k].w_mid_5_50_95[2])}]`,
+    `${f(c[k].w_near_5_50_95[1])} [${f(c[k].w_near_5_50_95[0])}–${f(c[k].w_near_5_50_95[2])}]`, `${f(c[k].ecs_5_50_95[1], 1)} [${f(c[k].ecs_5_50_95[0], 1)}–${f(c[k].ecs_5_50_95[2], 1)}]`];
+  const dr = Object.entries(p.drivers.ipcc).sort((a, b) => Math.abs(b[1].top20 - b[1].bottom20) - Math.abs(a[1].top20 - a[1].bottom20)).slice(0, 6)
+    .map(([k, v]) => [esc(k), f(v.bottom20, 2), f(v.top20, 2)]);
+  $("#secP3").innerHTML = `<p class="lead">20,000 draws of economic growth, energy and carbon intensity (weighted to real 2019–24 emissions) and
+      climate settings, × 5 noise paths each. Two views of how fast warming continues: fitted to history, or widened to match the IPCC.</p>
+    <div class="panel">${table(["emissions (2025 start)", "history-fit", "IPCC-calibrated", "median year (IPCC)"], rows, [1, 2, 3])}</div>
+    <h3>Calibration check against IPCC AR6 (flat emissions, °C above 1850–1900)</h3>
+    <div class="panel">${table(["view", "2041–2060", "2021–2040", "ECS °C"],
+      [crow("history", "fitted to history"), crow("ipcc", "IPCC-calibrated"), ["IPCC AR6 SSP2-4.5", "2.0 [1.6–2.5]", "1.5 [1.2–1.8]", "3 [2–5]"]], [1, 2, 3])}</div>
+    <h3>What moves the answer most (IPCC view; P(Yes) in bottom → top 20% of each input)</h3>
+    <div class="panel">${table(["input", "bottom 20%", "top 20%"], dr, [1, 2])}</div>
+    ${figs(["p3_7_fan.png", "p3_5_pyes_by_scenario.png", "p3_1_emissions.png", "p3_3_midterm_vs_ar6.png", "p3_4_drivers.png", "p3_2_climate_posterior.png", "p3_6_first_crossing.png"])}`;
+}
+
+function renderP4() {
+  const p = R.phase4;
+  if (!p) { $("#secP4").innerHTML = missing("Phase 4"); return; }
+  const iq = Object.entries(p.implied_q).map(([k, v]) => [esc(k), pct(p.deltas[k], 2), f(v.bid, 3), `<b>${f(v.mid, 3)}</b>`, f(v.ask, 3)]);
+  const book = Object.entries(p.book).map(([n, v]) => [n, f(v.yes.all_in_per_contract, 4), f(v.no.all_in_per_contract, 4)]);
+  const mvm = Object.entries(p.model_vs_market).map(([k, v]) => {
+    const z = v["0: vs cash on Kalshi"];
+    return [esc(k), f(v.p_yes_2049, 3), f(v.p_yes_2048, 3), esc(z.position), pct(z.yes_side.annualised_excess, 1), pct(z.no_side.annualised_excess, 1)];
+  });
+  const ph = p.price_history;
+  $("#secP4").innerHTML = `<p class="lead">A price isn't a probability: fees, the bid–ask spread, 24 years of tied-up money and Kalshi's
+      ${pct(p.kalshi_apy, 1)} interest on positions all matter. Snapshot ${esc(p.snapshot.fetched_utc)}.</p>
+    <div class="panel">${table(["cost of tying up money", "rate", "implied at bid", "at mid", "at ask"], iq, [1, 2, 3, 4])}</div>
+    <h3>Cost to enter, all-in per contract (thin order book)</h3>
+    <div class="panel">${table(["contracts", "buy Yes", "buy No"], book, [0, 1, 2])}</div>
+    <h3>Model vs market (2025 start)</h3>
+    <div class="panel">${table(["model cell", "P(≤2049)", "P(≤2048)", "vs market range", "Yes exp. excess / yr", "No exp. excess / yr"], mvm, [1, 2, 4, 5])}
+      <p class="note">Expected-return columns describe how far the model and the market disagree after costs, not a recommendation.</p></div>
+    <p class="note">Public trade history: ${ph.n_trades} trades (${ph.first_day} to ${ph.last_day}), ${Math.round(ph.contracts_in_api_history).toLocaleString()} of
+      ${Math.round(ph.lifetime_volume).toLocaleString()} lifetime contracts. One order on 22 Sep 2026 bought 2,545 No contracts for $1,344 and moved the price
+      from about 0.75 to about 0.67.</p>
+    ${figs(["p4_1_price_history.png", "p4_4_model_vs_band.png", "p4_3_implied_vs_delta.png", "p4_2_depth.png", "p4_5_payment_timing.png"])}`;
+}
+
+function renderP5() {
+  const p = R.phase5;
+  if (!p) { $("#secP5").innerHTML = missing("Phase 5"); return; }
+  const nc = Object.entries(p.nowcast).map(([k, v]) => [k, `${v.months_obs[0]}–${v.months_obs[v.months_obs.length - 1]}`,
+    v.months_filled.join(", ") || "none", `${f(v.native_mean, 3)} ± ${f(v.native_sd, 3)}`, f(v.rebased_mean, 3)]);
+  const py = Object.entries(p.p_yes).map(([k, v]) => [esc(k), `${f(v.history.p_yes_2025_start, 3)} → <b>${f(v.history.p_yes, 3)}</b>`,
+    `${f(v.ipcc.p_yes_2025_start, 3)} → <b>${f(v.ipcc.p_yes, 3)}</b>`, f(v.ipcc.p_yes_2048, 3), esc(v.ipcc.position)]);
+  const hk = Object.keys(p.hedge).find(k => k.endsWith("| ipcc"));
+  const h = p.hedge[hk];
+  const hr = Object.entries(h.rows).map(([k, v]) => [esc(k), f(v.r2, 3), `${money(v.sd_unhedged)} → ${money(v.sd_hedged)}`]);
+  const m = p.momentum;
+  $("#secP5").innerHTML = `<p class="lead">2026 is running hot. The months the agencies haven't published yet are filled from Copernicus ERA5
+      (data to ${p.era5_last_day.join("-")}), then the simulation restarts from 2026.</p>
+    <div class="panel">${table(["dataset", "months published", "months filled", "2026 (own baseline)", "2026 vs 1850–1900"], nc, [3, 4])}
+      <p class="note">Common 2026 signal ${f(p.signal_2026.mean, 3)} ± ${f(p.signal_2026.sd, 3)}°C. Back-test on 2023–25: spread widened ×${f(p.sd_scale)}
+        to be well calibrated (RMS z ${f(p.backtest.rms_calibrated)}). Late-2026 warmth carries into 2027 (momentum t = ${f(m.t_phi2, 1)}).</p></div>
+    <div class="warn" style="margin-top:12px">Kalshi “2026 hottest year ever” (${esc(p.kxgtemp_26.ticker)}): model <b>${pct(p.p_kxgtemp_model)}</b>,
+      market <b>${f(p.kxgtemp_26.bid)}/${f(p.kxgtemp_26.ask)}</b>.</div>
+    <h3>P(KXWARMING-50 = Yes): 2025 start → 2026 nowcast start</h3>
+    <div class="panel">${table(["emissions", "history-fit", "IPCC-calibrated", "IPCC, if 2049 can't count", "IPCC vs market range"], py, [1, 2, 3])}</div>
+    <h3>Hedging a hypothetical climate-damage exposure (IPCC view, per $1M of income)</h3>
+    <div class="panel">${table(["instrument", "risk removed (R²)", "loss sd before → after"], hr, [1, 2])}
+      <p class="note">Hedge size ${Math.round(h.h_contracts_per_1M_income).toLocaleString()} contracts per $1M of income, but the order book offers
+        ${Math.round(h["capacity_contracts_le_0.71"])} contracts at ≤ 0.71 (${money(h["max_income_hedgeable_le_0.71_$M"] * 1e6)} of income).
+        Damage coefficient from the course SCC spreadsheet (median ${f(-p.damage_coef_median * 6.25)}% of income at 2.5°C).</p></div>
+    ${figs(["p5_1_nowcast_2026.png", "p5_2_kxgtemp26.png", "p5_3_fan_nowcast.png", "p5_5_basis_risk.png", "p5_4_loss_vs_outcome.png"])}`;
+}
+
+async function poll() {
+  const s = await (await fetch("/api/status", { cache: "no-store" })).json();
+  renderRun(s);
+  if (!s.running) { stopPolling(); await load(); }
+}
+function startPolling() { if (!polling) polling = setInterval(poll, 1500); }
+function stopPolling() { clearInterval(polling); polling = null; }
+
+$("#runbtn").onclick = async () => {
+  if (!confirm("Fetch fresh Kalshi and temperature data and re-run every phase? It takes about 2 minutes; the page stays usable.")) return;
+  await fetch("/api/run", { method: "POST" });
+  startPolling(); poll();
+};
+document.addEventListener("click", e => {
+  const lb = $("#lightbox");
+  if (e.target.matches(".figs img")) { lb.querySelector("img").src = e.target.src; lb.classList.add("on"); }
+  else if (e.target.closest("#lightbox")) lb.classList.remove("on");
+});
+load().catch(err => { $("#cards").innerHTML = `<p class="note">Couldn't load results: ${esc(err)}</p>`; });
+
+// ------------------------------------------------------------------ What if? (in-browser class model)
+const WI = { ctx: null, params: null, pending: false, check: null };
+const KAYA_SLIDERS = [
+  ["g", "GDP per person growth", [[-0.02, 0.06], [-0.02, 0.08], [-0.02, 0.08]]],
+  ["ei", "Energy intensity change", [[-0.05, 0.01], [-0.05, 0.01], [-0.05, 0.01]]],
+  ["ci", "Carbon intensity change", [[-0.06, 0.02], [-0.06, 0.02], [-0.06, 0.02]]],
+];
+const REGIONS = ["Rich", "Middle", "Poor"];
+const pctFmt = v => (v >= 0 ? "+" : "−") + Math.abs(v * 100).toFixed(2) + "%/yr";
+
+function wiDefaults() {
+  const d = ClassModel.DEFAULTS;
+  return { g: [...d.g], ei: [...d.ei], ci: [...d.ci], p1: d.p1, p2: d.p2, fill: false, emis: "kaya" };
+}
+
+function wiBuildControls() {
+  const P = WI.params;
+  $("#wiKaya").innerHTML = KAYA_SLIDERS.map(([key, name, ranges]) =>
+    `<div class="wi-group">${name}</div>` + REGIONS.map((r, i) => `
+      <div class="wi-row"><span>${r}</span><span class="val" id="v_${key}${i}">${pctFmt(P[key][i])}</span>
+      <input type="range" id="s_${key}${i}" min="${ranges[i][0]}" max="${ranges[i][1]}" step="0.0005" value="${P[key][i]}"
+        aria-label="${name}, ${r} countries"></div>`).join("")).join("");
+  $("#wiClimate").innerHTML = `
+    <div class="wi-row"><span>Sensitivity (Parameter 2)</span><span class="val" id="v_p2"></span>
+      <input type="range" id="s_p2" min="0.5" max="1.8" step="0.01" value="${P.p2}" aria-label="Parameter 2"></div>
+    <div class="wi-row"><span>Adjustment speed (Parameter 1)</span><span class="val" id="v_p1"></span>
+      <input type="range" id="s_p1" min="0.01" max="0.06" step="0.0005" value="${P.p1}" aria-label="Parameter 1"></div>`;
+  KAYA_SLIDERS.forEach(([key]) => REGIONS.forEach((_, i) => {
+    $(`#s_${key}${i}`).oninput = e => { P[key][i] = +e.target.value; $(`#v_${key}${i}`).textContent = pctFmt(P[key][i]); wiSchedule(); };
+  }));
+  $("#s_p2").oninput = e => { P.p2 = +e.target.value; wiLabels(); wiSchedule(); };
+  $("#s_p1").oninput = e => { P.p1 = +e.target.value; wiLabels(); wiSchedule(); };
+  $("#wiEmis").value = P.emis;
+  $("#wiFill").checked = P.fill;
+  $("#wiKaya").style.opacity = P.emis === "kaya" ? 1 : 0.4;
+  wiLabels();
+}
+function wiLabels() {
+  const P = WI.params;
+  $("#v_p2").textContent = `${P.p2.toFixed(2)} (≈${ClassModel.ecs(P.p2).toFixed(1)}°C per CO₂ doubling)`;
+  $("#v_p1").textContent = P.p1.toFixed(4);
+}
+// While a slider is moving: fewer paths (fast). When it's released: more paths (precise).
+function wiSchedule(final) {
+  WI.finalPending = WI.finalPending || !!final;
+  if (WI.pending) return;
+  WI.pending = true;
+  const go = () => { WI.pending = false; const f = WI.finalPending; WI.finalPending = false; wiCompute(f ? 8000 : 1500); };
+  if (document.hidden) setTimeout(go, 0); else requestAnimationFrame(go);   // rAF doesn't fire in hidden tabs
+  clearTimeout(WI.settle);
+  if (!final) WI.settle = setTimeout(() => wiSchedule(true), 250);
+}
+
+function wiCompute(n = 8000) {
+  const P = WI.params;
+  const future = P.emis === "kaya" ? null : WI.ctx.scenario_paths_mtc[P.emis];
+  const res = ClassModel.run({ g: P.g, ei: P.ei, ci: P.ci, p1: P.p1, p2: P.p2, fill: P.fill ? 990 : 0, future });
+  const pr = ClassModel.probability(res, { n });
+  const mid = R && R.phase4 ? R.phase4.snapshot.mid : null;
+  const Y0 = ClassModel.YEAR0, toGt = 44 / 12 / 1000;
+  const yrs = res.years;
+  const t2100 = res.T[2100 - Y0] + pr.b, e2049 = res.E[2049 - Y0] * toGt;
+  const gap = mid != null ? (pr.pYes - mid) * 100 : null;
+  // emissions chart 1990-2100
+  const ey = yrs.filter(y => y >= 1990);
+  const emis = svgChart({ x0: 1990, x1: 2100, y0: 0, y1: Math.max(60, Math.ceil(Math.max(...ey.map(y => res.E[y - Y0] * toGt)) / 20) * 20),
+    title: "Emissions (Gt CO₂ per year)", vlines: [2024.5],
+    series: [{ x: ey, y: ey.map(y => res.E[y - Y0] * toGt), color: "var(--accent)" }] });
+  // temperature chart 1990-2100: anchored model line, observed signal, contract fan to 2049
+  const ty = yrs.filter(y => y >= 1990);
+  const obsX = WI.ctx.anchor_years.concat([2026]), obsY = WI.ctx.anchor_signal.concat([WI.ctx.signal_2026.mean]);
+  const tmax = Math.max(2.6, Math.ceil((Math.max(...ty.map(y => res.T[y - Y0] + pr.b))) * 2) / 2);
+  const temp = svgChart({ x0: 1990, x1: 2100, y0: 0.5, y1: tmax, title: "Temperature (°C above 1850–1900)", hlines: [2.0],
+    bands: [{ x: pr.years, lo: pr.fan.map(f => f[0]), hi: pr.fan.map(f => f[4]), color: "var(--accent)", op: 0.15 },
+            { x: pr.years, lo: pr.fan.map(f => f[1]), hi: pr.fan.map(f => f[3]), color: "var(--accent)", op: 0.25 }],
+    series: [{ x: ty, y: ty.map(y => res.T[y - Y0] + pr.b), color: "var(--ink)", w: 1.6 },
+             { x: pr.years, y: pr.fan.map(f => f[2]), color: "var(--accent)", w: 2 }],
+    points: { x: obsX, y: obsY } });
+  $("#wiOut").innerHTML = `
+    <div class="wi-head">
+      <div><div class="note">P(any year ≥ 2°C before 2050)</div><div class="big">${pct(pr.pYes)}</div></div>
+      ${mid != null ? `<div><div class="note">vs Kalshi ${pct(mid)}</div><div style="font-size:22px;font-weight:800">${gap >= 0 ? "+" : "−"}${Math.abs(gap).toFixed(0)} pts</div></div>` : ""}
+      <div><div class="note">median crossing year</div><div style="font-size:22px;font-weight:800">${isNaN(pr.firstMedian) ? "after 2049" : pr.firstMedian}</div></div>
+      <div><div class="note">2049 emissions / 2100 warming</div><div style="font-size:22px;font-weight:800">${e2049.toFixed(0)} Gt · ${t2100.toFixed(1)}°C</div></div>
+    </div>
+    <div class="wi-charts">${temp}${emis}</div>
+    <p class="note">${pr.n.toLocaleString()} simulated futures${pr.n < 8000 ? " (quick preview while dragging)" : ""}.
+      Shaded: 5–95% and 25–75% of the contract reading (second-highest dataset), 2027–2049; dots: observed, plus the 2026 nowcast.
+      The page uses one noise setting for speed; the full Python analysis above averages over thousands of climate settings.
+      ${WI.check ? `<br>Check against Python: temperature path differs by at most ${WI.check.maxAbsDiffT.toExponential(1)}°C;
+      HW5-template P(Yes) ${pct(WI.check.pJs, 1)} here vs ${pct(WI.check.pRef, 1)} in Python.` : ""}</p>`;
+}
+
+function svgChart(o) {
+  const W = 720, H = 220, L = 40, Rm = 10, T = 22, B = 24;
+  const X = x => L + (x - o.x0) / (o.x1 - o.x0) * (W - L - Rm);
+  const Yv = y => T + (1 - (y - o.y0) / (o.y1 - o.y0)) * (H - T - B);
+  const path = (xs, ys) => xs.map((x, i) => `${i ? "L" : "M"}${X(x).toFixed(1)},${Yv(ys[i]).toFixed(1)}`).join("");
+  const yt = []; const step = (o.y1 - o.y0) / 4;
+  for (let i = 0; i <= 4; i++) yt.push(o.y0 + i * step);
+  const xt = []; for (let x = Math.ceil(o.x0 / 20) * 20; x <= o.x1; x += 20) xt.push(x);
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.title)}">
+    <text x="${L}" y="14" style="font-weight:600">${esc(o.title)}</text>
+    ${yt.map(v => `<line class="ax" x1="${L}" x2="${W - Rm}" y1="${Yv(v)}" y2="${Yv(v)}"/><text x="${L - 4}" y="${Yv(v) + 4}" text-anchor="end">${+v.toFixed(1)}</text>`).join("")}
+    ${xt.map(v => `<text x="${X(v)}" y="${H - 6}" text-anchor="middle">${v}</text>`).join("")}
+    ${(o.vlines || []).map(v => `<line x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${H - B}" stroke="var(--muted)" stroke-dasharray="3 3"/>`).join("")}
+    ${(o.hlines || []).map(v => `<line x1="${L}" x2="${W - Rm}" y1="${Yv(v)}" y2="${Yv(v)}" stroke="#eab308" stroke-width="1.5"/>`).join("")}
+    ${(o.bands || []).map(b => `<path d="${path(b.x, b.hi)}L${b.x.slice().reverse().map((x, i) => `${X(x).toFixed(1)},${Yv(b.lo[b.lo.length - 1 - i]).toFixed(1)}`).join("L")}Z"
+        fill="${b.color}" opacity="${b.op}"/>`).join("")}
+    ${(o.series || []).map(s => `<path d="${path(s.x, s.y)}" fill="none" stroke="${s.color}" stroke-width="${s.w || 2}"/>`).join("")}
+    ${o.points ? o.points.x.map((x, i) => `<circle cx="${X(x)}" cy="${Yv(o.points.y[i])}" r="2.4" fill="var(--ink)"/>`).join("") : ""}
+  </svg>`;
+}
+
+async function wiInit() {
+  try {
+    const [inputs, ctx] = await Promise.all([fetch("/api/model-inputs").then(r => r.json()), fetch("/api/slider-context").then(r => r.json())]);
+    ClassModel.setup(inputs, ctx);
+    WI.ctx = ctx;
+    WI.params = wiDefaults();
+    wiBuildControls();
+    $("#wiEmis").onchange = e => { WI.params.emis = e.target.value; $("#wiKaya").style.opacity = WI.params.emis === "kaya" ? 1 : 0.4; wiSchedule(); };
+    $("#wiFill").onchange = e => { WI.params.fill = e.target.checked; wiSchedule(); };
+    $("#wiReset").onclick = () => { WI.params = wiDefaults(); wiBuildControls(); wiSchedule(); };
+    WI.check = ClassModel.check();
+    wiCompute();
+  } catch (e) {
+    $("#wiOut").innerHTML = missing("The what-if model");
+  }
+}
+wiInit();
+</script>
+</body>
+</html>

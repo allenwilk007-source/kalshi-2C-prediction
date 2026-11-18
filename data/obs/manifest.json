@@ -1,0 +1,69 @@
+{
+ "giss": {
+  "url": "https://data.giss.nasa.gov/gistemp/graphs/graph_data/Global_Mean_Estimates_based_on_Land_and_Ocean_Data/graph.txt",
+  "downloaded_utc": "2026-11-08T22:46:29+00:00",
+  "bytes": 3775,
+  "sha256": "9aa144d2d6e1f9f5ce3dca9b935be00a9d16948d8dc5d32986f148c7e6c42e8c"
+ },
+ "noaa": {
+  "url": "https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/global/time-series/globe/tavg/land_ocean/12/12/1850-2025/data.csv",
+  "downloaded_utc": "2026-11-08T22:46:29+00:00",
+  "bytes": 2005,
+  "sha256": "b61a4727ee0e36c03bc7ced3cc813ae7af736485dd8630b5d1b1fb8fc05066f4"
+ },
+ "berkeley": {
+  "url": "https://berkeley-earth-temperature.s3.us-west-1.amazonaws.com/Global/Land_and_Ocean_summary.txt",
+  "downloaded_utc": "2026-11-08T22:46:29+00:00",
+  "bytes": 25710,
+  "sha256": "8f4b3f37846f0aacc270a3cf0090c1d94e857c8b2c7b8d8cdb081134781e819f"
+ },
+ "hadcrut_annual": {
+  "url": "https://www.metoffice.gov.uk/hadobs/hadcrut5/data/HadCRUT.5.1.0.0/analysis/diagnostics/HadCRUT.5.1.0.0.analysis.summary_series.global.annual.csv",
+  "downloaded_utc": "2026-11-08T22:46:30+00:00",
+  "bytes": 7048,
+  "sha256": "16633b8d7c4fe6026d53549f509355964ab56ca689a6f007f27d4a5fa87d6ec6"
+ },
+ "hadcrut_monthly": {
+  "url": "https://www.metoffice.gov.uk/hadobs/hadcrut5/data/HadCRUT.5.1.0.0/analysis/diagnostics/HadCRUT.5.1.0.0.analysis.summary_series.global.monthly.csv",
+  "downloaded_utc": "2026-11-08T22:46:30+00:00",
+  "bytes": 89575,
+  "sha256": "1cb8d36b1cf0a210a45476477e61c855555e0413f72f75dbc70b5d0c04ebacca"
+ },
+ "owid_world_co2": {
+  "url": "https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv",
+  "downloaded_utc": "2026-11-08T23:28:24+00:00",
+  "bytes": 14377942,
+  "sha256": "7f78e2b218ce4bb8c538bbec04fdc9a7982e8d40bff972e650df603899edd5f6",
+  "note": "only World rows kept"
+ },
+ "giss_monthly": {
+  "url": "https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv",
+  "downloaded_utc": "2026-11-09T01:48:32+00:00",
+  "bytes": 12886,
+  "sha256": "4c64eda288bce32b8d76926278f346ecea1e53506df8ee72a3d5accb0657c416"
+ },
+ "noaa_monthly": {
+  "url": "https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/global/time-series/globe/tavg/land_ocean/1/0/1850-2026/data.csv",
+  "downloaded_utc": "2026-11-09T01:48:32+00:00",
+  "bytes": 26490,
+  "sha256": "f9a78a7374a2152a614331b6bd9d59fbb03ce1b7ebef8aa81f68a19ace53ed6d"
+ },
+ "era5_daily": {
+  "url": "https://sites.ecmwf.int/data/climatepulse/data/series/era5_daily_series_2t_global.csv",
+  "downloaded_utc": "2026-11-09T01:48:36+00:00",
+  "bytes": 1198965,
+  "sha256": "75922cbd89e817c2c1e744ebdb42b698f4b7d688028cde7a3ec2cc6ef35cabe3"
+ },
+ "mlo_monthly": {
+  "url": "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.txt",
+  "downloaded_utc": "2026-11-09T05:46:29+00:00",
+  "bytes": 59678,
+  "sha256": "0ce4e7749217b4af2cca8e0bdf263856ad59b0a2946d4e98c7b22ccfbff21cad"
+ },
+ "mlo_daily": {
+  "url": "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_daily_mlo.txt",
+  "downloaded_utc": "2026-11-09T05:46:30+00:00",
+  "bytes": 578299,
+  "sha256": "10a955f730687a3cc059fc8f039ef64f603a7b86334f99f260e9d4015a493b32"
+ }
+}

@@ -1,0 +1,785 @@
+{
+ "snapshot": {
+  "dir": "20261118T044236Z",
+  "fetched_utc": "2026-11-18T04:42:36+00:00",
+  "yes_bid": 0.68,
+  "yes_ask": 0.72,
+  "mid": 0.7,
+  "last": 0.72,
+  "open_interest": 4141.8,
+  "volume": 21756.51,
+  "close_time": "2050-01-01T04:59:00Z",
+  "latest_expiration_time": "2050-01-08T15:00:00Z"
+ },
+ "today": 2026.8799897260274,
+ "deltas": {
+  "0: vs cash on Kalshi": 0.0,
+  "T-bill - Kalshi APY": 0.0058999999999999955,
+  "20y Treasury - Kalshi APY": 0.019999999999999997,
+  "T-bill, no APY": 0.0409,
+  "20y Treasury, no APY": 0.055
+ },
+ "kalshi_apy": 0.035,
+ "treasury": {
+  "date": "11/17/2026",
+  "1 Mo": 0.0409,
+  "1.5 Month": 0.0424,
+  "2 Mo": 0.0426,
+  "3 Mo": 0.0433,
+  "4 Mo": 0.0432,
+  "6 Mo": 0.0441,
+  "1 Yr": 0.046,
+  "2 Yr": 0.048,
+  "3 Yr": 0.0484,
+  "5 Yr": 0.049,
+  "7 Yr": 0.0499,
+  "10 Yr": 0.051,
+  "20 Yr": 0.055,
+  "30 Yr": 0.0546
+ },
+ "book": {
+  "1": {
+   "yes": {
+    "requested": 1,
+    "filled": 1.0,
+    "vwap": 0.72,
+    "fee": 0.02,
+    "all_in_per_contract": 0.74,
+    "complete": true
+   },
+   "no": {
+    "requested": 1,
+    "filled": 1.0,
+    "vwap": 0.32,
+    "fee": 0.02,
+    "all_in_per_contract": 0.34,
+    "complete": true
+   }
+  },
+  "10": {
+   "yes": {
+    "requested": 10,
+    "filled": 10.0,
+    "vwap": 0.72,
+    "fee": 0.15,
+    "all_in_per_contract": 0.735,
+    "complete": true
+   },
+   "no": {
+    "requested": 10,
+    "filled": 10.0,
+    "vwap": 0.32,
+    "fee": 0.16,
+    "all_in_per_contract": 0.336,
+    "complete": true
+   }
+  },
+  "100": {
+   "yes": {
+    "requested": 100,
+    "filled": 100.0,
+    "vwap": 0.72,
+    "fee": 1.42,
+    "all_in_per_contract": 0.7342,
+    "complete": true
+   },
+   "no": {
+    "requested": 100,
+    "filled": 100.0,
+    "vwap": 0.32955200000000007,
+    "fee": 1.55,
+    "all_in_per_contract": 0.345052,
+    "complete": true
+   }
+  },
+  "500": {
+   "yes": {
+    "requested": 500,
+    "filled": 500.0,
+    "vwap": 0.72,
+    "fee": 7.06,
+    "all_in_per_contract": 0.73412,
+    "complete": true
+   },
+   "no": {
+    "requested": 500,
+    "filled": 500.0,
+    "vwap": 0.3439632,
+    "fee": 7.9,
+    "all_in_per_contract": 0.35976320000000006,
+    "complete": true
+   }
+  },
+  "1000": {
+   "yes": {
+    "requested": 1000,
+    "filled": 1000.0,
+    "vwap": 0.7444108000000002,
+    "fee": 13.26,
+    "all_in_per_contract": 0.7576708000000001,
+    "complete": true
+   },
+   "no": {
+    "requested": 1000,
+    "filled": 1000.0,
+    "vwap": 0.36952229999999997,
+    "fee": 16.0,
+    "all_in_per_contract": 0.3855223,
+    "complete": true
+   }
+  }
+ },
+ "implied_q": {
+  "0: vs cash on Kalshi": {
+   "bid": 0.68,
+   "mid": 0.7,
+   "ask": 0.72,
+   "DY_range_across_cells": [
+    1.0,
+    1.0
+   ],
+   "DY": 1.0,
+   "DN": 1.0
+  },
+  "T-bill - Kalshi APY": {
+   "bid": 0.6728245608486813,
+   "mid": 0.6930706036258377,
+   "ask": 0.7133433864985698,
+   "DY_range_across_cells": [
+    0.8930413819994745,
+    0.9026038728469657
+   ],
+   "DY": 0.901457542942392,
+   "DN": 0.8723835851093787
+  },
+  "20y Treasury - Kalshi APY": {
+   "bid": 0.6548578217788528,
+   "mid": 0.6756797485829451,
+   "ask": 0.6965983554129674,
+   "DY_range_across_cells": [
+    0.6824075986150784,
+    0.7080097594959196
+   ],
+   "DY": 0.7050474973817039,
+   "DN": 0.6295183942702482
+  },
+  "T-bill, no APY": {
+   "bid": 0.626032319078732,
+   "mid": 0.6476575874732344,
+   "ask": 0.6694995395999191,
+   "DY_range_across_cells": [
+    0.459650180057344,
+    0.4967354088525248
+   ],
+   "DY": 0.49268402344950935,
+   "DN": 0.3881255457386433
+  },
+  "20y Treasury, no APY": {
+   "bid": 0.6050646554647297,
+   "mid": 0.627180341561177,
+   "ask": 0.6496049235729017,
+   "DY_range_across_cells": [
+    0.352967356997656,
+    0.3926211791655472
+   ],
+   "DY": 0.38846895714051455,
+   "DN": 0.28007424084901866
+  }
+ },
+ "bands": {
+  "top of book (10) | 0: vs cash on Kalshi | h=0.0": [
+   0.6639999999999999,
+   0.735
+  ],
+  "top of book (10) | 0: vs cash on Kalshi | h=0.02": [
+   0.6571428571428571,
+   0.75
+  ],
+  "top of book (10) | 0: vs cash on Kalshi | h=0.05": [
+   0.6463157894736842,
+   0.7736842105263159
+  ],
+  "top of book (10) | 0: vs cash on Kalshi | h=0.1": [
+   0.6266666666666667,
+   0.8166666666666667
+  ],
+  "top of book (10) | T-bill - Kalshi APY | h=0.0": [
+   0.6148483239080288,
+   0.8153462198573788
+  ],
+  "top of book (10) | T-bill - Kalshi APY | h=0.02": [
+   0.6069880856204375,
+   0.8319859386299783
+  ],
+  "top of book (10) | T-bill - Kalshi APY | h=0.05": [
+   0.5945771830610829,
+   0.8582591787972408
+  ],
+  "top of book (10) | T-bill - Kalshi APY | h=0.1": [
+   0.5720536932311431,
+   0.9059402442859764
+  ],
+  "top of book (10) | 20y Treasury - Kalshi APY | h=0.0": [
+   0.4662586461996894,
+   1.0424829571476093
+  ],
+  "top of book (10) | 20y Treasury - Kalshi APY | h=0.02": [
+   0.45536596550988706,
+   1.0637581195383767
+  ],
+  "top of book (10) | 20y Treasury - Kalshi APY | h=0.05": [
+   0.4381669959996729,
+   1.09735048120801
+  ],
+  "top of book (10) | 20y Treasury - Kalshi APY | h=0.1": [
+   0.40695405133298823,
+   1.1583143968306768
+  ],
+  "top of book (10) | T-bill, no APY | h=0.0": [
+   0.1343007341592085,
+   1.4918283626368156
+  ],
+  "top of book (10) | T-bill, no APY | h=0.02": [
+   0.116633402203274,
+   1.5222738394253221
+  ],
+  "top of book (10) | T-bill, no APY | h=0.05": [
+   0.08873761490443,
+   1.5703456448808586
+  ],
+  "top of book (10) | T-bill, no APY | h=0.1": [
+   0.038111926843565014,
+   1.6575870695964618
+  ],
+  "top of book (10) | 20y Treasury, no APY | h=0.0": [
+   -0.19968190927322582,
+   1.892043074458947
+  ],
+  "top of book (10) | 20y Treasury, no APY | h=0.02": [
+   -0.2241652135441079,
+   1.9306561984274968
+  ],
+  "top of book (10) | 20y Treasury, no APY | h=0.05": [
+   -0.26282306239286934,
+   1.9916242889041547
+  ],
+  "top of book (10) | 20y Treasury, no APY | h=0.1": [
+   -0.3329798991924733,
+   2.1022700827321628
+  ],
+  "100 contracts | 0: vs cash on Kalshi | h=0.0": [
+   0.654948,
+   0.7342
+  ],
+  "100 contracts | 0: vs cash on Kalshi | h=0.02": [
+   0.6479061224489795,
+   0.7491836734693877
+  ],
+  "100 contracts | 0: vs cash on Kalshi | h=0.05": [
+   0.6367873684210525,
+   0.7728421052631579
+  ],
+  "100 contracts | 0: vs cash on Kalshi | h=0.1": [
+   0.6166088888888889,
+   0.8157777777777777
+  ],
+  "100 contracts | T-bill - Kalshi APY | h=0.0": [
+   0.6044721543485511,
+   0.8144587681895067
+  ],
+  "100 contracts | T-bill - Kalshi APY | h=0.02": [
+   0.5964001574985214,
+   0.8310803757035783
+  ],
+  "100 contracts | T-bill - Kalshi APY | h=0.05": [
+   0.5836548993142643,
+   0.8573250191468492
+  ],
+  "100 contracts | T-bill - Kalshi APY | h=0.1": [
+   0.5605246159428345,
+   0.9049541868772297
+  ],
+  "100 contracts | 20y Treasury - Kalshi APY | h=0.0": [
+   0.45187939996575954,
+   1.0413482818201016
+  ],
+  "100 contracts | 20y Treasury - Kalshi APY | h=0.02": [
+   0.44069326527118313,
+   1.0626002875715324
+  ],
+  "100 contracts | 20y Treasury - Kalshi APY | h=0.05": [
+   0.42303094733237845,
+   1.0961560861264228
+  ],
+  "100 contracts | 20y Treasury - Kalshi APY | h=0.1": [
+   0.3909771110730662,
+   1.1570536464667796
+  ],
+  "100 contracts | T-bill, no APY | h=0.0": [
+   0.11097838369971191,
+   1.4902046038747618
+  ],
+  "100 contracts | T-bill, no APY | h=0.02": [
+   0.09283508540786933,
+   1.520616942729349
+  ],
+  "100 contracts | T-bill, no APY | h=0.05": [
+   0.06418777231548622,
+   1.5686364251313285
+  ],
+  "100 contracts | T-bill, no APY | h=0.1": [
+   0.012198204110790978,
+   1.6557828931941798
+  ],
+  "100 contracts | 20y Treasury, no APY | h=0.0": [
+   -0.23200191118614621,
+   1.8899837078472908
+  ],
+  "100 contracts | 20y Treasury, no APY | h=0.02": [
+   -0.2571448073328022,
+   1.928554803925807
+  ],
+  "100 contracts | 20y Treasury, no APY | h=0.05": [
+   -0.2968441170380487,
+   1.9894565345760957
+  ],
+  "100 contracts | 20y Treasury, no APY | h=0.1": [
+   -0.3688910124290514,
+   2.099981897608101
+  ]
+ },
+ "model_vs_market": {
+  "Kaya randomised + 2019-24 weighting | history": {
+   "p_yes_2049": 0.9262944615591322,
+   "p_yes_2048": 0.8791886280348072,
+   "p_only_2049": 0.04710583352432496,
+   "mean_tau_yes": 18.19221692006049,
+   "0: vs cash on Kalshi": {
+    "fair_price": 0.9262944615591322,
+    "band": [
+     0.6639999999999999,
+     0.735
+    ],
+    "position": "above band (model > market)",
+    "yes_side": {
+     "gross_multiple": 1.2602645735498397,
+     "total_excess": 0.2602645735498397,
+     "annualised_excess": 0.012796604634710551
+    },
+    "no_side": {
+     "gross_multiple": 0.21936172155020178,
+     "total_excess": -0.7806382784497983,
+     "annualised_excess": -0.0634561009319603
+    }
+   },
+   "T-bill - Kalshi APY": {
+    "fair_price": 0.9282729487073736,
+    "band": [
+     0.6148483239080288,
+     0.8181559265678966
+    ],
+    "position": "above band (model > market)",
+    "yes_side": {
+     "gross_multiple": 1.1321735032157851,
+     "total_excess": 0.13217350321578514,
+     "annualised_excess": 0.006847090320167615
+    },
+    "no_side": {
+     "gross_multiple": 0.1913675650817303,
+     "total_excess": -0.8086324349182696,
+     "annualised_excess": -0.06896544140041061
+    }
+   }
+  },
+  "Falling (SSP1-2.6-like) | history": {
+   "p_yes_2049": 0.59418,
+   "p_yes_2048": 0.52124,
+   "p_only_2049": 0.07294,
+   "mean_tau_yes": 19.200839652275477,
+   "0: vs cash on Kalshi": {
+    "fair_price": 0.59418,
+    "band": [
+     0.6639999999999999,
+     0.735
+    ],
+    "position": "below band (model < market)",
+    "yes_side": {
+     "gross_multiple": 0.8084081632653062,
+     "total_excess": -0.19159183673469382,
+     "annualised_excess": -0.01101590141083264
+    },
+    "no_side": {
+     "gross_multiple": 1.207797619047619,
+     "total_excess": 0.20779761904761895,
+     "annualised_excess": 0.008192340830894151
+    }
+   },
+   "T-bill - Kalshi APY": {
+    "fair_price": 0.5998106697093424,
+    "band": [
+     0.6148483239080288,
+     0.8230301695027527
+    ],
+    "position": "below band (model < market)",
+    "yes_side": {
+     "gross_multiple": 0.7219419433421058,
+     "total_excess": -0.2780580566578942,
+     "annualised_excess": -0.016825402512733345
+    },
+    "no_side": {
+     "gross_multiple": 1.0536628169913334,
+     "total_excess": 0.05366281699133335,
+     "annualised_excess": 0.002261519148270885
+    }
+   }
+  },
+  "Flat (SSP2-4.5-like) | history": {
+   "p_yes_2049": 0.84789,
+   "p_yes_2048": 0.77827,
+   "p_only_2049": 0.06962000000000002,
+   "mean_tau_yes": 18.745970716954595,
+   "0: vs cash on Kalshi": {
+    "fair_price": 0.84789,
+    "band": [
+     0.6639999999999999,
+     0.735
+    ],
+    "position": "above band (model > market)",
+    "yes_side": {
+     "gross_multiple": 1.153591836734694,
+     "total_excess": 0.153591836734694,
+     "annualised_excess": 0.007651047331543426
+    },
+    "no_side": {
+     "gross_multiple": 0.4527083333333332,
+     "total_excess": -0.5472916666666667,
+     "annualised_excess": -0.03366851550166028
+    }
+   },
+   "T-bill - Kalshi APY": {
+    "fair_price": 0.8512233124560299,
+    "band": [
+     0.6148483239080288,
+     0.8208295385900182
+    ],
+    "position": "above band (model > market)",
+    "yes_side": {
+     "gross_multiple": 1.0329672119944233,
+     "total_excess": 0.03296721199442332,
+     "annualised_excess": 0.0017317602095918705
+    },
+    "no_side": {
+     "gross_multiple": 0.3949353188422249,
+     "total_excess": -0.6050646811577751,
+     "annualised_excess": -0.03935308528934689
+    }
+   }
+  },
+  "Rising (SSP3-7.0-like) | history": {
+   "p_yes_2049": 0.91493,
+   "p_yes_2048": 0.85869,
+   "p_only_2049": 0.05624000000000007,
+   "mean_tau_yes": 18.4185437136893,
+   "0: vs cash on Kalshi": {
+    "fair_price": 0.91493,
+    "band": [
+     0.6639999999999999,
+     0.735
+    ],
+    "position": "above band (model > market)",
+    "yes_side": {
+     "gross_multiple": 1.2448027210884354,
+     "total_excess": 0.24480272108843537,
+     "annualised_excess": 0.011959899815092934
+    },
+    "no_side": {
+     "gross_multiple": 0.2531845238095237,
+     "total_excess": -0.7468154761904763,
+     "annualised_excess": -0.057634405438452996
+    }
+   },
+   "T-bill - Kalshi APY": {
+    "fair_price": 0.917084876832222,
+    "band": [
+     0.6148483239080288,
+     0.8192482220587152
+    ],
+    "position": "above band (model > market)",
+    "yes_side": {
+     "gross_multiple": 1.1167921703886559,
+     "total_excess": 0.11679217038865586,
+     "annualised_excess": 0.006015260275319623
+    },
+    "no_side": {
+     "gross_multiple": 0.22087402257516317,
+     "total_excess": -0.7791259774248368,
+     "annualised_excess": -0.06317799278268699
+    }
+   }
+  },
+  "Doubling (SSP5-8.5-like) | history": {
+   "p_yes_2049": 0.98413,
+   "p_yes_2048": 0.96274,
+   "p_only_2049": 0.02138999999999991,
+   "mean_tau_yes": 17.513215643181955,
+   "0: vs cash on Kalshi": {
+    "fair_price": 0.98413,
+    "band": [
+     0.6639999999999999,
+     0.735
+    ],
+    "position": "above band (model > market)",
+    "yes_side": {
+     "gross_multiple": 1.338952380952381,
+     "total_excess": 0.3389523809523809,
+     "annualised_excess": 0.016806363802213564
+    },
+    "no_side": {
+     "gross_multiple": 0.04723214285714301,
+     "total_excess": -0.9527678571428569,
+     "annualised_excess": -0.12359080635233421
+    }
+   },
+   "T-bill - Kalshi APY": {
+    "fair_price": 0.9846423147029402,
+    "band": [
+     0.6148483239080288,
+     0.8148969015337978
+    ],
+    "position": "above band (model > market)",
+    "yes_side": {
+     "gross_multiple": 1.207674244616309,
+     "total_excess": 0.2076742446163089,
+     "annualised_excess": 0.010832768740544951
+    },
+    "no_side": {
+     "gross_multiple": 0.04120454611811275,
+     "total_excess": -0.9587954538818872,
+     "annualised_excess": -0.12874639664798382
+    }
+   }
+  },
+  "Kaya randomised + 2019-24 weighting | ipcc": {
+   "p_yes_2049": 0.6663074257095585,
+   "p_yes_2048": 0.6170808403394906,
+   "p_only_2049": 0.049226585370067855,
+   "mean_tau_yes": 17.628190608533636,
+   "0: vs cash on Kalshi": {
+    "fair_price": 0.6663074257095585,
+    "band": [
+     0.6639999999999999,
+     0.735
+    ],
+    "position": "inside band",
+    "yes_side": {
+     "gross_multiple": 0.9065407152511,
+     "total_excess": -0.09345928474889997,
+     "annualised_excess": -0.005550585123000884
+    },
+    "no_side": {
+     "gross_multiple": 0.993132661578695,
+     "total_excess": -0.006867338421305047,
+     "annualised_excess": -0.00029775272615184534
+    }
+   },
+   "T-bill - Kalshi APY": {
+    "fair_price": 0.6735564477362079,
+    "band": [
+     0.6148483239080288,
+     0.8153462198573788
+    ],
+    "position": "inside band",
+    "yes_side": {
+     "gross_multiple": 0.8172079657474952,
+     "total_excess": -0.1827920342525048,
+     "annualised_excess": -0.011385757377746941
+    },
+    "no_side": {
+     "gross_multiple": 0.8663926317972414,
+     "total_excess": -0.13360736820275865,
+     "annualised_excess": -0.006178630336680646
+    }
+   }
+  },
+  "Falling (SSP1-2.6-like) | ipcc": {
+   "p_yes_2049": 0.43616,
+   "p_yes_2048": 0.39229,
+   "p_only_2049": 0.043869999999999965,
+   "mean_tau_yes": 17.932891785344577,
+   "0: vs cash on Kalshi": {
+    "fair_price": 0.43616,
+    "band": [
+     0.6639999999999999,
+     0.735
+    ],
+    "position": "below band (model < market)",
+    "yes_side": {
+     "gross_multiple": 0.5934149659863945,
+     "total_excess": -0.40658503401360546,
+     "annualised_excess": -0.02868144143966156
+    },
+    "no_side": {
+     "gross_multiple": 1.678095238095238,
+     "total_excess": 0.6780952380952381,
+     "annualised_excess": 0.022622850668972294
+    }
+   },
+   "T-bill - Kalshi APY": {
+    "fair_price": 0.44380270761671364,
+    "band": [
+     0.6148483239080288,
+     0.81678683364967
+    ],
+    "position": "below band (model < market)",
+    "yes_side": {
+     "gross_multiple": 0.5339948956462666,
+     "total_excess": -0.46600510435373343,
+     "annualised_excess": -0.0343793876865377
+    },
+    "no_side": {
+     "gross_multiple": 1.4639427399645002,
+     "total_excess": 0.4639427399645002,
+     "annualised_excess": 0.016607139648101787
+    }
+   }
+  },
+  "Flat (SSP2-4.5-like) | ipcc": {
+   "p_yes_2049": 0.59102,
+   "p_yes_2048": 0.53875,
+   "p_only_2049": 0.05227000000000004,
+   "mean_tau_yes": 17.892202077972467,
+   "0: vs cash on Kalshi": {
+    "fair_price": 0.59102,
+    "band": [
+     0.6639999999999999,
+     0.735
+    ],
+    "position": "below band (model < market)",
+    "yes_side": {
+     "gross_multiple": 0.804108843537415,
+     "total_excess": -0.19589115646258504,
+     "annualised_excess": -0.012111293136198187
+    },
+    "no_side": {
+     "gross_multiple": 1.2172023809523809,
+     "total_excess": 0.21720238095238087,
+     "annualised_excess": 0.008530344077360086
+    }
+   },
+   "T-bill - Kalshi APY": {
+    "fair_price": 0.5985476821039325,
+    "band": [
+     0.6148483239080288,
+     0.8166109089392825
+    ],
+    "position": "below band (model < market)",
+    "yes_side": {
+     "gross_multiple": 0.7237473728678098,
+     "total_excess": -0.27625262713219023,
+     "annualised_excess": -0.017907759784813182
+    },
+    "no_side": {
+     "gross_multiple": 1.06186737689891,
+     "total_excess": 0.061867376898909976,
+     "annualised_excess": 0.0025975340469763797
+    }
+   }
+  },
+  "Rising (SSP3-7.0-like) | ipcc": {
+   "p_yes_2049": 0.64693,
+   "p_yes_2048": 0.59569,
+   "p_only_2049": 0.05123999999999995,
+   "mean_tau_yes": 17.780649292104393,
+   "0: vs cash on Kalshi": {
+    "fair_price": 0.64693,
+    "band": [
+     0.6639999999999999,
+     0.735
+    ],
+    "position": "below band (model < market)",
+    "yes_side": {
+     "gross_multiple": 0.8801768707482993,
+     "total_excess": -0.11982312925170069,
+     "annualised_excess": -0.007152461708508806
+    },
+    "no_side": {
+     "gross_multiple": 1.0508035714285713,
+     "total_excess": 0.05080357142857128,
+     "annualised_excess": 0.002143831269623808
+    }
+   },
+   "T-bill - Kalshi APY": {
+    "fair_price": 0.6541780883202442,
+    "band": [
+     0.6148483239080288,
+     0.8160802004503707
+    ],
+    "position": "inside band",
+    "yes_side": {
+     "gross_multiple": 0.7927284593388964,
+     "total_excess": -0.20727154066110365,
+     "annualised_excess": -0.01297837774136279
+    },
+    "no_side": {
+     "gross_multiple": 0.9167037868885962,
+     "total_excess": -0.08329621311140378,
+     "annualised_excess": -0.0037514092741625094
+    }
+   }
+  },
+  "Doubling (SSP5-8.5-like) | ipcc": {
+   "p_yes_2049": 0.74371,
+   "p_yes_2048": 0.69764,
+   "p_only_2049": 0.046069999999999944,
+   "mean_tau_yes": 17.410524587347442,
+   "0: vs cash on Kalshi": {
+    "fair_price": 0.74371,
+    "band": [
+     0.6639999999999999,
+     0.735
+    ],
+    "position": "above band (model > market)",
+    "yes_side": {
+     "gross_multiple": 1.0118503401360543,
+     "total_excess": 0.01185034013605435,
+     "annualised_excess": 0.0006768699686114932
+    },
+    "no_side": {
+     "gross_multiple": 0.7627678571428571,
+     "total_excess": -0.2372321428571429,
+     "annualised_excess": -0.011634530148610711
+    }
+   },
+   "T-bill - Kalshi APY": {
+    "fair_price": 0.7501469391712274,
+    "band": [
+     0.6148483239080288,
+     0.8143107093942388
+    ],
+    "position": "inside band",
+    "yes_side": {
+     "gross_multiple": 0.9133000357483223,
+     "total_excess": -0.0866999642516777,
+     "annualised_excess": -0.005195422606360078
+    },
+    "no_side": {
+     "gross_multiple": 0.6654261578204842,
+     "total_excess": -0.3345738421795158,
+     "annualised_excess": -0.017448717701473715
+    }
+   }
+  }
+ },
+ "price_history": {
+  "n_trades": 204,
+  "first_day": "2026-09-11",
+  "last_day": "2026-11-15",
+  "contracts_in_api_history": 4759.169999999999,
+  "lifetime_volume": 21756.51,
+  "vwap_first_day": 0.753854041013269,
+  "vwap_last_day": 0.7166285714285715,
+  "vwap_min": 0.4982245439800546,
+  "vwap_max": 0.8117527675276753,
+  "vwap_last_30d": 0.6768827244087754
+ }
+}

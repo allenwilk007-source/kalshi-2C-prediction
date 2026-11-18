@@ -1,0 +1,17 @@
+{
+ "fetched_utc": "2026-11-18T04:41:06+00:00",
+ "ticker": "KXWARMING-50",
+ "api": "https://api.elections.kalshi.com/trade-api/v2",
+ "kalshi_apy": 0.035,
+ "apy_checked": "2026-11-08",
+ "taker_rate": 0.07,
+ "files": {
+  "market.json": 1627,
+  "orderbook.json": 560,
+  "trades.json": 62861,
+  "treasury_nominal.csv": 17930,
+  "treasury_real.csv": 7962,
+  "kxgtemp_26.json": 2169,
+  "climate_markets.json": 23493
+ }
+}

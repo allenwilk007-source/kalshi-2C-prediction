@@ -1,0 +1,602 @@
+{
+ "snapshot": "20261118T044236Z",
+ "kxgtemp_26": {
+  "ticker": "KXGTEMP-26-P0",
+  "bid": 0.881,
+  "ask": 0.884,
+  "last": 0.884,
+  "volume": 618144.44,
+  "open_interest": 174995.23,
+  "rule": "If the unsmoothed Land-Ocean Temperature Index value for 2026 reported by NASA\u00e2\u20ac\u2122s Goddard Institute for Space Studies (GISS) is above the 2025 value and 1.28 degrees Celsius, then the market resolves to Yes."
+ },
+ "era5_last_day": [
+  2026,
+  11,
+  6
+ ],
+ "nowcast": {
+  "giss": {
+   "months_obs": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "months_filled": [
+    10,
+    11,
+    12
+   ],
+   "bridge": {
+    "alpha": 0.6109826208386115,
+    "beta": 0.9359578484324615,
+    "s": 0.05581587387334177,
+    "rho": 0.43599795116899126,
+    "n": 420
+   },
+   "native_mean": 1.31080079113624,
+   "native_sd": 0.025674924039139388,
+   "rebased_mean": 1.4994358404070154
+  },
+  "noaa": {
+   "months_obs": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "months_filled": [
+    10,
+    11,
+    12
+   ],
+   "bridge": {
+    "alpha": 0.6063000521585535,
+    "beta": 0.9006820175689102,
+    "s": 0.04541134782248703,
+    "rho": 0.5144543309418907,
+    "n": 420
+   },
+   "native_mean": 1.2533406701821113,
+   "native_sd": 0.02392298443444824,
+   "rebased_mean": 1.420791650574268
+  },
+  "hadcrut": {
+   "months_obs": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "months_filled": [
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "bridge": {
+    "alpha": 0.5366026005807341,
+    "beta": 0.906150266951183,
+    "s": 0.04804657686035639,
+    "rho": 0.36199452273005067,
+    "n": 420
+   },
+   "native_mean": 1.1822153965542586,
+   "native_sd": 0.02625760204287679,
+   "rebased_mean": 1.5395762653189646
+  }
+ },
+ "signal_2026": {
+  "mean": 1.5222089320468666,
+  "sd": 0.02411746904766059,
+  "q4_minus_annual": 0.24329426393858347
+ },
+ "shared_corr": 0.718234353552778,
+ "sd_scale": 1.3311550300956703,
+ "backtest": {
+  "raw": [
+   {
+    "year": 2023,
+    "dataset": "giss",
+    "pred": 1.1471338943685903,
+    "sd": 0.019009342876126354,
+    "actual": 1.1675000000000002,
+    "z": 1.071373469568353
+   },
+   {
+    "year": 2023,
+    "dataset": "noaa",
+    "pred": 1.1399565054680174,
+    "sd": 0.017577961083143284,
+    "actual": 1.1658333333333333,
+    "z": 1.472117712794969
+   },
+   {
+    "year": 2023,
+    "dataset": "hadcrut",
+    "pred": 1.0810397123906468,
+    "sd": 0.019530619736672195,
+    "actual": 1.1098045416666666,
+    "z": 1.472806785644841
+   },
+   {
+    "year": 2024,
+    "dataset": "giss",
+    "pred": 1.2978123055501383,
+    "sd": 0.019239889838045754,
+    "actual": 1.2816666666666665,
+    "z": -0.8391752249820424
+   },
+   {
+    "year": 2024,
+    "dataset": "noaa",
+    "pred": 1.2650132727377694,
+    "sd": 0.017959673562315773,
+    "actual": 1.251666666666667,
+    "z": -0.7431430212132177
+   },
+   {
+    "year": 2024,
+    "dataset": "hadcrut",
+    "pred": 1.1964513877219227,
+    "sd": 0.01984893272391999,
+    "actual": 1.1690051583333334,
+    "z": -1.3827559280058321
+   },
+   {
+    "year": 2025,
+    "dataset": "giss",
+    "pred": 1.2086453883824164,
+    "sd": 0.019260985743861477,
+    "actual": 1.1850000000000003,
+    "z": -1.2276312695964684
+   },
+   {
+    "year": 2025,
+    "dataset": "noaa",
+    "pred": 1.1480086264060625,
+    "sd": 0.017964728376253732,
+    "actual": 1.1158333333333335,
+    "z": -1.7910258590527435
+   },
+   {
+    "year": 2025,
+    "dataset": "hadcrut",
+    "pred": 1.0798129489612482,
+    "sd": 0.019785839723561717,
+    "actual": 1.0480304033333334,
+    "z": -1.6063278623482926
+   }
+  ],
+  "calibrated": [
+   {
+    "year": 2023,
+    "dataset": "giss",
+    "pred": 1.1471338943685903,
+    "sd": 0.02530438238836889,
+    "actual": 1.1675000000000002,
+    "z": 0.8048449995274806
+   },
+   {
+    "year": 2023,
+    "dataset": "noaa",
+    "pred": 1.1399565054680176,
+    "sd": 0.023398991314652118,
+    "actual": 1.1658333333333333,
+    "z": 1.105895015615991
+   },
+   {
+    "year": 2023,
+    "dataset": "hadcrut",
+    "pred": 1.0810397123906468,
+    "sd": 0.025998282703356967,
+    "actual": 1.1098045416666666,
+    "z": 1.1064126659529583
+   },
+   {
+    "year": 2024,
+    "dataset": "giss",
+    "pred": 1.2978123055501383,
+    "sd": 0.025611276136401174,
+    "actual": 1.2816666666666665,
+    "z": -0.6304113390321869
+   },
+   {
+    "year": 2024,
+    "dataset": "noaa",
+    "pred": 1.2650132727377692,
+    "sd": 0.023907109801352865,
+    "actual": 1.251666666666667,
+    "z": -0.558269325819845
+   },
+   {
+    "year": 2024,
+    "dataset": "hadcrut",
+    "pred": 1.196451387721923,
+    "sd": 0.026422006637476646,
+    "actual": 1.1690051583333334,
+    "z": -1.0387640032479648
+   },
+   {
+    "year": 2025,
+    "dataset": "giss",
+    "pred": 1.2086453883824164,
+    "sd": 0.0256393580575422,
+    "actual": 1.1850000000000003,
+    "z": -0.9222301248474706
+   },
+   {
+    "year": 2025,
+    "dataset": "noaa",
+    "pred": 1.1480086264060625,
+    "sd": 0.02391383854235258,
+    "actual": 1.1158333333333335,
+    "z": -1.3454675214832206
+   },
+   {
+    "year": 2025,
+    "dataset": "hadcrut",
+    "pred": 1.0798129489612482,
+    "sd": 0.026338020072685906,
+    "actual": 1.0480304033333334,
+    "z": -1.2067173439842283
+   }
+  ],
+  "rms_raw": 1.3311550300956703,
+  "rms_calibrated": 0.9999999999999991
+ },
+ "p_kxgtemp_model": 0.839,
+ "momentum": {
+  "c": -0.0011310299295443189,
+  "phi1": 0.293896971590735,
+  "phi2": 0.655781755343006,
+  "t_phi2": 5.374804013759735,
+  "se_phi2": 0.12201035678029856,
+  "sigma": 0.07998768493280169,
+  "n": 65
+ },
+ "momentum_used": true,
+ "p_yes": {
+  "Kaya randomised + 2019-24 weighting": {
+   "history": {
+    "p_yes": 0.9270191416230286,
+    "mc_se": 0.0013907264417003277,
+    "first_p10": 2040.0,
+    "first_median": 2044.0,
+    "first_p90": 2048.0,
+    "ess_paths": 35140.369986713384,
+    "p_yes_2048": 0.8782168203614541,
+    "p_yes_2025_start": 0.9262944615591322,
+    "position": "above band"
+   },
+   "ipcc": {
+    "p_yes": 0.6714354852529033,
+    "mc_se": 0.002510812253063687,
+    "first_p10": 2038.0,
+    "first_median": 2044.0,
+    "first_p90": 2048.0,
+    "ess_paths": 35140.369986713384,
+    "p_yes_2048": 0.6219062212971714,
+    "p_yes_2025_start": 0.6663074257095585,
+    "position": "inside band"
+   }
+  },
+  "Falling (SSP1-2.6-like)": {
+   "history": {
+    "p_yes": 0.5947,
+    "mc_se": 0.0015525202414139406,
+    "first_p10": 2041.0,
+    "first_median": 2045.0,
+    "first_p90": 2049.0,
+    "ess_paths": 100000.0,
+    "p_yes_2048": 0.52243,
+    "p_yes_2025_start": 0.59418,
+    "position": "below band"
+   },
+   "ipcc": {
+    "p_yes": 0.43827,
+    "mc_se": 0.0015690424057366965,
+    "first_p10": 2037.0,
+    "first_median": 2044.0,
+    "first_p90": 2048.0,
+    "ess_paths": 100000.0,
+    "p_yes_2048": 0.39447,
+    "p_yes_2025_start": 0.43616,
+    "position": "below band"
+   }
+  },
+  "Flat (SSP2-4.5-like)": {
+   "history": {
+    "p_yes": 0.84806,
+    "mc_se": 0.00113513979931989,
+    "first_p10": 2040.0,
+    "first_median": 2045.0,
+    "first_p90": 2048.0,
+    "ess_paths": 100000.0,
+    "p_yes_2048": 0.77798,
+    "p_yes_2025_start": 0.84789,
+    "position": "above band"
+   },
+   "ipcc": {
+    "p_yes": 0.59339,
+    "mc_se": 0.0015533135803822743,
+    "first_p10": 2038.0,
+    "first_median": 2044.0,
+    "first_p90": 2048.0,
+    "ess_paths": 100000.0,
+    "p_yes_2048": 0.54138,
+    "p_yes_2025_start": 0.59102,
+    "position": "below band"
+   }
+  },
+  "Rising (SSP3-7.0-like)": {
+   "history": {
+    "p_yes": 0.91399,
+    "mc_se": 0.0008866356630544477,
+    "first_p10": 2040.0,
+    "first_median": 2045.0,
+    "first_p90": 2048.0,
+    "ess_paths": 100000.0,
+    "p_yes_2048": 0.8585,
+    "p_yes_2025_start": 0.91493,
+    "position": "above band"
+   },
+   "ipcc": {
+    "p_yes": 0.64896,
+    "mc_se": 0.0015093406454475408,
+    "first_p10": 2038.0,
+    "first_median": 2044.0,
+    "first_p90": 2048.0,
+    "ess_paths": 100000.0,
+    "p_yes_2048": 0.59755,
+    "p_yes_2025_start": 0.64693,
+    "position": "below band"
+   }
+  },
+  "Doubling (SSP5-8.5-like)": {
+   "history": {
+    "p_yes": 0.98385,
+    "mc_se": 0.00039861231165130867,
+    "first_p10": 2040.0,
+    "first_median": 2043.0,
+    "first_p90": 2047.0,
+    "ess_paths": 100000.0,
+    "p_yes_2048": 0.96181,
+    "p_yes_2025_start": 0.98413,
+    "position": "above band"
+   },
+   "ipcc": {
+    "p_yes": 0.74612,
+    "mc_se": 0.001376317352938631,
+    "first_p10": 2038.0,
+    "first_median": 2044.0,
+    "first_p90": 2048.0,
+    "ess_paths": 100000.0,
+    "p_yes_2048": 0.70198,
+    "p_yes_2025_start": 0.74371,
+    "position": "above band"
+   }
+  }
+ },
+ "band": [
+  0.6639999999999999,
+  0.735
+ ],
+ "ipcc_headline_no_momentum": {
+  "p_yes": 0.6709966111986962,
+  "mc_se": 0.002511642043636043,
+  "first_p10": 2038.0,
+  "first_median": 2044.0,
+  "first_p90": 2048.0,
+  "ess_paths": 35140.369986713384
+ },
+ "hedge": {
+  "Kaya randomised + 2019-24 weighting | ipcc": {
+   "p_yes": 0.6714354852529033,
+   "rows": {
+    "linear temperature swap, damage coef fixed": {
+     "h": 9445.278614662411,
+     "r2": 0.9800867679884673,
+     "sd_unhedged": 2465.1805667243307,
+     "sd_hedged": 347.87211079247754,
+     "mean_loss": 3822.054587303228
+    },
+    "linear temperature swap, damage coef random": {
+     "h": 14922.875238420234,
+     "r2": 0.06173696994257755,
+     "sd_unhedged": 15518.369133111652,
+     "sd_hedged": 15031.709716397056,
+     "mean_loss": 6242.504458658115
+    },
+    "KXWARMING-50 Yes, damage coef fixed": {
+     "h": 3393.443524128503,
+     "r2": 0.41803122998093467,
+     "sd_unhedged": 2465.1805667243307,
+     "sd_hedged": 1880.6092825631051,
+     "mean_loss": 3822.054587303228
+    },
+    "KXWARMING-50 Yes, damage coef random": {
+     "h": 5509.723331941796,
+     "r2": 0.027809448358964012,
+     "sd_unhedged": 15518.369133111652,
+     "sd_hedged": 15301.069090114199,
+     "mean_loss": 6242.504458658115
+    },
+    "KXWARMING-50 Yes vs cumulative 2027-49 damages": {
+     "h": 61745.76041847601,
+     "r2": 0.03700267976998435,
+     "sd_unhedged": 150765.86665648583,
+     "sd_hedged": 147950.20383318045,
+     "mean_loss": 53745.63608081925
+    }
+   },
+   "h_contracts_per_1M_income": 5509.723331941796,
+   "expected_cost_per_1M": 350.2228899856369,
+   "mean_loss_if_yes": 8052.804031608329,
+   "mean_loss_if_no": 2543.080699666532,
+   "capacity_contracts_le_0.71": 0.0,
+   "capacity_contracts_le_0.76": 939.88,
+   "max_income_hedgeable_le_0.71_$M": 0.0,
+   "max_income_hedgeable_le_0.76_$M": 0.17058569793353986
+  },
+  "Kaya randomised + 2019-24 weighting | history": {
+   "p_yes": 0.9270191416230286,
+   "rows": {
+    "linear temperature swap, damage coef fixed": {
+     "h": 9922.768435489243,
+     "r2": 0.9801946128563409,
+     "sd_unhedged": 1340.4091219658485,
+     "sd_hedged": 188.6379389860588,
+     "mean_loss": 4587.578533794223
+    },
+    "linear temperature swap, damage coef random": {
+     "h": 16240.555444410133,
+     "r2": 0.01846994078096448,
+     "sd_unhedged": 15981.91442366605,
+     "sd_hedged": 15833.634043671871,
+     "mean_loss": 7511.589362759874
+    },
+    "KXWARMING-50 Yes, damage coef fixed": {
+     "h": 1981.0463730159956,
+     "r2": 0.14777882292263414,
+     "sd_unhedged": 1340.4091219658485,
+     "sd_hedged": 1237.4097556777301,
+     "mean_loss": 4587.578533794223
+    },
+    "KXWARMING-50 Yes, damage coef random": {
+     "h": 3404.44288709579,
+     "r2": 0.003069956154314838,
+     "sd_unhedged": 15981.91442366605,
+     "sd_hedged": 15957.363678483303,
+     "mean_loss": 7511.589362759874
+    },
+    "KXWARMING-50 Yes vs cumulative 2027-49 damages": {
+     "h": 27972.7609644691,
+     "r2": 0.002559876467665353,
+     "sd_unhedged": 143805.22456425044,
+     "sd_hedged": 143621.04481422433,
+     "mean_loss": 67541.08976945607
+    }
+   },
+   "h_contracts_per_1M_income": 3404.44288709579,
+   "expected_cost_per_1M": -653.7182008847587,
+   "mean_loss_if_yes": 7760.048526955501,
+   "mean_loss_if_no": 4355.60563985971,
+   "capacity_contracts_le_0.71": 0.0,
+   "capacity_contracts_le_0.76": 939.88,
+   "max_income_hedgeable_le_0.71_$M": 0.0,
+   "max_income_hedgeable_le_0.76_$M": 0.2760745388217625
+  },
+  "Flat (SSP2-4.5-like) | ipcc": {
+   "p_yes": 0.59339,
+   "rows": {
+    "linear temperature swap, damage coef fixed": {
+     "h": 9185.557711823625,
+     "r2": 0.978192706032144,
+     "sd_unhedged": 2278.962658744592,
+     "sd_hedged": 336.54109096338846,
+     "mean_loss": 3298.3295101696476
+    },
+    "linear temperature swap, damage coef random": {
+     "h": 14488.505856324506,
+     "r2": 0.07008272811632357,
+     "sd_unhedged": 13429.566379749394,
+     "sd_hedged": 12950.428762895182,
+     "mean_loss": 5359.7106563062625
+    },
+    "KXWARMING-50 Yes, damage coef fixed": {
+     "h": 2996.4359699992733,
+     "r2": 0.4171131326121932,
+     "sd_unhedged": 2278.962658744592,
+     "sd_hedged": 1739.9202576059838,
+     "mean_loss": 3298.3295101696476
+    },
+    "KXWARMING-50 Yes, damage coef random": {
+     "h": 4874.235529955707,
+     "r2": 0.03178390985056326,
+     "sd_unhedged": 13429.566379749394,
+     "sd_hedged": 13214.420971377458,
+     "mean_loss": 5359.7106563062625
+    },
+    "KXWARMING-50 Yes vs cumulative 2027-49 damages": {
+     "h": 56667.84107639767,
+     "r2": 0.04216989507539967,
+     "sd_unhedged": 135548.4470369522,
+     "sd_hedged": 132659.63185664924,
+     "mean_loss": 47064.86660911595
+    }
+   },
+   "h_contracts_per_1M_income": 4874.235529955707,
+   "expected_cost_per_1M": 690.2404933970276,
+   "mean_loss_if_yes": 7341.62356514155,
+   "mean_loss_if_no": 2467.388035185845,
+   "capacity_contracts_le_0.71": 0.0,
+   "capacity_contracts_le_0.76": 939.88,
+   "max_income_hedgeable_le_0.71_$M": 0.0,
+   "max_income_hedgeable_le_0.76_$M": 0.19282613534445697
+  },
+  "Falling (SSP1-2.6-like) | ipcc": {
+   "p_yes": 0.43827,
+   "rows": {
+    "linear temperature swap, damage coef fixed": {
+     "h": 8771.03528828093,
+     "r2": 0.9774341885042452,
+     "sd_unhedged": 2011.4393208035242,
+     "sd_hedged": 302.15682869812974,
+     "mean_loss": 2521.700264025836
+    },
+    "linear temperature swap, damage coef random": {
+     "h": 13997.325471606417,
+     "r2": 0.08016759857583211,
+     "sd_unhedged": 11208.447556090521,
+     "sd_hedged": 10749.785932613968,
+     "mean_loss": 4134.435456774102
+    },
+    "KXWARMING-50 Yes, damage coef fixed": {
+     "h": 2526.1332598484155,
+     "r2": 0.3883005492588854,
+     "sd_unhedged": 2011.4393208035242,
+     "sd_hedged": 1573.1711775193528,
+     "mean_loss": 2521.700264025836
+    },
+    "KXWARMING-50 Yes, damage coef random": {
+     "h": 4145.702438921581,
+     "r2": 0.033680202056871375,
+     "sd_unhedged": 11208.447556090521,
+     "sd_hedged": 11018.07952972237,
+     "mean_loss": 4134.435456774102
+    },
+    "KXWARMING-50 Yes vs cumulative 2027-49 damages": {
+     "h": 52373.92638437168,
+     "r2": 0.04579543211454206,
+     "sd_unhedged": 121433.56191333989,
+     "sd_hedged": 118620.42607148983,
+     "mean_loss": 38322.65577213824
+    }
+   },
+   "h_contracts_per_1M_income": 4145.702438921581,
+   "expected_cost_per_1M": 1230.1542847012008,
+   "mean_loss_if_yes": 6463.200887789522,
+   "mean_loss_if_no": 2317.4984488679406,
+   "capacity_contracts_le_0.71": 0.0,
+   "capacity_contracts_le_0.76": 939.88,
+   "max_income_hedgeable_le_0.71_$M": 0.0,
+   "max_income_hedgeable_le_0.76_$M": 0.2267118814838265
+  }
+ },
+ "damage_coef_median": 0.2422145328
+}

@@ -1,0 +1,386 @@
+{
+ "snapshot": "20261118T044236Z",
+ "rows": [
+  {
+   "series": "KXCO2LEVEL",
+   "ticker": "KXCO2LEVEL-30-445",
+   "event": "KXCO2LEVEL-30",
+   "label": "At least 445",
+   "bid": 0.18,
+   "ask": 0.23,
+   "mid": 0.20500000000000002,
+   "last": 0.24,
+   "volume": 4794.91,
+   "close": "2030-01-01T04:59:00Z",
+   "rule": "If the atmospheric concentration of CO2 is at least 445 before Jan 2030, then the market resolves to Yes.",
+   "p_model": 0.00025,
+   "p_alt": 0.0128,
+   "method": "Mauna Loa monthly mean (alt: daily max)",
+   "band": [
+    0.16960000000000008,
+    0.2424
+   ],
+   "position": "below",
+   "gap": -0.20475000000000002
+  },
+  {
+   "series": "KXCO2LEVEL",
+   "ticker": "KXCO2LEVEL-30-450",
+   "event": "KXCO2LEVEL-30",
+   "label": "At least 450",
+   "bid": 0.1,
+   "ask": 0.17,
+   "mid": 0.135,
+   "last": 0.1,
+   "volume": 4638.13,
+   "close": "2030-01-01T04:59:00Z",
+   "rule": "If the atmospheric concentration of CO2 is at least 450 before Jan 2030, then the market resolves to Yes.",
+   "p_model": 0.0,
+   "p_alt": 0.0,
+   "method": "Mauna Loa monthly mean (alt: daily max)",
+   "band": [
+    0.0937,
+    0.1799
+   ],
+   "position": "below",
+   "gap": -0.135
+  },
+  {
+   "series": "KXCO2LEVEL",
+   "ticker": "KXCO2LEVEL-30-455",
+   "event": "KXCO2LEVEL-30",
+   "label": "At least 455",
+   "bid": 0.06,
+   "ask": 0.1,
+   "mid": 0.08,
+   "last": 0.05,
+   "volume": 885.92,
+   "close": "2030-01-01T04:59:00Z",
+   "rule": "If the atmospheric concentration of CO2 is at least 455 before Jan 2030, then the market resolves to Yes.",
+   "p_model": 0.0,
+   "p_alt": 0.0,
+   "method": "Mauna Loa monthly mean (alt: daily max)",
+   "band": [
+    0.05600000000000005,
+    0.1063
+   ],
+   "position": "below",
+   "gap": -0.08
+  },
+  {
+   "series": "KXGTEMP",
+   "ticker": "KXGTEMP-27-P0",
+   "event": "KXGTEMP-27",
+   "label": "Hottest",
+   "bid": 0.87,
+   "ask": 0.9,
+   "mid": 0.885,
+   "last": 0.87,
+   "volume": 34846.67,
+   "close": "2027-01-01T04:59:00Z",
+   "rule": "If the unsmoothed Land-Ocean Temperature Index value for 2026 reported by NASA\u2019s Goddard Institute for Space Studies (GISS) is above 2025 value and 1.28 degrees Celsius, then the market resolves to Yes.",
+   "p_model": 0.839,
+   "p_alt": null,
+   "method": "2026 nowcast, GISS annual",
+   "band": [
+    0.862,
+    0.9063
+   ],
+   "position": "below",
+   "gap": -0.04600000000000004
+  },
+  {
+   "series": "KXCO2LEVEL",
+   "ticker": "KXCO2LEVEL-30-460",
+   "event": "KXCO2LEVEL-30",
+   "label": "At least 460",
+   "bid": 0.01,
+   "ask": 0.08,
+   "mid": 0.045,
+   "last": 0.09,
+   "volume": 1977.46,
+   "close": "2030-01-01T04:59:00Z",
+   "rule": "If the atmospheric concentration of CO2 is at least 460 before Jan 2030, then the market resolves to Yes.",
+   "p_model": 0.0,
+   "p_alt": 0.0,
+   "method": "Mauna Loa monthly mean (alt: daily max)",
+   "band": [
+    0.009299999999999975,
+    0.0852
+   ],
+   "position": "below",
+   "gap": -0.045
+  },
+  {
+   "series": "KXGTEMP",
+   "ticker": "KXGTEMP-26-P0",
+   "event": "KXGTEMP-26",
+   "label": "Hottest",
+   "bid": 0.881,
+   "ask": 0.884,
+   "mid": 0.8825000000000001,
+   "last": 0.884,
+   "volume": 618144.44,
+   "close": "2027-01-01T04:59:00Z",
+   "rule": "If the unsmoothed Land-Ocean Temperature Index value for 2026 reported by NASA\u2019s Goddard Institute for Space Studies (GISS) is above the 2025 value and 1.28 degrees Celsius, then the market resolves to Yes.",
+   "p_model": 0.839,
+   "p_alt": null,
+   "method": "2026 nowcast, GISS annual",
+   "band": [
+    0.8736,
+    0.8912
+   ],
+   "position": "below",
+   "gap": -0.043500000000000094
+  },
+  {
+   "series": "KXCO2LEVEL",
+   "ticker": "KXCO2LEVEL-30-440",
+   "event": "KXCO2LEVEL-30",
+   "label": "At least 440",
+   "bid": 0.78,
+   "ask": 0.86,
+   "mid": 0.8200000000000001,
+   "last": 0.87,
+   "volume": 3534.53,
+   "close": "2030-01-01T04:59:00Z",
+   "rule": "If the atmospheric concentration of CO2 is at least 440 before Jan 2030, then the market resolves to Yes.",
+   "p_model": 0.78025,
+   "p_alt": 0.96475,
+   "method": "Mauna Loa monthly mean (alt: daily max)",
+   "band": [
+    0.7679,
+    0.8684999999999999
+   ],
+   "position": "inside",
+   "gap": -0.03975000000000006
+  },
+  {
+   "series": "KXWARMING",
+   "ticker": "KXWARMING-50",
+   "event": "KXWARMING-50",
+   "label": "Before 2050",
+   "bid": 0.68,
+   "ask": 0.72,
+   "mid": 0.7,
+   "last": 0.72,
+   "volume": 21756.51,
+   "close": "2050-01-01T04:59:00Z",
+   "rule": "If the annual global mean surface temperature anomaly has reached or exceeded +2.0\u00b0C above pre-industrial levels (1850-1900 average) in any calendar year before Jan 1, 2050, then the market resolves to Yes.",
+   "p_model": 0.6714354852529033,
+   "p_alt": 0.9270191416230286,
+   "method": "Phase 5, IPCC-calibrated (alt: history-fit)",
+   "band": [
+    0.6647000000000001,
+    0.7342
+   ],
+   "position": "inside",
+   "gap": -0.028564514747096648
+  },
+  {
+   "series": "KXHMONTH",
+   "ticker": "KXHMONTH-26NOV",
+   "event": "KXHMONTH-26NOV",
+   "label": "Hottest ever",
+   "bid": 0.9,
+   "ask": 0.92,
+   "mid": 0.91,
+   "last": 0.91,
+   "volume": 56721.43,
+   "close": "2026-12-16T04:59:00Z",
+   "rule": "If Nov 2026 is the hottest November ever, then the market resolves to Yes.",
+   "p_model": 0.9343,
+   "p_alt": null,
+   "method": "ERA5-bridged NOAA 2026-11 vs record 1.39",
+   "band": [
+    0.8936999999999999,
+    0.9252
+   ],
+   "position": "above",
+   "gap": 0.02429999999999999
+  },
+  {
+   "series": "KXHMONTHRANGE",
+   "ticker": "KXHMONTHRANGE-26NOV-B1.200",
+   "event": "KXHMONTHRANGE-26NOV",
+   "label": "1.17 to 1.23",
+   "bid": 0.01,
+   "ask": 0.04,
+   "mid": 0.025,
+   "last": 0.04,
+   "volume": 1898.0,
+   "close": "2026-12-16T04:59:00Z",
+   "rule": "If the Land Ocean-Temperature Index for Nov 2026 is between 1.17-1.23, then the market resolves to Yes.",
+   "p_model": 0.00305,
+   "p_alt": null,
+   "method": "ERA5-bridged NOAA 2026-11 (between)",
+   "band": [
+    0.009299999999999975,
+    0.0427
+   ],
+   "position": "below",
+   "gap": -0.02195
+  },
+  {
+   "series": "KXHMONTHRANGE",
+   "ticker": "KXHMONTHRANGE-26NOV-T1.03",
+   "event": "KXHMONTHRANGE-26NOV",
+   "label": "1.02999 or below",
+   "bid": 0.0,
+   "ask": 0.04,
+   "mid": 0.02,
+   "last": 0.04,
+   "volume": 476.52,
+   "close": "2026-12-16T04:59:00Z",
+   "rule": "If the Land Ocean-Temperature Index for Nov 2026 is below 1.03, then the market resolves to Yes.",
+   "p_model": 5e-05,
+   "p_alt": null,
+   "method": "ERA5-bridged NOAA 2026-11 (less)",
+   "band": [
+    0.0,
+    0.0427
+   ],
+   "position": "inside",
+   "gap": -0.01995
+  },
+  {
+   "series": "KXHMONTHRANGE",
+   "ticker": "KXHMONTHRANGE-26NOV-B1.060",
+   "event": "KXHMONTHRANGE-26NOV",
+   "label": "1.03 to 1.09",
+   "bid": 0.0,
+   "ask": 0.04,
+   "mid": 0.02,
+   "last": 0.04,
+   "volume": 1276.0,
+   "close": "2026-12-16T04:59:00Z",
+   "rule": "If the Land Ocean-Temperature Index for Nov 2026 is between 1.03-1.09, then the market resolves to Yes.",
+   "p_model": 0.0001,
+   "p_alt": null,
+   "method": "ERA5-bridged NOAA 2026-11 (between)",
+   "band": [
+    0.0,
+    0.0427
+   ],
+   "position": "inside",
+   "gap": -0.0199
+  },
+  {
+   "series": "KXHMONTHRANGE",
+   "ticker": "KXHMONTHRANGE-26NOV-B1.130",
+   "event": "KXHMONTHRANGE-26NOV",
+   "label": "1.10 to 1.16",
+   "bid": 0.01,
+   "ask": 0.03,
+   "mid": 0.02,
+   "last": 0.04,
+   "volume": 2287.0,
+   "close": "2026-12-16T04:59:00Z",
+   "rule": "If the Land Ocean-Temperature Index for Nov 2026 is between 1.10-1.16, then the market resolves to Yes.",
+   "p_model": 0.0008,
+   "p_alt": null,
+   "method": "ERA5-bridged NOAA 2026-11 (between)",
+   "band": [
+    0.009299999999999975,
+    0.0321
+   ],
+   "position": "below",
+   "gap": -0.019200000000000002
+  },
+  {
+   "series": "KXHMONTHRANGE",
+   "ticker": "KXHMONTHRANGE-26NOV-B1.270",
+   "event": "KXHMONTHRANGE-26NOV",
+   "label": "1.24 to 1.30",
+   "bid": 0.02,
+   "ask": 0.04,
+   "mid": 0.03,
+   "last": 0.04,
+   "volume": 1816.0,
+   "close": "2026-12-16T04:59:00Z",
+   "rule": "If the Land Ocean-Temperature Index for Nov 2026 is between 1.24-1.30, then the market resolves to Yes.",
+   "p_model": 0.01225,
+   "p_alt": null,
+   "method": "ERA5-bridged NOAA 2026-11 (between)",
+   "band": [
+    0.01860000000000006,
+    0.0427
+   ],
+   "position": "below",
+   "gap": -0.01775
+  },
+  {
+   "series": "KXHMONTHRANGE",
+   "ticker": "KXHMONTHRANGE-26NOV-T1.30",
+   "event": "KXHMONTHRANGE-26NOV",
+   "label": "1.30001 or above",
+   "bid": 0.96,
+   "ask": 0.99,
+   "mid": 0.975,
+   "last": 0.96,
+   "volume": 2255.87,
+   "close": "2026-12-16T04:59:00Z",
+   "rule": "If the Land Ocean-Temperature Index for Nov 2026 is above 1.30, then the market resolves to Yes.",
+   "p_model": 0.98375,
+   "p_alt": null,
+   "method": "ERA5-bridged NOAA 2026-11 (greater)",
+   "band": [
+    0.9573,
+    0.9907
+   ],
+   "position": "inside",
+   "gap": 0.008750000000000036
+  }
+ ],
+ "notes": [],
+ "range_bin_sums": {
+  "KXHMONTHRANGE-26NOV": 1.0
+ },
+ "co2": {
+  "beta": 0.8913406474593996,
+  "alpha": 49.942498026083555,
+  "growth_sd": 0.41985407116483014,
+  "start_month": [
+   2026,
+   9
+  ],
+  "rw_sd_monthly": 0.12,
+  "forecast_error_sd_historical": {
+   "12": 0.743572158345902,
+   "24": 0.8974353944895943,
+   "36": 0.9886713389647785
+  },
+  "forecast_error_sd_model": {
+   "12": 0.644304416338919,
+   "24": 0.8726911830316911,
+   "36": 1.0539766361274965
+  },
+  "backtest_z_12m": -2.035297859888738,
+  "kappa_ppm_per_C": 2.843528150396794,
+  "temp_anomaly_2026_27_median": [
+   0.17903197582845923,
+   0.21191742668463276
+  ],
+  "growth_2026_29_median": [
+   3.0401924178546023,
+   3.163870705226918,
+   2.885046324554854,
+   2.7481139472759026
+  ],
+  "trend_start": 429.5979333333333,
+  "observed_max_monthly_since_open": 432.34,
+  "observed_max_daily_since_open": 433.95,
+  "backtest_rmse": 0.9490628996124871,
+  "backtest_coverage_5_95": 0.25,
+  "max_monthly_p5_50_95": [
+   438.95759065837154,
+   440.8896301678217,
+   442.83479636354014
+  ],
+  "max_daily_p5_50_95": [
+   440.18458072306754,
+   442.1670847024252,
+   444.2444080556425
+  ]
+ }
+}
