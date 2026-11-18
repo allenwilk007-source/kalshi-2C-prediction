@@ -67,6 +67,10 @@ table.grid .big { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 40
 table.grid .c-ours { color: var(--accent); }
 table.grid .c-ipcc { color: var(--blue); }
 table.grid tr.hl td { background: #FFF4EC; }
+table.grid.tight td { padding: 8px 16px; }
+table.grid .c-no { color: var(--blue); font-weight: 700; }
+table.grid .c-yes { color: var(--accent); font-weight: 700; }
+table.grid .c-pass { color: var(--muted); font-weight: 700; }
 
 /* cover and statement slides: navy */
 section.navy { background: var(--ink); }

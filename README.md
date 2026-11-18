@@ -566,7 +566,9 @@ server, and `static/decision_lab_embed.html`, the same page without its document
 
 ## Slide deck
 
-`deck/` holds the presentation's source (24 slides, speaker notes in each `<aside>`): the question and why compare a model with a
-market, the class model and its uncertainty, model vs Kalshi vs the IPCC report across dimensions (probability, timing, range,
-deadlines, thresholds, drivers), how a forecast becomes a Yes / No / Pass decision, the hypothetical trades, and the Decision Lab.
+`deck/` holds the presentation's source (30 slides, speaker notes in each `<aside>`) in three parts: **1** how Kalshi gets its
+number (the contract, the order book, fees and spread, does the market follow data); **2** how we get ours (the class model, noise,
+uncertainty, the 2026 nowcast, probability density functions, the 72-version ensemble, model vs Kalshi vs the IPCC across
+dimensions, what moves the odds); **3** what we could hypothetically do (the Yes / No / Pass rule, value bet, hedge, small trades,
+"if you believe X, here's Y", and the Decision Lab). Then takeaways, limitations and the social cost of carbon as a bonus.
 Images are referenced from the published deck.

@@ -1,0 +1,40 @@
+<section id="kalshinum">
+<div class="head"><p class="eyebrow">HOW THE PRICE FORMS</p><h2>From an order book to 70%</h2></div>
+<div class="two">
+<div class="text" style="width:640px">
+<ul class="pts">
+<li>Yes pays $1 if 2°C happens; No pays $1 if not. So Yes + No = $1</li>
+<li>Buyers post <b>bids</b>, sellers post <b>asks</b>; a trade happens when they meet</li>
+<li>Best bid 68¢, best ask 72¢: the midpoint, <b>70¢, reads as 70%</b></li>
+<li>Anyone who disagrees can trade, which pulls the price toward the crowd’s view</li>
+</ul>
+<p class="small">Order book on 18 Nov 2026. 21,757 contracts traded since July 2025; 4,142 still open.</p>
+</div>
+<div class="chart">
+<svg viewBox="0 0 940 580" width="940" height="580" aria-label="KXWARMING-50 order book: offers to sell Yes at 72 cents (500 contracts), 75, 76 and 84 cents; offers to buy Yes at 68 cents (20 contracts), 67, 66, 65 (546 contracts) and 64 cents; midpoint 70 cents">
+<text x="0" y="24" font-size="24" font-weight="700" fill="#C2410C">Offers to sell Yes (asks)</text>
+<text x="0" y="67" font-size="24" font-weight="700" fill="#14213D">84¢</text><rect x="110" y="40" width="233" height="36" rx="6" fill="#EA580C"/><text x="355" y="67" font-size="24" fill="#5B6475">212</text>
+<text x="0" y="115" font-size="24" font-weight="700" fill="#14213D">76¢</text><rect x="110" y="88" width="440" height="36" rx="6" fill="#EA580C"/><text x="562" y="115" font-size="24" fill="#5B6475">400</text>
+<text x="0" y="163" font-size="24" font-weight="700" fill="#14213D">75¢</text><rect x="110" y="136" width="44" height="36" rx="6" fill="#EA580C"/><text x="166" y="163" font-size="24" fill="#5B6475">40</text>
+<text x="0" y="211" font-size="24" font-weight="700" fill="#14213D">72¢</text><rect x="110" y="184" width="550" height="36" rx="6" fill="#EA580C"/><text x="672" y="211" font-size="24" fill="#5B6475">500 contracts</text>
+<rect x="0" y="234" width="940" height="60" rx="10" fill="#ECEEF2"/>
+<text x="470" y="273" text-anchor="middle" font-size="26" font-weight="700" fill="#14213D">Spread 68¢ to 72¢ · midpoint 70¢ = 70%</text>
+<text x="0" y="330" font-size="24" font-weight="700" fill="#1D4ED8">Offers to buy Yes (bids)</text>
+<text x="0" y="371" font-size="24" font-weight="700" fill="#14213D">68¢</text><rect x="110" y="344" width="22" height="36" rx="6" fill="#1D4ED8"/><text x="144" y="371" font-size="24" fill="#5B6475">20</text>
+<text x="0" y="419" font-size="24" font-weight="700" fill="#14213D">67¢</text><rect x="110" y="392" width="71" height="36" rx="6" fill="#1D4ED8"/><text x="193" y="419" font-size="24" fill="#5B6475">64</text>
+<text x="0" y="467" font-size="24" font-weight="700" fill="#14213D">66¢</text><rect x="110" y="440" width="124" height="36" rx="6" fill="#1D4ED8"/><text x="246" y="467" font-size="24" fill="#5B6475">113</text>
+<text x="0" y="515" font-size="24" font-weight="700" fill="#14213D">65¢</text><rect x="110" y="488" width="601" height="36" rx="6" fill="#1D4ED8"/><text x="723" y="515" font-size="24" fill="#5B6475">546</text>
+<text x="0" y="563" font-size="24" font-weight="700" fill="#14213D">64¢</text><rect x="110" y="536" width="183" height="36" rx="6" fill="#1D4ED8"/><text x="305" y="563" font-size="24" fill="#5B6475">166</text>
+</svg>
+</div>
+</div>
+<aside>Here’s exactly how Kalshi produces its number. There’s no model behind it, just an order book.
+
+Each contract is a simple bet. A Yes contract pays one dollar if any year before 2050 reaches 2°C on Kalshi’s rule, and nothing otherwise. A No contract pays one dollar in the opposite case. Since exactly one of them pays, a Yes and a No together are always worth one dollar, and that keeps the two prices consistent.
+
+On the right is the real order book from 18 November. The orange bars are people offering to sell Yes, the asks: 500 contracts at 72 cents, then more at 75, 76 and 84. The blue bars are people offering to buy Yes, the bids: only 20 contracts at 68 cents, then more down to 64. A trade only happens when a buyer accepts an ask or a seller accepts a bid.
+
+The best bid is 68 and the best ask is 72, so the midpoint, 70 cents, is the market’s price. A contract that pays one dollar with probability p is worth about p dollars, so 70 cents reads as a 70% chance.
+
+Why should we trust it at all? Because anyone who thinks 70% is wrong can trade against it and expect to profit, and that pressure pushes the price toward what the crowd as a whole believes. But notice how thin it is: only 20 contracts at the best bid, and 21,757 contracts traded in total since July 2025. The next slide shows why that matters.</aside>
+</section>
