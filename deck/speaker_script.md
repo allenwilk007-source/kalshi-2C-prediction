@@ -1,15 +1,15 @@
 # Speaker script: Will the world hit 2°C before 2050?
 
-Carbon Trading class project. 36 slides, about 52 minutes at 140 words a minute. The same text is in each slide's speaker notes. Hypothetical analysis; no trades were placed.
+Carbon Trading class project. 36 slides, about 53 minutes at 140 words a minute. The same text is in each slide's speaker notes. Hypothetical analysis; no trades were placed.
 
 | Part | Slides | Time |
 |---|---|---|
 | Introduction | 1–3 | 4:10 |
 | Part 1 · How Kalshi gets its number | 4–8 | 6:00 |
 | Part 2 · How we get our number | 9–26 | 28:39 |
-| Part 3 · What we could hypothetically do | 27–33 | 10:13 |
-| Wrap-up | 34–36 | 3:12 |
-| **Total** | 1–36 | **52:15** |
+| Part 3 · What we could hypothetically do | 27–33 | 10:28 |
+| Wrap-up | 34–36 | 3:18 |
+| **Total** | 1–36 | **52:35** |
 
 ---
 
@@ -327,7 +327,7 @@ That closes Part 2. We now have two numbers: the market’s 70%, and ours, betwe
 
 ## Part 3 · What we could hypothetically do
 
-*Goal: Turn the numbers into Yes / No / Pass, test strategies, and show what changes if you believe X. About 10:13.*
+*Goal: Turn the numbers into Yes / No / Pass, test strategies, and show what changes if you believe X. About 10:28.*
 
 ### Slide 27 · What could we do with these numbers?
 *~0:37*
@@ -390,7 +390,7 @@ Move down the table, to beliefs that make 2°C more likely. Adding back land-use
 Two lessons. First, the payoff shape doesn’t change, only which side you’re on and how often you expect to win. Second, every Yes bet risks $100 to make $36, so it only makes sense if you’re quite sure. The Decision Lab lets you combine beliefs, not just change one at a time.
 
 ### Slide 33 · The Decision Lab: make your own call
-*~2:00*
+*~2:14*
 
 Everything in this talk can be tried live. We built a Decision Lab that runs the class model directly in a web browser, using 400 versions of the climate and the economy, and recomputes a forecast in about a tenth of a second.
 
@@ -400,7 +400,7 @@ Path B lets you build your own forecast step by step: choose the emissions path,
 
 Then four tools: play the future, an odds explorer for any threshold and deadline, a chart of what moves the odds where you can click any option to switch to it, and a price slider that shows where your call flips if the market moves.
 
-Every number in the Lab matches our Python results to within a fraction of a point. As always, it’s hypothetical: nothing places a trade.
+Every number in the Lab matches our Python results to within a fraction of a point. As always, it’s hypothetical: nothing places a trade. The Lab, the code, the data and an Excel workbook that rebuilds the 81% are all public on GitHub at github.com/allenwilk007-source/kalshi-2C-prediction; the Lab is one file you can download and open in any browser.
 
 That’s Part 3. The numbers only turn into a decision once you say what you believe, and the Lab lets anyone do that. Let me finish with what we learned.
 
@@ -408,7 +408,7 @@ That’s Part 3. The numbers only turn into a decision once you say what you bel
 
 ## Wrap-up
 
-*Goal: What we learned, the limits, and the bonus SCC slide. About 3:12.*
+*Goal: What we learned, the limits, and the bonus SCC slide. About 3:18.*
 
 ### Slide 34 · What we learned
 *~1:01*
@@ -424,13 +424,13 @@ Three: the market looks fairly priced but it’s small. One modest order moved i
 Four: there’s no easy money. Every trade we looked at only pays if you believe the narrow class-model view over the IPCC’s uncertainty. The only strategy that doesn’t depend on that, earning the bid–ask spread, makes about ten dollars a year here.
 
 ### Slide 35 · What the model can’t do (yet)
-*~1:06*
+*~1:12*
 
 To be honest about the limits. The class model only tracks CO₂, so the effects of aerosols and methane are hidden inside Parameter 2. That’s exactly why we needed the IPCC-calibrated version. The model knows nothing about El Niño forecasts, which the market clearly uses. Damage estimates in the literature range from small benefits to losses of more than 20% of GDP, so any money figure for climate damage is very uncertain. And our trading back-tests assume orders get filled at the prices we chose, which is optimistic in a thin market.
 
 Next steps would be to add non-CO₂ forcing and seasonal El Niño forecasts, keep tracking how our model and the market move as new data arrives (the dashboard already records every run), and extend the scanner as Kalshi lists new climate contracts.
 
-Everything here is a hypothetical class analysis. We didn’t place any trades, and none of it is investment advice. Thank you.
+Everything here is a hypothetical class analysis. We didn’t place any trades, and none of it is investment advice. Everything is public on GitHub at github.com/allenwilk007-source/kalshi-2C-prediction, so you can check any number yourself. Thank you.
 
 ### Slide 36 · The social cost of carbon from our model
 *~1:04*
