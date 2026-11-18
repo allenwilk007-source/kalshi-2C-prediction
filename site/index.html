@@ -4,27 +4,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>2°C vs Kalshi</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
 <style>
+/* Kalshi-style look: near-black ground, white type, green accent, red for No. Dark first, light variant below. */
 :root {
-  --bg: #f7f7f5; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6b66; --line: #e3e3de;
-  --accent: #c2410c; --accent-soft: #fdebdc; --blue: #2563eb; --red: #dc2626; --green: #15803d;
-  --band: rgba(234, 179, 8, .28); --shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.04);
+  --bg: #0A0C0F; --panel: #13161A; --ink: #F2F3F3; --muted: #8F9193; --line: #2A2E34;
+  --accent: #00DD94; --accent-soft: #0E2A22; --blue: #6EA8FE; --red: #FF454D; --green: #00DD94;
+  --band: rgba(242, 201, 76, .22); --shadow: none; color-scheme: dark;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #141413; --panel: #1e1e1c; --ink: #ecebe6; --muted: #a3a29b; --line: #34332f;
-    --accent: #fb923c; --accent-soft: #3a2414; --blue: #60a5fa; --red: #f87171; --green: #4ade80;
-    --band: rgba(234, 179, 8, .25); --shadow: none;
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #FFFFFF; --panel: #F6F7F8; --ink: #0A0C0F; --muted: #5F646B; --line: #E2E4E7;
+    --accent: #00804F; --accent-soft: #E3F8EF; --blue: #2563EB; --red: #D92D3A; --green: #00804F;
+    --band: rgba(234, 179, 8, .28); --shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.04); color-scheme: light;
   }
 }
-:root[data-theme="dark"] {
-  --bg: #141413; --panel: #1e1e1c; --ink: #ecebe6; --muted: #a3a29b; --line: #34332f;
-  --accent: #fb923c; --accent-soft: #3a2414; --blue: #60a5fa; --red: #f87171; --green: #4ade80;
-  --band: rgba(234, 179, 8, .25); --shadow: none;
+:root[data-theme="light"] {
+  --bg: #FFFFFF; --panel: #F6F7F8; --ink: #0A0C0F; --muted: #5F646B; --line: #E2E4E7;
+  --accent: #00804F; --accent-soft: #E3F8EF; --blue: #2563EB; --red: #D92D3A; --green: #00804F;
+  --band: rgba(234, 179, 8, .28); --shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.04); color-scheme: light;
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink);
-  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  font: 15px/1.55 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+h1, h2, h3, .num, .big { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; letter-spacing: .2px; }
 .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px 64px; }
 header.top { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
@@ -32,9 +35,10 @@ header.top .wrap { display: flex; gap: 12px; align-items: center; padding-top: 1
 header.top h1 { font-size: 17px; margin: 0; flex: 1 1 auto; }
 nav a { color: var(--muted); text-decoration: none; margin-right: 12px; font-size: 13px; }
 nav a:hover { color: var(--ink); }
+main a { color: var(--accent); }
 button { font: inherit; border: 1px solid var(--line); background: var(--panel); color: var(--ink);
   border-radius: 8px; padding: 6px 12px; cursor: pointer; }
-button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 700; }
 button:disabled { opacity: .55; cursor: default; }
 .pill { font-size: 12px; color: var(--muted); }
 h2 { font-size: 20px; margin: 40px 0 6px; }
@@ -130,7 +134,7 @@ footer { margin-top: 48px; font-size: 12.5px; color: var(--muted); }
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <h1>2°C before 2050? Course model vs Kalshi</h1>
+  <h1>2°C before 2050: the model vs Kalshi</h1>
   <nav><a href="/play" style="font-weight:700;color:var(--accent)">Decision Lab →</a><a href="#trade">Trade idea</a><a href="#small">Small trades</a><a href="#dist">Distributions</a><a href="#markets">Markets</a><a href="#explore">Explore</a><a href="#whatif">What if?</a><a href="#scc">SCC</a><a href="#history">History</a><a href="#model">Model</a><a href="#p2">Phase 2</a><a href="#p3">Phase 3</a><a href="#p4">Phase 4</a><a href="#p5">Phase 5</a></nav>
   <span class="pill" id="runpill"></span>
   <button class="primary" id="runbtn" title="Fetch fresh Kalshi data and re-run every phase (about 2 minutes)">Refresh data &amp; re-run</button>
@@ -140,8 +144,8 @@ footer { margin-top: 48px; font-size: 12.5px; color: var(--muted); }
   <section class="hero">
     <h2>Will any year reach 2°C above pre-industrial before 2050?</h2>
     <p class="lead">Kalshi contract <b>KXWARMING-50</b> pays $1 if, in any calendar year up to 2049, at least two of NASA, NOAA,
-      Berkeley Earth and HadCRUT report ≥ 2.00°C above 1850–1900. This page runs the Carbon Trading class model
-      (HW2–HW5) forward with uncertainty and compares its probability with the market's.</p>
+      Berkeley Earth and HadCRUT report ≥ 2.00°C above 1850–1900. This page runs a climate model
+      (emissions → carbon cycle → temperature) forward with uncertainty and compares its probability with the market’s.</p>
     <div id="versus"></div>
     <p style="margin:10px 0 0"><a href="/play" style="font-weight:600">Try the Decision Lab →</a> take our recommendation and decide Yes, No or Pass, or set every factor yourself and see your odds against Kalshi’s.</p>
     <div id="runpanel" class="panel" style="display:none"></div>
@@ -149,12 +153,12 @@ footer { margin-top: 48px; font-size: 12.5px; color: var(--muted); }
   </section>
 
   <section id="trade">
-    <h2>Hypothetical trade idea (class project)</h2>
+    <h2>Trade idea: what the model’s estimate would mean</h2>
     <div id="secTrade"></div>
   </section>
 
   <section id="small">
-    <h2>Small, regular trades: can they make money? (class project)</h2>
+    <h2>Small, regular trades: can they make money?</h2>
     <div id="secSmall"></div>
   </section>
 
@@ -186,8 +190,8 @@ footer { margin-top: 48px; font-size: 12.5px; color: var(--muted); }
   </section>
 
   <section id="whatif">
-    <h2>What if? Run the class model yourself</h2>
-    <p class="lead">This is HW5 running live in your browser: Kaya → emissions → carbon cycle → temperature, then
+    <h2>What if? Run the model yourself</h2>
+    <p class="lead">The model runs live in your browser: Kaya → emissions → carbon cycle → temperature, then
       4,000 simulated futures from today's (2026) temperatures with Kalshi's exact 2-of-4 rule. Drag anything and
       watch the 2°C probability change.</p>
     <div class="panel whatif">
@@ -204,16 +208,16 @@ footer { margin-top: 48px; font-size: 12.5px; color: var(--muted); }
         <div class="wi-group">Climate response</div>
         <div id="wiClimate"></div>
         <label class="wi-check"><input type="checkbox" id="wiFill"> Add the ~1 GtC/yr the Kaya block leaves out (land use)</label>
-        <button id="wiReset">Reset to HW5 template</button>
+        <button id="wiReset">Reset to baseline</button>
       </div>
       <div class="wi-out" id="wiOut"><p class="note">Loading the model…</p></div>
     </div>
   </section>
 
-  <section id="scc"><h2>The social cost of carbon from the class model</h2><div id="secSCC"></div></section>
+  <section id="scc"><h2>The social cost of carbon from the model</h2><div id="secSCC"></div></section>
   <section id="history"><h2>Market history: does Kalshi react to the data?</h2><div id="secHistory"></div></section>
 
-  <section id="model"><h2>The class model in Python</h2><div id="secModel"></div></section>
+  <section id="model"><h2>The model in Python</h2><div id="secModel"></div></section>
   <section id="p2"><h2>Phase 2 · Real data, year-to-year noise, the 2-of-4 rule</h2><div id="secP2"></div></section>
   <section id="p3"><h2>Phase 3 · Uncertainty in emissions and climate response</h2><div id="secP3"></div></section>
   <section id="p4"><h2>Phase 4 · What probability the price implies</h2><div id="secP4"></div></section>
@@ -221,8 +225,8 @@ footer { margin-top: 48px; font-size: 12.5px; color: var(--muted); }
 
   <footer>
     Data: Kalshi public API (no login), NASA GISS, NOAA NCEI, Berkeley Earth, Met Office HadCRUT 5.1, Copernicus ERA5
-    (Climate Pulse), Our World in Data / Global Carbon Budget, US Treasury, IPCC AR6 WGI SPM, Tol SCC database (course file).
-    Model results are analysis of a class model, not trading advice.
+    (Climate Pulse), Our World in Data / Global Carbon Budget, US Treasury, IPCC AR6 WGI SPM, Tol SCC database.
+    Model results are analysis, not trading advice. Not affiliated with or endorsed by Kalshi.
   </footer>
 </main>
 <div class="lightbox" id="lightbox"><img alt=""></div>
@@ -237,10 +241,10 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 let R = null, polling = null, state = { cv: "ipcc", emis: "Kaya randomised + 2019-24 weighting" };
 
 const CAPS = {
-  "1_obs_vs_model.png": "Four datasets vs the class model (A) and the fitted version (B), 1850–2049",
+  "1_obs_vs_model.png": "Four datasets vs the model (A) and the fitted version (B), 1850–2049",
   "2_residuals.png": "Observed minus model, with the year-to-year noise fit",
   "3_dataset_offsets.png": "How the four datasets differ from their average",
-  "4_fan_chart.png": "Phase 2: second-highest dataset, simulated 2026–2049 (HW5 economy fixed)",
+  "4_fan_chart.png": "Phase 2: second-highest dataset, simulated 2026–2049 (baseline economy fixed)",
   "5_first_crossing.png": "Phase 2: year the contract would resolve Yes",
   "6_backtest.png": "Back-test: fit to 1999, simulate 2000–2025",
   "p3_1_emissions.png": "Emission paths: randomised Kaya (weighted to real 2019–24 data) and IPCC-style scenarios",
@@ -264,7 +268,7 @@ const CAPS = {
   "p12_1_weekly_buys.png": "$10 a week since listing: prices paid by each method",
   "p12_2_methods.png": "Small regular trades: profit depends on whose probability is right",
   "p12_3_fees.png": "Fee per contract by order size: tiny orders pay more",
-  "p11_1_ensemble_pdf.png": "Our ensemble PDF: 72 versions of the class model; shaded area = our estimate",
+  "p11_1_ensemble_pdf.png": "Ensemble PDF: 72 versions of the model; shaded area = the estimate",
   "p11_2_edge.png": "Expected profit per contract vs your probability; break-even at Kalshi's cost",
   "p11_3_payoffs.png": "Hypothetical $1,000: value bet vs hedged version",
   "p10_1_pdf_peak_versions.png": "Probability density of the highest reading 2027–2049, by model version",
@@ -272,8 +276,8 @@ const CAPS = {
   "p10_3_pdf_peak_scenarios.png": "IPCC view: densities by emissions path and sensitivity",
   "p10_4_exceedance.png": "Chance of reaching each temperature before 2050, with Kalshi at 2.00°C",
   "p10_5_pyes_versions.png": "Every model version's P(2°C before 2050) vs Kalshi's range",
-  "p6_1_scc_distribution.png": "SCC distribution at a 1.5% pure rate of time preference: class model vs Tol's database",
-  "p6_2_scc_by_prtp.png": "SCC by discount choice: class model vs the literature",
+  "p6_1_scc_distribution.png": "SCC distribution at a 1.5% pure rate of time preference: the model vs Tol's database",
+  "p6_2_scc_by_prtp.png": "SCC by discount choice: the model vs the literature",
   "p6_3_pulse.png": "Anatomy of the SCC: extra warming and damages from one extra gigatonne",
   "p6_4_scc_vs_pyes.png": "Higher-emission worlds: more likely 2°C, costlier carbon",
   "p7_1_scanner.png": "All priced markets: model vs the market's range after fees",
@@ -310,17 +314,17 @@ function renderTrade() {
   const usd = v => (v < 0 ? "−$" : "+$") + Math.abs(Math.round(v)).toLocaleString();
   const aspects = Object.entries(e.by_aspect).map(([a, d]) => [esc(a), Object.entries(d).map(([k, v]) => `${esc(k)}: <b>${pct(v)}</b>`).join(" · ")]);
   const outs = Object.entries(B.outcomes).map(([k, v]) => [esc(k), usd(v)]);
-  el.innerHTML = `<div class="warn"><b>Hypothetical, for a class presentation.</b> This shows how a model estimate turns into a trading idea.
+  el.innerHTML = `<div class="warn"><b>Hypothetical.</b> This shows how the model’s estimate turns into a trading idea.
       It isn't investment advice and nothing here places orders.</div>
-    ${R.phase12 ? `<div class="panel" style="margin-top:12px"><b>The key comparison:</b> our ensemble of the class model says
+    ${R.phase12 ? `<div class="panel" style="margin-top:12px"><b>The key comparison:</b> the model’s 72-version ensemble says
       <b>${pct(e.p_yes)}</b>, but once its uncertainty is widened to IPCC size the same model says <b>${pct(R.phase12.estimates.ipcc)}</b>,
-      almost exactly Kalshi's <b>${pct(p.kalshi.mid)}</b>. The trade below only makes money if the narrower class-model view is right.</div>
+      almost exactly Kalshi's <b>${pct(p.kalshi.mid)}</b>. The trade below only makes money if the narrower model view is right.</div>
       ${figs(["p12_0_estimates.png"])}` : ""}
-    <p class="lead" style="margin-top:12px">Step 1: run the class model ${e.n_versions} times, changing its most important settings (climate sensitivity,
-      adjustment speed, emissions path, missing land-use emissions), ${e.paths_per_version.toLocaleString()} futures each. Our estimate is the mean of that
+    <p class="lead" style="margin-top:12px">Step 1: run the model ${e.n_versions} times, changing its most important settings (climate sensitivity,
+      adjustment speed, emissions path, missing land-use emissions), ${e.paths_per_version.toLocaleString()} futures each. The model’s estimate is the mean of that
       ensemble's probability distribution.</p>
     <div class="cards">
-      ${card("Our estimate (ensemble mean)", pct(e.p_yes, 1), `PDF mean peak reading ${f(e.pdf_mean_peak)}°C; versions range ${pct(e.p_yes_range_across_versions[0])}–${pct(e.p_yes_range_across_versions[1])}`)}
+      ${card("Model estimate (ensemble mean)", pct(e.p_yes, 1), `PDF mean peak reading ${f(e.pdf_mean_peak)}°C; versions range ${pct(e.p_yes_range_across_versions[0])}–${pct(e.p_yes_range_across_versions[1])}`)}
       ${card("Kalshi", pct(p.kalshi.mid, 1), `${f(p.kalshi.bid)} bid / ${f(p.kalshi.ask)} ask; buying Yes costs ${f(A.all_in_cost, 3)} with the fee`)}
       ${card("Edge", `${(A.edge_per_contract * 100).toFixed(1)}¢`, "expected profit per $1 contract = our probability − all-in cost")}
     </div>
@@ -329,7 +333,7 @@ function renderTrade() {
     <h3>Strategy A · Value bet: buy Yes on KXWARMING-50</h3>
     <div class="panel">${table(["", "hypothetical $1,000"], [
       ["Contracts bought", `${A.contracts_for_stake.toLocaleString()} at ${f(A.all_in_cost, 3)}`],
-      ["If 2°C is reached by 2049 (our estimate: " + pct(A.our_p) + ")", `<b>${usd(A.profit_if_yes)}</b>`],
+      ["If 2°C is reached by 2049 (model estimate: " + pct(A.our_p) + ")", `<b>${usd(A.profit_if_yes)}</b>`],
       ["If not (" + pct(A.prob_lose_stake) + ")", `<b>${usd(A.loss_if_no)}</b>`],
       ["Expected profit", `<b>${usd(A.expected_profit)}</b> (${(A.expected_return_total * 100).toFixed(1)}% total, about ${(A.expected_return_per_year_excl_interest * 100).toFixed(2)}%/yr over ~${Math.round(A.years_to_payout_mean)} years, plus Kalshi's ${pct(A.kalshi_apy, 1)} interest)`],
       ["Kelly sizing", `${pct(A.kelly_fraction)} of a bankroll (half-Kelly ${pct(A.half_kelly)})`],
@@ -356,7 +360,7 @@ function renderSmall() {
   const e = p.estimates, d = p.dca_at_ask, l = p.limit_orders, s = p.spread_capture, fw = p.forward_one_year;
   const usd = v => (v < 0 ? "−$" : "+$") + Math.abs(v).toFixed(0);
   const fA = fw["buy at the ask"], fL = fw["limit order at the bid + 1c"];
-  el.innerHTML = `<div class="warn"><b>Hypothetical back-test for a class presentation,</b> on Kalshi's public price history. Not investment advice.</div>
+  el.innerHTML = `<div class="warn"><b>Hypothetical back-test</b> on Kalshi's public price history. Not investment advice.</div>
     <p class="lead" style="margin-top:12px">What if you spent <b>$${p.weekly_dollars} every week</b> since the market listed (${p.period[0]} to ${p.period[1]})?
       Three simple methods, each judged under our ${pct(e.ensemble)} and under the IPCC-calibrated ${pct(e.ipcc)}.</p>
     <div class="panel">${table(["method", "what you'd hold", "if our 81% is right", "if the IPCC 67% is right", "sold today at the bid"], [
@@ -483,10 +487,10 @@ function renderSCC() {
   });
   const sc = Object.entries(p.scenarios).map(([k, v]) => [esc(k), `$${Math.round(v["scc_rho1.5"].median)}`, `$${Math.round(v["scc_rho1.5"].median * c)}`, v.p_yes_ipcc == null ? "–" : pct(v.p_yes_ipcc)]);
   const d = p.drivers.ipcc, x = p.by_trend_crossing.ipcc;
-  el.innerHTML = `<p class="lead">Your first question: how to predict the SCC. Here the class model computes it directly: add one
+  el.innerHTML = `<p class="lead">How big is the social cost of carbon? Here the model computes it directly: add one
       extra gigatonne of carbon in 2027, follow the extra warming to 2300, turn it into damages with the SCC spreadsheet's damage
-      estimates, and discount it back (the HW1 NPV method). Then compare with Tol's 14,141 published estimates.</p>
-    <div class="panel">${table(["discounting", "class model, IPCC view: median $/tC [5–95%]", "$/tCO₂", "history view", "Tol database: median / mean"], rows, [1, 2, 3, 4])}
+      estimates, and discount it back (net present value). Then compare with Tol's 14,141 published estimates.</p>
+    <div class="panel">${table(["discounting", "model, IPCC view: median $/tC [5–95%]", "$/tCO₂", "history view", "Tol database: median / mean"], rows, [1, 2, 3, 4])}
       <p class="note">Ramsey discounting: r = ρ + η·g with η = ${p.eta} and g = growth in income per person. ${pct(p.views.ipcc["Ramsey rho=1.5%"].share_negative)} of
         draws come out negative because a few studies in the database find net benefits from warming.</p></div>
     <div class="cards">
@@ -548,7 +552,7 @@ function renderVersus() {
       <span class="verdict v-${verdict[0]}">${verdict[1]}</span>
     </div>
     <div class="side ours">
-      <div class="who">Our model says</div>
+      <div class="who">The model says</div>
       <div class="num">${pct(ours)}</div>
       <div class="sub">${views[vsView]}, emissions weighted to real data, starting from 2026<br>
         the other view (${views[other]}): <b>${pct(cell[other].p_yes)}</b> · median crossing ${f(cell[vsView].first_median, 0)}</div>
@@ -623,7 +627,7 @@ function renderExplore() {
   }
   $("#climateNote").textContent = state.cv === "ipcc"
     ? "Uncertainty in how fast warming continues is widened to match the IPCC AR6 ranges."
-    : "The class model fitted to 1880–2020 temperatures. It's very sure about the warming rate, too sure according to the IPCC.";
+    : "The model fitted to 1880–2020 temperatures. It's very sure about the warming rate, too sure according to the IPCC.";
   const cell = p5.p_yes[state.emis][state.cv];
   const use2049 = $("#chk2049").checked;
   const P = use2049 ? cell.p_yes : cell.p_yes_2048;
@@ -654,10 +658,10 @@ function renderModel() {
   if (!m || m.error) { $("#secModel").innerHTML = missing("The model summary"); return; }
   const val = R.pipeline && R.pipeline.steps ? (R.pipeline.steps.find(s => s.script === "validate.py") || {}).log : "";
   const pass = val ? (val.trim().split("\n").filter(l => /PASS|FAIL/.test(l)).pop() || "") : "";
-  $("#secModel").innerHTML = `<p class="lead">Your HW5 spreadsheet translated line for line: Kaya (3 regions) → emissions → 5-box carbon cycle →
-      CO₂ ppm → forcing → two-box temperature. ${pass ? `Check against every year of all four HW5 sheets: <b>${esc(pass)}</b>.` : ""}
+  $("#secModel").innerHTML = `<p class="lead">The climate model, line for line: Kaya (3 regions) → emissions → 5-box carbon cycle →
+      CO₂ ppm → forcing → two-box temperature. ${pass ? `Check against every year of all four reference workbook sheets: <b>${esc(pass)}</b>.` : ""}
       Parameter 2 (1.15) implies ${f(m.ecs)}°C of eventual warming per CO₂ doubling.</p>
-    <div class="panel">${table(["HW5 sheet", "°C in 2050", "°C in 2100", "ppm in 2100", "first year ≥ 2°C"],
+    <div class="panel">${table(["Reference sheet", "°C in 2050", "°C in 2100", "ppm in 2100", "first year ≥ 2°C"],
       m.scenarios.map(s => [esc(s.sheet), f(s.t2050), f(s.t2100), Math.round(s.ppm2100), s.first_2c ?? "after 2100"]), [1, 2, 3, 4])}</div>
     ${figs(["1_obs_vs_model.png"])}`;
 }
@@ -670,7 +674,7 @@ function renderP2() {
     f(v.rules["2of4"].first_year_median, 0)]);
   const bt = p.backtest;
   $("#secP2").innerHTML = `<p class="lead">Real temperatures from the four settlement datasets (re-baselined to 1850–1900), the model on the same
-      baseline, El Niño-style year-to-year noise, and Kalshi's exact rule. Here the economy is fixed at the HW5 template, so these numbers are
+      baseline, El Niño-style year-to-year noise, and Kalshi's exact rule. Here the economy is fixed at the baseline, so these numbers are
       conditional on that high-emissions path.</p>
     <div class="panel">${table(["variant", "p2", "ECS", "P(Yes) 2-of-4", "any 1 dataset", "4-dataset mean", "20-yr mean", "median year"], rows, [1, 2, 3, 4, 5, 6, 7])}
     <p class="note">Back-test (fit to 1999, simulate 2000–2025): version A covered ${pct(bt.A.coverage_5_95)} of observed years in its 90% band;
@@ -746,7 +750,7 @@ function renderP5() {
     <div class="panel">${table(["instrument", "risk removed (R²)", "loss sd before → after"], hr, [1, 2])}
       <p class="note">Hedge size ${Math.round(h.h_contracts_per_1M_income).toLocaleString()} contracts per $1M of income, but the order book offers
         ${Math.round(h["capacity_contracts_le_0.71"])} contracts at ≤ 0.71 (${money(h["max_income_hedgeable_le_0.71_$M"] * 1e6)} of income).
-        Damage coefficient from the course SCC spreadsheet (median ${f(-p.damage_coef_median * 6.25)}% of income at 2.5°C).</p></div>
+        Damage coefficient from the SCC damage dataset (median ${f(-p.damage_coef_median * 6.25)}% of income at 2.5°C).</p></div>
     ${figs(["p5_1_nowcast_2026.png", "p5_2_kxgtemp26.png", "p5_3_fan_nowcast.png", "p5_5_basis_risk.png", "p5_4_loss_vs_outcome.png"])}`;
 }
 
@@ -860,7 +864,7 @@ function wiCompute(n = 8000) {
       Shaded: 5–95% and 25–75% of the contract reading (second-highest dataset), 2027–2049; dots: observed, plus the 2026 nowcast.
       The page uses one noise setting for speed; the full Python analysis above averages over thousands of climate settings.
       ${WI.check ? `<br>Check against Python: temperature path differs by at most ${WI.check.maxAbsDiffT.toExponential(1)}°C;
-      HW5-template P(Yes) ${pct(WI.check.pJs, 1)} here vs ${pct(WI.check.pRef, 1)} in Python.` : ""}</p>`;
+      Baseline P(Yes) ${pct(WI.check.pJs, 1)} here vs ${pct(WI.check.pRef, 1)} in Python.` : ""}</p>`;
 }
 
 function svgChart(o) {

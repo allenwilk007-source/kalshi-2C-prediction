@@ -5,38 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>2°C Decision Lab</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
 <style>
+/* Kalshi-style look: near-black ground, white type, green = Yes, red = No. Dark first, light variant below. */
 :root {
-  --bg: #f7f6f2; --panel: #ffffff; --ink: #14213d; --body: #3d4656; --muted: #6b7280; --line: #e2e3de;
-  --accent: #c2410c; --accent-bright: #ea580c; --accent-soft: #fff1e6; --blue: #1d4ed8; --blue-soft: #e8efff;
-  --green: #15803d; --green-soft: #e7f6ec; --red: #b91c1c; --red-soft: #fdecec; --gold: #ca8a04;
-  --shadow: 0 1px 2px rgba(0,0,0,.05), 0 6px 20px rgba(0,0,0,.05);
+  --bg: #0A0C0F; --panel: #13161A; --ink: #F2F3F3; --body: #C9CBCD; --muted: #8F9193; --line: #2A2E34;
+  --accent: #00DD94; --accent-bright: #00DD94; --accent-soft: #0E2A22; --blue: #6EA8FE; --blue-soft: #16233A;
+  --green: #00DD94; --green-soft: #0E2A22; --red: #FF454D; --red-soft: #3A1518; --gold: #F2C94C;
+  --no: #FF454D; --no-soft: #3A1518; --cta: #00DD94; --cta-ink: #04130D;
+  --shadow: none; color-scheme: dark;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #131416; --panel: #1d1f23; --ink: #eceae4; --body: #c9cbd1; --muted: #9a9ea8; --line: #33363c;
-    --accent: #fb923c; --accent-bright: #fb923c; --accent-soft: #3a2414; --blue: #7aa2ff; --blue-soft: #1c2640;
-    --green: #4ade80; --green-soft: #15291c; --red: #f87171; --red-soft: #321a1a; --gold: #eab308; --shadow: none; color-scheme: dark;
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #FFFFFF; --panel: #F6F7F8; --ink: #0A0C0F; --body: #33373D; --muted: #5F646B; --line: #E2E4E7;
+    --accent: #00804F; --accent-bright: #00935F; --accent-soft: #E3F8EF; --blue: #2563EB; --blue-soft: #E8EFFF;
+    --green: #00804F; --green-soft: #E3F8EF; --red: #D92D3A; --red-soft: #FDECEC; --gold: #B7791F;
+    --no: #D92D3A; --no-soft: #FDECEC; --cta: #00C389; --cta-ink: #04130D;
+    --shadow: 0 1px 2px rgba(0,0,0,.05), 0 6px 20px rgba(0,0,0,.05); color-scheme: light;
   }
 }
-:root[data-theme="dark"] {
-  --bg: #131416; --panel: #1d1f23; --ink: #eceae4; --body: #c9cbd1; --muted: #9a9ea8; --line: #33363c;
-  --accent: #fb923c; --accent-bright: #fb923c; --accent-soft: #3a2414; --blue: #7aa2ff; --blue-soft: #1c2640;
-  --green: #4ade80; --green-soft: #15291c; --red: #f87171; --red-soft: #321a1a; --gold: #eab308; --shadow: none; color-scheme: dark;
+:root[data-theme="light"] {
+  --bg: #FFFFFF; --panel: #F6F7F8; --ink: #0A0C0F; --body: #33373D; --muted: #5F646B; --line: #E2E4E7;
+  --accent: #00804F; --accent-bright: #00935F; --accent-soft: #E3F8EF; --blue: #2563EB; --blue-soft: #E8EFFF;
+  --green: #00804F; --green-soft: #E3F8EF; --red: #D92D3A; --red-soft: #FDECEC; --gold: #B7791F;
+  --no: #D92D3A; --no-soft: #FDECEC; --cta: #00C389; --cta-ink: #04130D;
+  --shadow: 0 1px 2px rgba(0,0,0,.05), 0 6px 20px rgba(0,0,0,.05); color-scheme: light;
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+h1, h2, h3, .stat .v, .verdict .call, .outcome .big, .brand { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; letter-spacing: .2px; }
+.brand { font-size: 22px; font-weight: 700; } .brand span { color: var(--accent); }
+.kind { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; }
 .wrap { max-width: 1060px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-bottom: 72px; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
 header.top { border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 5; }
 header.top .wrap { display: flex; align-items: center; gap: 14px; padding-top: 10px; padding-bottom: 10px; flex-wrap: wrap; }
 header.top a { color: var(--muted); text-decoration: none; font-size: 14px; }
 header.top a:hover { color: var(--ink); }
-header.top b { flex: 1; }
+header.top .grow { flex: 1; }
 .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px; }
-h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.1; margin: 0 0 14px; }
-h2 { font-size: 26px; margin: 0 0 8px; line-height: 1.2; }
-h3 { font-size: 19px; margin: 0 0 6px; }
+h1 { font-size: clamp(38px, 6.5vw, 64px); line-height: 1.02; margin: 0 0 14px; font-weight: 700; }
+h2 { font-size: 32px; margin: 0 0 8px; line-height: 1.1; font-weight: 600; }
+h3 { font-size: 24px; margin: 0 0 6px; font-weight: 600; }
 p { margin: 0 0 12px; }
 .lead { font-size: 18px; color: var(--body); max-width: 780px; }
 .note { font-size: 14px; color: var(--muted); }
@@ -60,7 +70,7 @@ section.stage { margin-top: 34px; scroll-margin-top: 60px; }
 button { font: inherit; }
 .btn { background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 9px 16px; cursor: pointer; }
 .btn:hover { border-color: var(--muted); }
-.btn.primary { background: var(--accent-bright); border-color: var(--accent-bright); color: #fff; font-weight: 600; }
+.btn.primary { background: var(--cta); border-color: var(--cta); color: var(--cta-ink); font-weight: 700; }
 .btn:disabled { opacity: .5; cursor: default; }
 .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 .steps-bar { display: flex; gap: 6px; margin-bottom: 14px; }
@@ -79,13 +89,13 @@ button { font: inherit; }
 .result-head { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 14px; }
 .stat { background: var(--bg); border-radius: 12px; padding: 14px 16px; }
 .stat .k { font-size: 13px; color: var(--muted); }
-.stat .v { font-size: 32px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat .v { font-size: 40px; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
 .verdict { border-radius: 14px; padding: 18px 20px; margin-top: 16px; }
 .verdict.yes { background: var(--green-soft); border: 1px solid color-mix(in srgb, var(--green) 40%, transparent); }
-.verdict.no { background: var(--blue-soft); border: 1px solid color-mix(in srgb, var(--blue) 40%, transparent); }
+.verdict.no { background: var(--no-soft); border: 1px solid color-mix(in srgb, var(--no) 40%, transparent); }
 .verdict.pass { background: var(--bg); border: 1px solid var(--line); }
-.verdict .call { font-size: 26px; font-weight: 800; }
-.verdict.yes .call { color: var(--green); } .verdict.no .call { color: var(--blue); }
+.verdict .call { font-size: 34px; font-weight: 700; }
+.verdict.yes .call { color: var(--green); } .verdict.no .call { color: var(--no); }
 table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
 th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); }
 th { font-size: 13px; color: var(--muted); font-weight: 600; }
@@ -103,10 +113,10 @@ select, input[type=number] { width: 100%; font: inherit; padding: 7px 9px; borde
 .bets { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 12px; }
 .bet { border: 2px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 10px; padding: 8px 14px; cursor: pointer; font-weight: 600; }
 .bet[aria-pressed="true"].yes { border-color: var(--green); background: var(--green-soft); }
-.bet[aria-pressed="true"].no { border-color: var(--blue); background: var(--blue-soft); }
+.bet[aria-pressed="true"].no { border-color: var(--no); background: var(--no-soft); }
 .bet[aria-pressed="true"].pass { border-color: var(--muted); }
 .outcome { min-height: 52px; margin-top: 10px; font-size: 15px; }
-.outcome .big { font-size: 22px; font-weight: 800; }
+.outcome .big { font-size: 28px; font-weight: 700; }
 .win { color: var(--green); } .lose { color: var(--red); }
 .strip { display: grid; grid-template-columns: repeat(25, 1fr); gap: 3px; margin-top: 10px; max-width: 520px; }
 .strip i { aspect-ratio: 1; border-radius: 3px; background: var(--line); }
@@ -125,7 +135,7 @@ select, input[type=number] { width: 100%; font: inherit; padding: 7px 9px; borde
 .chips { display: flex; flex-wrap: wrap; gap: 6px; grid-column: 2; }
 .ochip { border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 999px; padding: 3px 10px; font-size: 13px; cursor: pointer; }
 .ochip[aria-pressed="true"] { border-color: var(--accent-bright); background: var(--accent-soft); font-weight: 600; }
-.ochip .up { color: var(--accent); } .ochip .dn { color: var(--blue); }
+.ochip .up { color: var(--accent); } .ochip .dn { color: var(--red); }
 @media (prefers-reduced-motion: reduce) { .path { transition: none; } }
 @media (max-width: 560px) { .trow { grid-template-columns: 1fr; } .chips { grid-column: 1; } }
 footer { margin-top: 40px; font-size: 13px; color: var(--muted); }
@@ -133,30 +143,30 @@ footer { margin-top: 40px; font-size: 13px; color: var(--muted); }
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <b>2°C Decision Lab</b>
+  <span class="brand">2°C <span>Decision Lab</span></span><span class="kind">Prediction comparison tool</span><span class="grow"></span>
   <a href="#" id="navTop">Start</a><a href="#" id="navA">Recommendation</a><a href="#" id="navB">Build your own</a>
   <a href="/" id="dashLink">Full dashboard →</a>
 </div></header>
 
 <main class="wrap">
   <section class="hero" id="pitch">
-    <p class="eyebrow">Carbon Trading class project · hypothetical</p>
+    <p class="eyebrow">Your forecast vs the market · Kalshi KXWARMING-50</p>
     <h1>Would you bet on a 2°C year before 2050?</h1>
-    <p class="lead">Kalshi, a regulated prediction market, lets people bet on whether <b>any single year before 2050</b> will be at least
-      <b>2°C warmer than pre-industrial times</b>. Its price is the crowd’s probability. We rebuilt the climate model from our class
-      (Kaya → carbon cycle → temperature), connected it to real data and ran it hundreds of thousands of times to check that price.
-      Now it’s your turn: take our call, or build your own forecast.</p>
+    <p class="lead">On Kalshi, a regulated prediction market, you can bet on whether <b>any single year before 2050</b> will be at least
+      <b>2°C warmer than pre-industrial times</b>. The price is the crowd’s probability. This tool gives you a second opinion: a climate
+      model (emissions → carbon cycle → temperature) connected to real temperature data and run hundreds of thousands of times.
+      Take the model’s recommendation, or build your own forecast and see how your odds compare with the market’s.</p>
     <div class="quote" id="quote"><span class="chip">Loading Kalshi’s price…</span></div>
     <div class="paths">
-      <button class="path" id="goRec"><span class="ico">Path A</span><h2>Take our recommendation</h2>
-        <p>See what our model forecasts, what we’d do (buy Yes, buy No or pass), then play out the future and see if the bet pays.</p></button>
+      <button class="path" id="goRec"><span class="ico">Path A</span><h2>Take the recommendation</h2>
+        <p>See what the model forecasts and what it suggests you do (buy Yes, buy No or pass), then play out the future and see if your bet pays.</p></button>
       <button class="path" id="goBuild"><span class="ico">Path B</span><h2>Build your own forecast</h2>
         <p>Choose each assumption yourself, step by step. Then see your odds against Kalshi’s and change anything live.</p></button>
     </div>
     <div class="how">
       <div><b>1 · The contract</b>Pays $1 if, in any year up to 2049, at least 2 of NASA, NOAA, Berkeley Earth and HadCRUT read ≥ 2.00°C.</div>
       <div><b>2 · Price = probability</b>A Yes price of 70¢ means the market thinks about 70%. Fees make it a 65–73% range.</div>
-      <div><b>3 · Our forecast</b>The HW5 model plus El Niño-style noise, started from 2026’s data, run thousands of times.</div>
+      <div><b>3 · The model’s forecast</b>A climate model plus El Niño-style noise, started from 2026’s data, run thousands of times.</div>
       <div><b>4 · The decision</b>Buy Yes if your chance beats Yes’s cost, buy No if the reverse, otherwise pass.</div>
     </div>
   </section>
@@ -165,9 +175,9 @@ footer { margin-top: 40px; font-size: 13px; color: var(--muted); }
   <section class="stage hidden" id="build"></section>
   <section class="stage hidden" id="result"></section>
 
-  <footer>Hypothetical analysis for a class presentation, not investment advice; nothing here places orders. Kalshi prices from its public API
-    <span id="asof"></span>. Model: the HW5 class model running in your browser over hundreds of versions of the climate and the economy, each with
-    El Niño-style year-to-year noise and Kalshi’s exact rule (second-highest of four datasets ≥ 2.00°C).</footer>
+  <footer>Not investment advice, and not affiliated with or endorsed by Kalshi. This tool never places orders; dollar amounts are illustrations.
+    Kalshi prices come from its public API <span id="asof"></span>. The model runs in your browser over hundreds of versions of the climate and the
+    economy, each with El Niño-style year-to-year noise and Kalshi’s exact rule (second-highest of four datasets ≥ 2.00°C).</footer>
 </main>
 
 <script src="/site/model.js"></script>
@@ -185,30 +195,30 @@ const FACTORS = [
   { key: "emis", name: "Emissions", q: "How will emissions grow from here?",
     why: "Emissions set how fast CO₂ builds up. Most warming before 2050 is already locked in, so this matters less than you might think, but it still moves the odds.",
     opts: [
-      ["kaya", "Today’s real-world trend", "The class Kaya model with growth rates matched to actual 2019–24 emissions (400 versions).", true],
-      ["hw5", "HW5 class economy", "The homework’s growth rates: emissions keep climbing fast (about 72 Gt CO₂ by 2049)."],
+      ["kaya", "Today’s real-world trend", "Kaya-identity emissions with growth rates matched to actual 2019–24 emissions (400 versions).", true],
+      ["hw5", "Fast-growth economy", "Emissions keep climbing quickly (about 72 Gt CO₂ by 2049)."],
       ["falling", "Falling to net zero by 2070", "Strong climate policy (like the IPCC’s SSP1-2.6)."],
       ["flat", "Flat at today’s level", "Middle of the road (like SSP2-4.5)."],
       ["rising", "Rising slowly", "Doubling by 2100 (like SSP3-7.0)."],
       ["doubling", "Doubling by 2050", "Very high emissions (like SSP5-8.5)."]] },
-  { key: "clim", name: "Climate certainty", q: "How sure are we about how fast warming continues?",
-    why: "This is the biggest factor. The class model fitted to history is very confident; the IPCC thinks more uncertainty is honest, because aerosols and methane also matter and a CO₂-only model can’t see them.",
+  { key: "clim", name: "Climate certainty", q: "How sure are you about how fast warming continues?",
+    why: "This is the biggest factor. A model fitted only to past temperatures is very confident; the IPCC thinks more uncertainty is honest, because aerosols and methane also matter and a CO₂-only model can’t see them.",
     opts: [
-      ["ipcc", "IPCC-calibrated", "Uncertainty matched to the IPCC’s ranges. Our most defensible view.", true],
-      ["history", "Fitted to history (confident)", "Trust the class model’s fit to 1880–2020 completely: a narrow range."],
-      ["grid", "Class model ± settings", "Our trade-idea grid: sensitivity 1.00/1.15/1.30 × speed 0.020/0.0256/0.032."],
+      ["ipcc", "IPCC-calibrated", "Uncertainty matched to the IPCC’s ranges. The most defensible view.", true],
+      ["history", "Fitted to history (confident)", "Trust the model’s fit to 1880–2020 completely: a narrow range."],
+      ["grid", "Model ± settings", "Sensitivity 1.00/1.15/1.30 × response speed 0.020/0.0256/0.032."],
       ["ipcc_full", "Wide (full IPCC range)", "Even more uncertainty, including what’s already been observed."],
       ["custom", "I’ll pick the climate settings", "Set the climate sensitivity and response speed yourself with sliders."]] },
-  { key: "lu", name: "Land-use emissions", q: "Include the land-use emissions the class model leaves out?",
-    why: "The Kaya block only counts fossil fuels, so projected emissions drop by about 1 billion tonnes of carbon a year in 2021 compared with the historical data.",
-    opts: [["off", "Leave them out", "Exactly as in the class model.", true], ["on", "Add them back", "+990 million tonnes of carbon a year."]] },
+  { key: "lu", name: "Land-use emissions", q: "Include the land-use emissions the base model leaves out?",
+    why: "The emissions model only counts fossil fuels, so projected emissions drop by about 1 billion tonnes of carbon a year in 2021 compared with the historical data.",
+    opts: [["off", "Leave them out", "Fossil-fuel emissions only, as in the base model.", true], ["on", "Add them back", "+990 million tonnes of carbon a year."]] },
   { key: "mom", name: "El Niño carry-over", q: "Does this year’s El Niño carry into 2027?",
     why: "Late 2026 is unusually warm. Historically a warm end of year carries into the next one. It barely matters for the 2040s, but you can switch it off.",
-    opts: [["on", "Yes", "Use the carry-over we measured from 1960–2025.", true], ["off", "No", "Let the warmth fade at the normal rate."]] },
+    opts: [["on", "Yes", "Use the carry-over measured from 1960–2025.", true], ["off", "No", "Let the warmth fade at the normal rate."]] },
   { key: "y49", name: "Does 2049 count?", q: "Should the year 2049 count?",
     why: "The contract expires on 8 January 2050, but agencies usually publish each year’s figure in mid-January, so 2049 might not make it in time.",
     opts: [["yes", "Yes, as written", "Any year up to 2049 counts.", true], ["no", "No, only up to 2048", "If 2049’s data arrives too late."]] },
-  { key: "stake", q: "How much would you put in (hypothetically)?", why: "Used to show what you could win or lose. Nothing is traded.", stake: true },
+  { key: "stake", q: "How much would you put in?", why: "Used to show what you could win or lose. Nothing is traded.", stake: true },
 ];
 const FKEYS = ["emis", "clim", "lu", "mom", "y49"];
 const REC = { emis: "kaya", clim: "ipcc", lu: "off", mom: "on", y49: "yes", stake: 100, p1: 0.0256, p2: 1.15 };
@@ -271,7 +281,7 @@ function decide(P, stake, k) {
 function verdictHTML(d, stake) {
   if (d.side === "pass") return `<div class="verdict pass"><div class="call">${d.call}</div><p style="margin:6px 0 0">${d.why}</p></div>`;
   return `<div class="verdict ${d.side}"><div class="call">${d.call}</div><p style="margin:6px 0 10px">${d.why}</p>
-    <table><tr><th>With $${stake.toLocaleString()} (hypothetical)</th><th class="n"></th></tr>
+    <table><tr><th>With $${stake.toLocaleString()}</th><th class="n"></th></tr>
       <tr><td>Contracts at ${cents(d.cost)}</td><td class="n">${d.n.toLocaleString()}</td></tr>
       <tr><td>If the forecast is right</td><td class="n"><b>${usd(d.win)}</b></td></tr>
       <tr><td>If it’s wrong (${pct(d.pLose)} chance on these numbers)</td><td class="n"><b>${usd(d.lose)}</b></td></tr>
@@ -333,35 +343,35 @@ function pReach(rm, years, thr, year) {
 // ---------------------------------------------------------------- path A: recommendation
 function renderRec() {
   if (!C) return;
-  $("#rec").innerHTML = `<p class="eyebrow">Path A · our recommendation</p><div class="panel"><p class="busy">Re-running our 72 model versions in your browser…</p></div>`;
+  $("#rec").innerHTML = `<p class="eyebrow">Path A · the recommendation</p><div class="panel"><p class="busy">Re-running the model’s 72 versions in your browser…</p></div>`;
   setTimeout(() => {
     const r = compute(null, "grid72");
     const ens = C.reference.ensemble_72, ip = C.reference.ipcc, k = C.kalshi, stake = 100;
     const dE = decide(ens, stake), dI = decide(ip, stake);
-    $("#rec").innerHTML = `<p class="eyebrow">Path A · our recommendation</p>
-      <h2>Our model says ${pct(ens)}. The market says ${pct(k.mid)}.</h2>
-      <p class="lead">We ran the class model 72 ways, changing climate sensitivity, how fast the atmosphere responds, the emissions path and
-        land-use emissions, thousands of futures each. Averaging them gives our estimate. (Your browser just re-ran it: ${pct(r.pYes, 1)}.)</p>
+    $("#rec").innerHTML = `<p class="eyebrow">Path A · the recommendation</p>
+      <h2>The model says ${pct(ens)}. The market says ${pct(k.mid)}.</h2>
+      <p class="lead">The model runs 72 ways, changing climate sensitivity, how fast the atmosphere responds, the emissions path and
+        land-use emissions, thousands of futures each. Their average is the model’s estimate. (Your browser just re-ran it: ${pct(r.pYes, 1)}.)</p>
       <div class="panel">
         <div class="result-head">
-          <div class="stat"><div class="k">Our estimate (72 versions)</div><div class="v" style="color:var(--accent-bright)">${pct(ens)}</div></div>
+          <div class="stat"><div class="k">Model estimate (72 versions)</div><div class="v" style="color:var(--accent-bright)">${pct(ens)}</div></div>
           <div class="stat"><div class="k">Kalshi</div><div class="v">${pct(k.mid)}</div></div>
           <div class="stat"><div class="k">Cautious check (IPCC-calibrated)</div><div class="v" style="color:var(--blue)">${pct(ip)}</div></div>
         </div>
         ${verdictHTML(dE, stake)}
-        <div class="charts"><div class="chart">${pdfChart([[C.ensemble_pdf.grid, C.ensemble_pdf.pdf, "var(--accent-bright)", "our model (72 versions)"],
+        <div class="charts"><div class="chart">${pdfChart([[C.ensemble_pdf.grid, C.ensemble_pdf.pdf, "var(--accent-bright)", "model (72 versions)"],
           [C.ipcc_pdf.grid, C.ipcc_pdf.pdf, "var(--blue)", "IPCC-calibrated"]], "Highest reading 2027–2049: area right of 2.00°C = chance of Yes")}</div></div>
       </div>
       <div class="panel" id="recPlay"></div>
       <div class="panel">
         <h3>The second opinion: ${dI.side === "pass" ? "pass, no trade" : dI.call}</h3>
-        <p>${dI.why} Both views agree on the middle, about 2°C in the late 2040s. They differ on how sure to be: our 72-version model is
+        <p>${dI.why} Both views agree on the middle, about 2°C in the late 2040s. They differ on how sure to be: the 72-version model is
           narrow, the IPCC’s uncertainty is wider, so more of its futures fall short of 2°C.</p>
-        <p class="note">So our recommendation only holds if you trust the class model’s confidence over the IPCC’s. That’s the key caveat.</p>
+        <p class="note">So the recommendation only holds if you trust the model’s confidence over the IPCC’s. That’s the key caveat.</p>
         <div class="row" style="margin-top:10px"><button class="btn primary" id="recToBuild">Now build your own forecast →</button>
           <button class="btn" id="recBack">Back to the start</button></div>
       </div>`;
-    playground($("#recPlay"), r, dE.side, stake, "our 72-version model");
+    playground($("#recPlay"), r, dE.side, stake, "the 72-version model");
     $("#recToBuild").onclick = () => { show("build"); step = 0; renderStep(); };
     $("#recBack").onclick = () => $("#pitch").scrollIntoView({ behavior: "smooth" });
   }, 30);
@@ -491,7 +501,7 @@ function bindClimSliders(onChange) {
   const p2 = $("#sP2"), p1 = $("#sP1");
   if (!p2) return;
   const lab = () => { $("#vP2").textContent = `${choice.p2.toFixed(2)} (≈${ClassModel.ecs(choice.p2).toFixed(1)}°C per CO₂ doubling)`;
-    $("#vP1").textContent = choice.p1.toFixed(4) + (Math.abs(choice.p1 - 0.0256) < 1e-4 ? " (class value)" : ""); };
+    $("#vP1").textContent = choice.p1.toFixed(4) + (Math.abs(choice.p1 - 0.0256) < 1e-4 ? " (default)" : ""); };
   p2.oninput = () => { choice.p2 = +p2.value; lab(); onChange && onChange(); };
   p1.oninput = () => { choice.p1 = +p1.value; lab(); onChange && onChange(); };
   lab();
@@ -502,7 +512,7 @@ const summary = ch => FKEYS.filter(x => ch[x] !== REC[x]).map(x => optLabel(x, c
 // ---------------------------------------------------------------- results
 let CUR = null, explore = { thr: 2.0, year: 2049 }, tornadoJob = 0;
 function renderResult() {
-  $("#result").innerHTML = `<p class="eyebrow">Your result</p><div class="panel"><p class="busy">Running the class model over hundreds of versions…</p></div>`;
+  $("#result").innerHTML = `<p class="eyebrow">Your result</p><div class="panel"><p class="busy">Running the model over hundreds of versions…</p></div>`;
   setTimeout(() => { const t0 = performance.now(); const r = compute(choice); drawResult(r, performance.now() - t0); }, 30);
 }
 function rerun() {
@@ -532,13 +542,13 @@ function drawResult(r, ms) {
       </div>
       ${verdictHTML(d, stake)}
       <div class="charts"><div class="chart">${histChart(r.peak)}</div><div class="chart">${pathChart(r)}</div></div>
-      <p class="note">${r.n.toLocaleString()} simulated futures in ${Math.round(ms)} ms. For comparison: our 72-version model says ${pct(C.reference.ensemble_72)},
+      <p class="note">${r.n.toLocaleString()} simulated futures in ${Math.round(ms)} ms. For comparison: the 72-version model says ${pct(C.reference.ensemble_72)},
         the IPCC-calibrated view ${pct(C.reference.ipcc)}.</p>
     </div>
 
     <div class="panel"><h3>Change any factor and watch the odds move</h3>
       <div class="tweak">${selects}
-        <div><label for="t_stake">Stake ($, hypothetical)</label><input type="number" id="t_stake" min="1" step="10" value="${stake}"></div></div>
+        <div><label for="t_stake">Stake ($)</label><input type="number" id="t_stake" min="1" step="10" value="${stake}"></div></div>
       <div id="tweakClim" class="${choice.clim === "custom" ? "" : "hidden"}" style="margin-top:8px">${climSliders()}</div>
       <div class="row" style="margin-top:12px"><button class="btn" id="resRec">Reset to recommended</button>
         <button class="btn" id="pinBtn">Pin this forecast</button>
@@ -564,7 +574,7 @@ function drawResult(r, ms) {
     <div class="panel"><h3>What if Kalshi’s price moved?</h3>
       <p class="note">Your forecast stays fixed; drag the market price and see where your call flips. Away from the live price, costs assume a 4¢ spread and Kalshi’s fee.</p>
       <div class="slider"><span>Market price for Yes</span><span class="v" id="vMid"></span>
-        <input type="range" id="sMid" min="5" max="95" step="1" value="${Math.round(k.mid * 100)}" aria-label="Hypothetical market price"></div>
+        <input type="range" id="sMid" min="5" max="95" step="1" value="${Math.round(k.mid * 100)}" aria-label="Market price for Yes"></div>
       <div class="chart" id="zones"></div><div id="zoneCall"></div>
     </div>
 
@@ -623,7 +633,7 @@ function bindPrice(P) {
     const W = 640, H = 96, X = v => 10 + v * (W - 20);
     const lo = 1 - q.no_cost, hi = q.yes_cost;
     $("#zones").innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Decision zones for your probability">
-      <rect x="${X(0)}" y="30" width="${X(lo) - X(0)}" height="26" fill="var(--blue)" opacity=".35"/>
+      <rect x="${X(0)}" y="30" width="${X(lo) - X(0)}" height="26" fill="var(--no)" opacity=".35"/>
       <rect x="${X(lo)}" y="30" width="${X(hi) - X(lo)}" height="26" fill="var(--muted)" opacity=".25"/>
       <rect x="${X(hi)}" y="30" width="${X(1) - X(hi)}" height="26" fill="var(--green)" opacity=".35"/>
       ${lo > 0.08 ? `<text x="${(X(0) + X(lo)) / 2}" y="48" text-anchor="middle" style="fill:var(--ink);font-weight:600">Buy NO</text>` : ""}
@@ -634,7 +644,7 @@ function bindPrice(P) {
       <line x1="${X(mid)}" x2="${X(mid)}" y1="30" y2="66" stroke="var(--gold)" stroke-width="2" stroke-dasharray="4 3"/>
       <text x="${X(mid)}" y="80" text-anchor="middle" style="fill:var(--gold)">market ${Math.round(mid * 100)}%</text>
       ${[0, 0.25, 0.5, 0.75, 1].map(v => `<text x="${X(v)}" y="${H - 2}" text-anchor="${v === 0 ? "start" : v === 1 ? "end" : "middle"}">${v * 100}%</text>`).join("")}</svg>`;
-    $("#zoneCall").innerHTML = `<p style="margin:8px 0 0"><b style="color:${d.side === "yes" ? "var(--green)" : d.side === "no" ? "var(--blue)" : "var(--ink)"}">${d.call}</b>${d.side === "pass" ? `: your ${pct(P, 1)} is inside the ${pct(lo)}–${pct(hi)} band.` : `: expected ${usd(d.ev)} on $${choice.stake}.`}
+    $("#zoneCall").innerHTML = `<p style="margin:8px 0 0"><b style="color:${d.side === "yes" ? "var(--green)" : d.side === "no" ? "var(--no)" : "var(--ink)"}">${d.call}</b>${d.side === "pass" ? `: your ${pct(P, 1)} is inside the ${pct(lo)}–${pct(hi)} band.` : `: expected ${usd(d.ev)} on $${choice.stake}.`}
       <span class="note">Yes costs ${cents(q.yes_cost)}, No costs ${cents(q.no_cost)} including fees.</span></p>`;
   };
   s.oninput = draw; draw();
@@ -711,9 +721,9 @@ function histChart(peak) {
   const { X, ticks } = axes(W, H, L, B, lo, hi, [1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8], v => v.toFixed(1) + "°C");
   const m = Math.max(...counts), Y = c => T + (1 - c / m) * (H - T - B);
   const bars = counts.map((c, i) => { const x = lo + i * bw; const over = x + 1e-9 >= 2.0;
-    return `<rect x="${X(x) + 1}" y="${Y(c)}" width="${Math.max(1, X(x + bw) - X(x) - 2)}" height="${H - B - Y(c)}" fill="${over ? "var(--accent-bright)" : "var(--blue)"}" opacity="${over ? 0.85 : 0.55}"><title>${x.toFixed(2)}–${(x + bw).toFixed(2)}°C: ${c} futures</title></rect>`; }).join("");
+    return `<rect x="${X(x) + 1}" y="${Y(c)}" width="${Math.max(1, X(x + bw) - X(x) - 2)}" height="${H - B - Y(c)}" fill="${over ? "var(--accent-bright)" : "var(--muted)"}" opacity="${over ? 0.9 : 0.45}"><title>${x.toFixed(2)}–${(x + bw).toFixed(2)}°C: ${c} futures</title></rect>`; }).join("");
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Distribution of the highest reading 2027 to 2049">
-    <text x="${L}" y="14" style="font-weight:600;fill:var(--ink)">Your futures: highest reading 2027–2049 (orange = 2°C reached)</text>
+    <text x="${L}" y="14" style="font-weight:600;fill:var(--ink)">Your futures: highest reading 2027–2049 (green = 2°C reached)</text>
     ${bars}<line x1="${X(2)}" x2="${X(2)}" y1="${T}" y2="${H - B}" stroke="var(--gold)" stroke-width="2.5"/>${ticks}</svg>`;
 }
 function pathChart(r) {
