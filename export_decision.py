@@ -1,7 +1,7 @@
 """Data for the Decision Lab page (site/play.html): model draws, the 2026 starting state and the live
 Kalshi quote, so the browser can re-run the class model for any choice of factors.
 
-    python export_decision.py      # results/decision_context.json + static/decision_lab.html
+    python export_decision.py      # results/decision_context.json + "Tool Dashboard.html"
 
 Contents
   climate_draws   400 (p1, p2, AR(1) phi, sigma) draws for each climate view: history-fit, IPCC-calibrated,
@@ -42,7 +42,7 @@ def build_static(ctx: dict) -> Path:
     data = json.dumps({"inputs": json.loads(inputs), "ctx": ctx}, separators=(",", ":")).replace("</", "<\\/")
     page = page.replace(tag, f"<script>window.__DLAB__ = {data};</script>\n<script>\n{js}\n</script>")
     STATIC.mkdir(exist_ok=True)
-    out = STATIC / "decision_lab.html"
+    out = HERE / "Tool Dashboard.html"          # top of the repo: download and double-click, no install
     out.write_text(page, encoding="utf-8")
     # the same page without its own document wrapper, for hosts that add one (the published artifact)
     head = page.split("<head>", 1)[1].split("</head>", 1)[0]

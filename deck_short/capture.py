@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-LAB = HERE.parent / "static" / "decision_lab.html"
+LAB = HERE.parent / "Tool Dashboard.html"
 CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 TMP = HERE / "_tmp"
 

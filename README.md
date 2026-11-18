@@ -15,20 +15,44 @@ noise, and summarised as a probability density function of each future’s hotte
 Every version puts the most likely first 2°C year around 2044; they differ in how wide the distribution is.
 Hypothetical class analysis only: no trades were placed and nothing here is investment advice.
 
+## ▶ Tool Dashboard: try it in your browser (no install)
+
+The **Tool Dashboard** compares your own forecast for a 2°C year before 2050 with Kalshi’s market price. It is one
+file and runs entirely in your web browser: no Python, no account, works offline.
+
+1. Click **[`Tool Dashboard.html`](Tool%20Dashboard.html)** (also in the file list above).
+2. On the file page, click the **download button** (the ↓ arrow, “Download raw file”, at the top right).
+3. **Double-click the downloaded file.** It opens in Chrome, Edge, Safari or Firefox.
+
+How to use it (about 5 minutes):
+
+- **Path A, “Take the recommendation”:** the model’s estimate (81%) next to Kalshi’s (70%), the Yes / No / Pass call it
+  implies, and a cautious second opinion (IPCC-calibrated, 67%). Press **▶ Play one future** to watch a simulated
+  future year by year, or **Play 100 futures at once** to see how often the bet would win.
+- **Path B, “Build your own forecast”:** six quick choices (emissions path, how sure you are about the climate,
+  land-use emissions, El Niño, whether 2049 counts, stake). You get your chance of a 2°C year next to Kalshi’s, with a
+  Yes / No / Pass call. Then change any setting and the odds update in about a tenth of a second.
+- Under your result: **What moves the odds most?** (click any option to switch to it), an **odds explorer** for any
+  threshold and deadline, a **market-price slider**, and **pinned forecasts** to compare side by side.
+
+The prices inside are a snapshot of Kalshi’s order book from 18 November 2026. To refresh them, use the full results
+dashboard below.
+
 **Where to look**
 
 - [`excel/ensemble_72_versions.xlsx`](excel/ensemble_72_versions.xlsx): how the 80.8% is computed, with live formulas
   (72 versions, 232,668 of 288,000 simulated futures reach 2°C), the Kalshi fee and decision math, and one simulated
   future scored year by year with Kalshi’s rule.
-- [`static/decision_lab.html`](static/decision_lab.html): the interactive Decision Lab; download it and open it in a
-  browser, no install needed.
+- [`Tool Dashboard.html`](Tool%20Dashboard.html): the interactive comparison tool described above; download it and
+  double-click, no install needed.
 - [`deck_short/`](deck_short/) and [`deck/`](deck/): slide sources (7-slide and 36-slide versions) with speaker notes.
 - `model.py` (the class model, checked against the HW5 workbook by `validate.py`), `phase2.py` … `phase12.py` (each
   step of the analysis, documented below), `test_phase*.py` (63 tests).
 
-## Quick start: the dashboard
+## Full results dashboard (optional, needs Python)
 
-Needs Python 3.10+ with numpy, matplotlib and openpyxl (`pip install -r requirements.txt`). From this folder:
+Every chart and result from the analysis, with a button to fetch the latest Kalshi prices and re-run everything. Needs
+Python 3.10+ with numpy, matplotlib and openpyxl (`pip install -r requirements.txt`). From this folder:
 
 ```bash
 python serve.py
@@ -584,7 +608,7 @@ Interactive tools on the result (and Path A):
 - **Pinned forecasts**: save settings and compare them side by side (kept in the browser).
 - Path A reruns Phase 11's 72-version grid in the browser: 80.6% vs Python's 80.8%.
 
-`export_decision.py` also writes `static/decision_lab.html`, a self-contained copy (model and data inlined) that opens without the
+`export_decision.py` also writes `Tool Dashboard.html`, a self-contained copy (model and data inlined) that opens without the
 server, and `static/decision_lab_embed.html`, the same page without its document wrapper for hosts that add one.
 
 ## Slide deck
