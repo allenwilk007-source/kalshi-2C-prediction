@@ -1,0 +1,35 @@
+<section id="calc" class="alt">
+<div class="head"><p class="eyebrow">3 · HOW I GOT MY NUMBERS</p><h2>How the 81% is calculated, step by step</h2></div>
+<div class="two">
+<div class="col" style="width:860px; gap:14px">
+<div class="eq"><span class="k">1 · Make 72 versions</span><br>3 sensitivities × 3 speeds × 4 emissions paths × land use on/off</div>
+<div class="eq"><span class="k">2 · Run each version</span><br>The class model gives one smooth temperature path, 2027–2049</div>
+<div class="eq"><span class="k">3 · Simulate 4,000 futures per version</span><br>Add El Niño-style noise; each future reaches 2°C or not</div>
+<div class="eq"><span class="k">4 · Count per version</span><br><span class="f">P(version) = futures reaching 2°C ÷ 4,000</span></div>
+<div class="eq"><span class="k">5 · Pool all 72</span><br>Add up every version’s count and divide by all 288,000 futures</div>
+</div>
+<div class="col" style="flex:1; gap:20px">
+<table class="grid">
+<tr><th style="width:44%">Example version</th><th style="width:38%">Reach 2°C</th><th style="width:18%">P</th></tr>
+<tr><td class="rowh">Lowest: sensitivity 1.00, slow, falling emissions</td><td>380 of 4,000</td><td>9.5%</td></tr>
+<tr><td class="rowh">Sensitivity 1.00, class speed, flat emissions</td><td>2,040 of 4,000</td><td>51%</td></tr>
+<tr><td class="rowh">Class settings, HW5 economy</td><td>3,975 of 4,000</td><td>99.4%</td></tr>
+<tr class="hl"><td class="rowh">All 72 versions</td><td>232,668 of 288,000</td><td>80.8%</td></tr>
+</table>
+<div class="callout">232,668 ÷ 288,000 = <b>80.8%</b>. That’s the same as the average of the 72 percentages, because every version has 4,000 futures.</div>
+</div>
+</div>
+<aside>Here is exactly how the 81% is calculated. It’s five steps.
+
+Step 1: make 72 versions of the class model. I changed the four inputs that matter most. Climate sensitivity takes three values: 1.00, 1.15 (the class value) and 1.30. Response speed takes three: 0.020, 0.0256 (the class value) and 0.032. Emissions after 2024 follow one of four paths: the HW5 economy, falling, flat or rising. Land-use emissions are either left out or added back. Three times three times four times two is 72.
+
+Step 2: run each version through the class model. That gives one smooth temperature path for that version from 2027 to 2049.
+
+Step 3: simulate 4,000 futures for each version. Each future starts from 2026’s actual temperature, adds random El Niño-style ups and downs each year, and splits into the four datasets Kalshi uses. A future counts as reaching 2°C if, in any year up to 2049, the second-highest of the four datasets is at least 2.00°C.
+
+Step 4: count, version by version. The table shows three real examples. The lowest version, with low sensitivity, slow response and falling emissions, reaches 2°C in only 380 of its 4,000 futures, 9.5%. A middle version reaches it in 2,040, about 51%. The class settings with the HW5 economy reach it in 3,975 of 4,000, 99.4%.
+
+Step 5: pool all 72 versions. Adding up every version’s count gives 232,668 futures that reach 2°C, out of 72 times 4,000, or 288,000. 232,668 divided by 288,000 is 80.8%. Because every version has the same 4,000 futures, that’s exactly the same as taking the plain average of the 72 percentages. In other words, every version gets equal weight.
+
+That 80.8% is also the area past 2.00°C under the green curve on the previous slide, because that curve is built from the same 288,000 futures. Every one of the 72 rows is in the Excel workbook in the GitHub repo, with live formulas, so you can check the arithmetic yourself.</aside>
+</section>
