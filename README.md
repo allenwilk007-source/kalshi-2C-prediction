@@ -620,12 +620,14 @@ dimensions, what moves the odds); **3** what we could hypothetically do (the Yes
 "if you believe X, here's Y", and the Decision Lab). Then takeaways, limitations and the social cost of carbon as a bonus.
 Images are referenced from the published deck.
 
-## Short deck (7 slides)
+## Short deck (10 slides)
 
-`deck_short/` is the condensed presentation: cover; **1** how we got our numbers (class model, thousands of futures, the
-probability density function, P(Yes) = area past 2.00°C); **2** how Kalshi gets its number (order book, fees, thin market);
-**3** how we compare; **4** what we could hypothetically do (Yes / No / Pass rule and three beliefs); then two slides of
-dashboard screenshots. Speaker notes are in each slide's `<aside>`.
+`deck_short/` is the condensed presentation in a Kalshi-style dark theme: cover; **one slide on Kalshi** (screenshot of
+the market, price = probability, fees); **how the model works** (the class model's four equations), **from one line to
+thousands of futures** (noise, the 2026 start, Kalshi's 2-of-4 rule, one future scored year by year), **the probability
+density function** behind the numbers, **where 81% and 67% come from** (the 72-version table and the IPCC calibration),
+**how we compare with Kalshi**, **customizing the model** (what each factor does to the odds); and two slides on **what you
+can do with the model** (a Yes / No / Pass call, and other uses). Speaker notes are in each slide's `<aside>`.
 
 - `deck_short/make_charts.py`: the four charts, from `results/decision_context.json`
 - `deck_short/capture.py`: Decision Lab screenshots with headless Chrome (light theme, fixed random seed)

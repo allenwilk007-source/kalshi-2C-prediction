@@ -1,0 +1,33 @@
+<section id="sources" class="alt">
+<div class="head"><p class="eyebrow">3 · HOW I GOT MY NUMBERS</p><h2>Where 81% and 67% come from</h2></div>
+<div class="cards" style="gap:40px">
+<div class="card" style="gap:16px">
+<p class="h3"><span class="g">81%</span> · 72 versions, equal weight</p>
+<p class="label">Sensitivity × speed × 4 emissions paths × land use on/off, 4,000 futures each. Each cell averages 8 versions:</p>
+<table class="grid">
+<tr><th>Sensitivity ↓ · speed →</th><th>0.020</th><th>0.0256</th><th>0.032</th></tr>
+<tr><td class="rowh">1.00</td><td>28%</td><td>62%</td><td>84%</td></tr>
+<tr class="hl"><td class="rowh">1.15 (class)</td><td>69%</td><td>93%</td><td>99%</td></tr>
+<tr><td class="rowh">1.30</td><td>94%</td><td>100%</td><td>100%</td></tr>
+</table>
+<p class="label">232,668 of 288,000 futures reach 2°C = <b>80.8%</b>. Excel workbook in the repo.</p>
+</div>
+<div class="card" style="gap:16px">
+<p class="h3"><span class="g">67%</span> · IPCC-sized uncertainty</p>
+<ul class="pts" style="font-size:24px; gap:10px">
+<li>2,751 combinations of sensitivity and speed</li>
+<li>Weighted by the IPCC’s range for climate sensitivity (2–5°C) and by fit to 1880–2020</li>
+<li>Fit softened until 2041–60 warming spans 0.67°C, as in the IPCC AR6 report</li>
+<li>Paired with real-data emissions: 100,000 futures</li>
+</ul>
+<p class="label">67.1% reach 2°C. Same middle as the 81%, wider spread.</p>
+</div>
+</div>
+<aside>Here’s exactly where the two numbers come from.
+
+The 81% is a sensitivity ensemble. I took the four inputs that matter most and gave each a low, middle and high value around the class settings: climate sensitivity 1.00, 1.15 or 1.30; response speed 0.020, 0.0256 or 0.032; four emissions paths; and land-use emissions on or off. That’s 72 versions, 4,000 futures each, 288,000 in total. The table averages the eight emissions and land-use versions for each combination. With the class settings it’s 93%; with low sensitivity and slow response it’s only 28%. Overall 232,668 of the 288,000 futures reach 2°C, which is 80.8%. The Excel workbook in the GitHub repo rebuilds this with live formulas. One choice to flag: every version gets equal weight.
+
+The 67% is the more cautious estimate. A model with only CO₂ in it, fitted to history, is over-confident, because aerosols and methane also shaped past warming. So I took 2,751 combinations of sensitivity and speed, weighted them by the IPCC’s assessed range for climate sensitivity and by how well each fits 1880–2020 temperatures, then softened that fit until the spread of 2041–2060 warming matched the IPCC AR6 report. Paired with emissions matched to real 2019–2024 data, 67.1% of 100,000 futures reach 2°C.
+
+Same middle, different width. That’s the whole difference between the two.</aside>
+</section>

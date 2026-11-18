@@ -1,0 +1,27 @@
+<section id="engine">
+<div class="head"><p class="eyebrow">1 · HOW THE MODEL WORKS</p><h2>The engine: the climate model from class</h2></div>
+<div class="two">
+<div class="col" style="width:900px">
+<div class="eq"><span class="k">1 · Emissions (Kaya)</span><br>Population × GDP per person × energy per $ × CO₂ per energy, for 3 regions</div>
+<div class="eq"><span class="k">2 · Carbon cycle</span><br>5 boxes that hold CO₂ for different lifetimes (forever, 363, 74, 17, 2 years) → CO₂ in ppm</div>
+<div class="eq"><span class="k">3 · Forcing</span><br><span class="f">F = 5.35 × ln(CO₂ ÷ 275)</span> W/m²</div>
+<div class="eq"><span class="k">4 · Temperature</span><br>A two-box model (air and ocean) turns forcing into warming above 1850–1900</div>
+</div>
+<div class="col" style="flex:1; gap:20px">
+<table class="grid">
+<tr><th>Year</th><th>Emissions (GtC)</th><th>CO₂ (ppm)</th><th>Warming (°C)</th></tr>
+<tr><td class="rowh">2026</td><td>12.0</td><td>429</td><td>1.34</td></tr>
+<tr><td class="rowh">2040</td><td>16.2</td><td>482</td><td>1.77</td></tr>
+<tr class="hl"><td class="rowh">2049</td><td>19.5</td><td>526</td><td>2.09</td></tr>
+</table>
+<p class="small">The HW5 settings, run in Python. It matches the HW5 workbook in every year, 1750–2100. But one smooth line can’t give a probability.</p>
+</div>
+</div>
+<aside>Here’s how my project works, starting with the engine: the climate model we built in class, from HW2 to HW5, rebuilt in Python.
+
+It has four steps. One, the Kaya identity: population times GDP per person times energy per dollar times CO₂ per unit of energy, for rich, middle and poor countries, gives emissions. Two, a five-box carbon cycle: some CO₂ stays in the air forever, the rest decays over 363, 74, 17 or 2 years, which gives the CO₂ concentration. Three, forcing: 5.35 times the log of CO₂ over 275. Four, a two-box temperature model, air and ocean, turns forcing into warming above the 1850–1900 average, which is the baseline Kalshi uses.
+
+The table runs it with the homework’s settings. CO₂ rises from 429 ppm today to 526 ppm in 2049, and warming from 1.34 to 2.09°C. I checked the Python version against every year of the HW5 workbook and it matches to rounding error.
+
+But this gives one smooth line, and one line can’t give a probability. The next slide is how I turned it into thousands of possible futures.</aside>
+</section>

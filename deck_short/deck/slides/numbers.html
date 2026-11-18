@@ -1,23 +1,21 @@
 <section id="numbers">
-<div class="head"><p class="eyebrow">1 · HOW WE GOT OUR NUMBERS</p><h2>Thousands of futures, one probability density function</h2></div>
+<div class="head"><p class="eyebrow">3 · HOW I GOT MY NUMBERS</p><h2>A probability density function of all the futures</h2></div>
 <div class="two">
 <div class="col" style="width:740px">
-<div class="eq"><span class="k">1 · Class model (HW2–HW5)</span><br>Kaya emissions → 5-box carbon cycle → CO₂ forcing → two-box temperature</div>
-<div class="eq"><span class="k">2 · Real-world noise and Kalshi’s rule</span><br>El Niño-style swings each year; a year counts when the 2nd-highest of 4 datasets is ≥ 2.00°C</div>
-<div class="eq"><span class="k">3 · Thousands of futures</span><br>Vary sensitivity, response speed, emissions and land use; start from 2026’s data</div>
-<div class="eq"><span class="k">4 · Probability density function</span><br>Each future’s hottest reading, 2027–2049 → <span class="f">P(Yes) = area right of 2.00°C</span></div>
+<div class="eq"><span class="k">Record</span><br>For each future, its <span class="f">hottest reading</span> between 2027 and 2049</div>
+<div class="eq"><span class="k">Plot</span><br>The probability density function: where all the futures land</div>
+<div class="eq"><span class="k">Read off the answer</span><br>A future pays Yes when its hottest reading ≥ 2.00°C, so <span class="f">P(Yes) = area right of 2.00°C</span></div>
+<div class="eq"><span class="k">Two versions</span><br>72 versions of the class model: <span class="f">81%</span>. With IPCC-sized uncertainty: <span class="f">67%</span></div>
 </div>
 <img class="fig" src="/_blob/106b14a17566a7ab0ae9f27d05854330" alt="Probability density functions of each simulated future’s hottest reading: our 72-version model (81% past 2.00°C) and the IPCC-calibrated version (67%)" style="width:868px; height:632px">
 </div>
-<aside>This is how we got our numbers, in four steps.
+<aside>This is where my numbers come from: a probability density function.
 
-Step one is the climate model from our homework, exactly as in class. The Kaya identity turns population, GDP per person, energy per dollar and carbon per unit of energy into emissions. A five-box carbon cycle turns emissions into CO₂ concentration, a log formula turns that into radiative forcing, and a two-box model turns forcing into temperature. Our Python version matches the HW5 spreadsheet in every year.
+For every simulated future I recorded one number, the hottest reading the contract would ever see between 2027 and 2049. The chart plots the density of those readings, in other words where all the futures land.
 
-Step two makes it realistic. The class model draws one smooth line, but real years bounce around by about a tenth of a degree because of El Niño. We added that year-to-year noise, estimated from 1880–2025. We also copied Kalshi’s rule exactly: four agencies publish temperatures, and a year only counts when the second-highest of the four reads at least 2.00°C.
+The link to Kalshi is exact. A future pays Yes if and only if its hottest reading is at least 2.00°C, so the probability of Yes is simply the area under the curve to the right of the gold line.
 
-Step three: one run gives one future, so we ran thousands. Each future uses different settings for climate sensitivity, how fast the climate responds, the emissions path and land-use emissions, and every one starts from where 2026 actually is.
+There are two curves because I ran two versions. The green one averages 72 versions of the class model and puts 81% of its futures past 2°C. The blue one is the same model with its uncertainty widened to match the IPCC’s ranges. Both peak around 2.1°C, so they agree on the middle, but the blue one is wider, so only 67% of its futures land past the line.
 
-Step four is the probability density function. For every simulated future we record its hottest reading between 2027 and 2049. The chart is the density of those readings: where the futures land. A future pays Yes exactly when its hottest reading is at or past 2.00°C, so the probability of Yes is the area under the curve to the right of the gold line.
-
-Two curves, two numbers. The orange one averages 72 versions of the class model and puts 81% of its futures past 2°C. The blue one is the same model with its uncertainty widened to match the IPCC’s ranges: same middle, around 2.1°C, but wider, so only 67% lands past the line.</aside>
+The next slide shows exactly where those two numbers come from.</aside>
 </section>

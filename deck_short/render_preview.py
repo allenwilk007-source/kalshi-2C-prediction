@@ -5,7 +5,10 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 PROJ = Path(sys.argv[1])
 CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-BLOBS = {"106b14a17566a7ab0ae9f27d05854330": "charts_kalshi/pdf.png", "41c47ffa9bcf78f45b2ad1eb2241416e": "charts_kalshi/orderbook.png",
+BLOBS = {"3a831ac1020c34500017b53f55cd5abc": "shots_dark/dashboard_g.png", "0e6eec889abc73fed27a51b33220353f": "shots_dark/lab_start_g.png",
+         "c0b9118bb6ee6740b41dac53e4763d4d": "shots_dark/lab_result_g.png", "9741e98a0223295ca70f4171301db9c0": "shots_dark/lab_play_g.png",
+         "93e9b60d33418750ff157d0a66ce6712": "shots_dark/lab_tools_g.png",
+         "106b14a17566a7ab0ae9f27d05854330": "charts_kalshi/pdf.png", "41c47ffa9bcf78f45b2ad1eb2241416e": "charts_kalshi/orderbook.png",
          "be08dd850e5246f237daef566099c35a": "charts_kalshi/compare.png", "7c07b256db4c461645fab97c4456426a": "charts_kalshi/decision.png",
          "98d81e241b3cc41e473e25596c15baf9": "shots_dark/dashboard_c.png", "986d810431cff64b3cb81da1fe96ca60": "shots_dark/lab_start_c.png",
          "1a6e2ed9d95522a4c290a863a5e8d67d": "shots_dark/lab_result_c.png", "056b88f95603b1168422466ce79fd2d8": "shots_dark/lab_play_c.png",

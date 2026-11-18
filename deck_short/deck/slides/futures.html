@@ -1,0 +1,33 @@
+<section id="futures" class="alt">
+<div class="head"><p class="eyebrow">2 · FROM ONE LINE TO THOUSANDS OF FUTURES</p><h2>Real-world noise and Kalshi’s exact rule</h2></div>
+<div class="two">
+<div class="col" style="width:820px">
+<div class="eq"><span class="k">Start from today</span><br>Anchor to observed 2006–2025 temperatures; begin from 2026’s data (1.52°C)</div>
+<div class="eq"><span class="k">Add El Niño-style noise</span><br>Each year keeps 53% of last year’s swing plus a new shock of about ±0.1°C</div>
+<div class="eq"><span class="k">Vary the settings</span><br>Climate sensitivity, response speed, emissions path, land use</div>
+<div class="eq"><span class="k">Score it like Kalshi</span><br>4 datasets, rounded to 0.01: <span class="f">Yes if the 2nd-highest ≥ 2.00°C</span></div>
+</div>
+<div class="col" style="flex:1; gap:20px">
+<p class="h3">One simulated future</p>
+<table class="grid">
+<tr><th>Year</th><th>Trend</th><th>Noise</th><th>2nd-highest</th></tr>
+<tr><td class="rowh">2027</td><td>1.39</td><td>+0.21</td><td>1.63</td></tr>
+<tr><td class="rowh">2035</td><td>1.63</td><td>+0.03</td><td>1.69</td></tr>
+<tr><td class="rowh">2041</td><td>1.82</td><td>+0.04</td><td>1.92</td></tr>
+<tr class="hl"><td class="rowh">2042</td><td>1.86</td><td>+0.20</td><td>2.09 = Yes</td></tr>
+</table>
+<p class="small">This future pays Yes in 2042. Repeat 288,000 times.</p>
+</div>
+</div>
+<aside>To get a probability, I turned the one smooth line into thousands of realistic futures.
+
+First, start from today. The model doesn’t match recent temperatures exactly, so I anchored it to the observed 2006–2025 average and started every future from 2026’s actual data, about 1.52°C so far.
+
+Second, add noise. Real years bounce around the trend because of El Niño, La Niña and volcanoes. I estimated that from 1880–2025: each year keeps about half of the previous year’s swing and adds a new random shock of about a tenth of a degree.
+
+Third, vary the settings that matter most: climate sensitivity, how fast the climate responds, the emissions path, and the land-use emissions the class model leaves out.
+
+Fourth, score every future exactly like Kalshi: four datasets, each rounded to two decimals, and a year counts only when the second-highest is at least 2.00°C.
+
+The table is one real simulated future. In 2027 an El Niño year pushes it up, but only to 1.63. In 2041 one dataset alone reaches 1.98, which isn’t enough. In 2042 the trend plus a warm year gives a second-highest reading of 2.09, so this future pays Yes. Then I repeated that 288,000 times.</aside>
+</section>
