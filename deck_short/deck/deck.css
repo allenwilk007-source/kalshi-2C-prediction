@@ -1,28 +1,27 @@
+/* Kalshi-style dark theme: near-black ground, white type, green for Yes, red for No.
+   Kalshi Sans is proprietary, so Barlow Condensed (headlines) and Inter (text) stand in for it. */
 :root {
-  --ink: #14213D;
-  --body: #3D4656;
-  --muted: #5B6475;
-  --paper: #F7F6F2;
-  --paper2: #ECEEF2;
-  --card: #FCFBF8;
-  --line: #D9DBD6;
-  --accent: #C2410C;
-  --accent-bright: #EA580C;
-  --blue: #1D4ED8;
-  --navy-text: #F7F6F2;
-  --navy-soft: #C9D3E6;
-  --navy-accent: #FB923C;
+  --bg: #0A0C0F;
+  --bg2: #13161A;
+  --card: #15181C;
+  --line: #2A2E34;
+  --text: #F2F3F3;
+  --body: #C9CBCD;
+  --muted: #8F9193;
+  --green: #00DD94;
+  --green-d: #00B67A;
+  --red: #FF454D;
 }
-body { font-family: 'Inter', Arial, sans-serif; color: var(--ink); }
+body { font-family: 'Inter', Arial, sans-serif; color: var(--text); }
 section {
-  background: var(--paper);
+  background: var(--bg);
   padding: 128px 128px 160px;
   display: flex;
   flex-direction: column;
   gap: 36px;
   counter-increment: page;
 }
-section.alt { background: var(--paper2); }
+section.alt { background: var(--bg2); }
 section::after {
   content: counter(page);
   position: absolute;
@@ -33,45 +32,49 @@ section::after {
   font-size: 24px;
   color: var(--muted);
 }
-h1 { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 112px; font-weight: 700; line-height: 1.02; color: var(--ink); }
-h2 { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 60px; font-weight: 600; line-height: 1.1; color: var(--ink); }
-.eyebrow { font-size: 24px; font-weight: 700; letter-spacing: 3px; color: var(--accent); }
+h1 { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 136px; font-weight: 700; line-height: 0.98; color: var(--text); }
+h2 { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 72px; font-weight: 600; line-height: 1.05; color: var(--text); }
+a { color: var(--green); }
+.eyebrow { font-size: 24px; font-weight: 700; letter-spacing: 3px; color: var(--green); }
 .head { display: flex; flex-direction: column; gap: 12px; }
 .lead { font-size: 32px; line-height: 1.4; color: var(--body); }
 .small { font-size: 24px; line-height: 1.35; color: var(--muted); }
 .two { display: flex; gap: 56px; align-items: flex-start; }
 .col { display: flex; flex-direction: column; gap: 16px; }
 ul.pts { font-size: 30px; line-height: 1.4; color: var(--body); display: flex; flex-direction: column; gap: 16px; padding-left: 36px; }
-.fig { background: #FCFBF8; border: 2px solid var(--line); border-radius: 16px; object-fit: contain; }
-.shot { background: #FFFFFF; border: 2px solid var(--line); border-radius: 14px; object-fit: contain; }
+.fig { background: #13161A; border: 2px solid var(--line); border-radius: 16px; object-fit: contain; }
+.shot { background: #0A0C0F; border: 2px solid var(--line); border-radius: 14px; object-fit: contain; }
 .cards { display: flex; gap: 28px; }
 .card { flex: 1; background: var(--card); border: 2px solid var(--line); border-radius: 20px; padding: 28px 32px; display: flex; flex-direction: column; gap: 8px; }
-.card .ttl { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 30px; font-weight: 600; line-height: 1.2; color: var(--ink); }
+.card .ttl { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 38px; font-weight: 600; line-height: 1.1; color: var(--text); }
 .card .label { font-size: 24px; line-height: 1.35; color: var(--body); }
-.card .step { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 26px; font-weight: 700; color: var(--accent); }
-.card.yes .ttl { color: var(--accent); }
-.card.no .ttl { color: var(--blue); }
+.card .step { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: 1px; color: var(--green); }
+.card.yes .ttl { color: var(--green); }
+.card.no .ttl { color: var(--red); }
 .card.pass .ttl { color: var(--muted); }
 .eq { font-size: 26px; line-height: 1.4; color: var(--body); background: var(--card); border: 2px solid var(--line); border-radius: 14px; padding: 14px 24px; }
-.eq .k { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; color: var(--accent); }
-.eq .f { font-weight: 600; color: var(--ink); }
-.callout { background: #FFF4EC; border: 2px solid #F5C9A9; border-radius: 16px; padding: 20px 28px; font-size: 28px; line-height: 1.4; color: var(--ink); }
+.eq .k { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 30px; font-weight: 700; color: var(--green); }
+.eq .f { font-weight: 600; color: var(--text); }
+.callout { background: #0E2A22; border: 2px solid #1F5A47; border-radius: 16px; padding: 20px 28px; font-size: 28px; line-height: 1.4; color: var(--text); }
 .shotcol { flex: 1; display: flex; flex-direction: column; gap: 16px; }
 .cap { font-size: 24px; line-height: 1.35; color: var(--body); }
-.cap .n { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; color: var(--accent); }
-.cap .t { font-weight: 700; color: var(--ink); }
+.cap .n { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 30px; font-weight: 700; color: var(--green); }
+.cap .t { font-weight: 700; color: var(--text); }
+.pill { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: 1px; padding: 6px 18px; border-radius: 999px; }
+.pill.yes { background: #0E2A22; color: var(--green); }
+.pill.no { background: #3A1518; color: var(--red); }
 
 /* cover */
-section.navy { background: var(--ink); }
-section.navy::after { color: var(--navy-soft); }
-section.navy h1 { color: var(--navy-text); }
-section.navy .eyebrow { color: var(--navy-accent); }
-section.navy .lead { color: var(--navy-soft); }
+section.navy { background: var(--bg); }
+section.navy::after { color: var(--muted); }
+section.navy h1 { color: var(--text); }
+section.navy .eyebrow { color: var(--green); }
+section.navy .lead { color: var(--body); }
 .cover-stats { display: flex; gap: 28px; margin-top: 16px; }
-.cstat { flex: 1; border: 2px solid #33415E; border-radius: 20px; padding: 26px 32px; display: flex; flex-direction: column; gap: 8px; }
-.cstat .n { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 96px; font-weight: 700; line-height: 1; color: var(--navy-text); }
-.cstat .n.hot { color: var(--navy-accent); }
-.cstat .l { font-size: 26px; line-height: 1.35; color: var(--navy-soft); }
+.cstat { flex: 1; background: var(--card); border: 2px solid var(--line); border-radius: 20px; padding: 26px 32px; display: flex; flex-direction: column; gap: 8px; }
+.cstat .n { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 112px; font-weight: 700; line-height: 1; color: var(--text); }
+.cstat .n.hot { color: var(--green); }
+.cstat .l { font-size: 26px; line-height: 1.35; color: var(--body); }
 
 /* gentle arrival motion */
 @keyframes rise { from { opacity: 0; transform: translateY(24px); } }
